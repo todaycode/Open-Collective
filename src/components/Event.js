@@ -14,16 +14,19 @@ import Responses from '../components/Responses';
 import colors from '../constants/colors';
 import { filterCollection } from '../lib/utils';
 import '../styles/EventPage.css';
-import defaultBackgroundImage from '../images/defaultBackgroundImage.png';
 import { addEventData } from '../graphql/queries';
 import { addCreateResponseMutation } from '../graphql/mutations';
 import Markdown from 'react-markdown';
 import TicketsConfirmed from '../components/TicketsConfirmed';
 import { FormattedMessage, FormattedDate, FormattedTime } from 'react-intl';
 
+const defaultBackgroundImage = '/static/images/defaultBackgroundImage.png';
+
 class Event extends React.Component {
 
   static propTypes = {
+    collectiveSlug: React.PropTypes.string.required,
+    eventSlug: React.PropTypes.string.required,
     data: React.PropTypes.object,
   }
 
@@ -192,8 +195,8 @@ class Event extends React.Component {
 
     const info = (
       <HashLink to="#location">
-        <FormattedDate value={Event.startsAt} day='numeric' month='long' />&nbsp;•&nbsp;
-        <FormattedTime value={Event.startsAt}  />&nbsp;•&nbsp;
+        <FormattedDate value={Event.startsAt} weekday='short' day='numeric' month='long' />, &nbsp;
+        <FormattedTime value={Event.startsAt}  />&nbsp; - &nbsp;
         {Event.location}
       </HashLink>
     );
