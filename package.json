@@ -42,6 +42,7 @@
     "react": "^15.3.1",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "react-apollo": "0.11.1",
 =======
     "react-add-to-calendar": "0.0.8",
@@ -49,6 +50,9 @@
 >>>>>>> 1a0afd5... download calendar event for multiple calendars, using only 2 digits for credit card year
 =======
     "react-add-to-calendar": "0.0.8",
+=======
+    "react-add-to-calendar": "0.0.9",
+>>>>>>> 9837ac2... make the modal work with ssr
     "react-apollo": "0.11.1",
 >>>>>>> fc1e983... wip
     "react-bootstrap": "^0.30.7",
