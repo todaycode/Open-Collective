@@ -57,6 +57,7 @@ const getEventQuery = gql`query Event($collectiveSlug: String!, $eventSlug: Stri
         stripePublishableKey
       },
       responses {
+        createdAt,
         quantity,
         status,
         description,
