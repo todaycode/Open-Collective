@@ -4,15 +4,7 @@ import Button from './Button';
 import _ from 'lodash';
 import { isValidEmail, capitalize } from '../lib/utils';
 import CreditCardForm from './CreditCardForm';
-import { css } from 'glamor';
 import { defineMessages, injectIntl } from 'react-intl';
-
-const styles = {
-  SignInUp: css({
-    margin: '0px auto',
-    maxWidth: '400px'
-  })
-}
 
 class SignInUp extends React.Component {
 
@@ -88,10 +80,12 @@ class SignInUp extends React.Component {
     this.setState({ user: this.state.user });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
+    this.setState({ loading: true });
     this.state.user.email = this.state.user.email.trim().toLowerCase();
-    this.props.onSubmit(this.state.user);
+    await this.props.onSubmit(this.state.user);
+    this.setState({ loading: false });
   }
 
   componentDidMount() {
@@ -104,10 +98,17 @@ class SignInUp extends React.Component {
     const showCreditCardForm = this.props.requireCreditCard && !this.state.user.creditCards;
 
     const isFormValid = isValidEmail(this.state.user.email) && (!this.props.requireCreditCard || this.state.user.card);
+    const isLoading = this.state.loading;
+
+    const submitBtnLabel = (isLoading) ? 'loading' : this.props.label;
 
     return (
-      <div className={styles.SignInUp}>
+      <div className="SignInUp">
         <style jsx global>{`
+          .SignInUp {
+            margin: 0px auto;
+            max-width: 400px;
+          }
           .field {
             display: flex;
             width: 100%;
@@ -141,17 +142,17 @@ class SignInUp extends React.Component {
         }
         {showCreditCardForm &&
           <CreditCardForm
-            addCardLabel={this.props.label}
+            addCardLabel={submitBtnLabel}
             onCardAdded={this.handleCardAdded}
             stripePublishableKey={this.props.stripePublishableKey}
             number={process.env.NODE_ENV === 'development' ? '4242424242424242' : undefined}
             expiration={process.env.NODE_ENV === 'development' ? '11/20' : undefined}
-            disabled={!isFormValid}
+            disabled={!isFormValid || isLoading}
             />
         }
         {!showCreditCardForm &&
         <div id="actions" className="actions">
-          <Button type="submit" disabled={!isFormValid} className="green" label={this.props.label} />
+          <Button type="submit" disabled={!isFormValid || isLoading} className="green" label={submitBtnLabel} />
         </div>}
         </form>
       </div>

@@ -78,8 +78,8 @@ const getEventQuery = gql`query Event($collectiveSlug: String!, $eventSlug: Stri
 export const addEventData = graphql(getEventQuery);
 
 const getEventsQuery = gql`
-  query allEvents {
-    allEvents {
+  query allEvents($collectiveSlug: String) {
+    allEvents(collectiveSlug: $collectiveSlug) {
       id,
       slug,
       name,
