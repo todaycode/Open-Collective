@@ -42,6 +42,7 @@
     "next-routes": "1.0.24",
     "node-sass": "4.5.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "now": "4.9.0",
     "now-logs": "0.0.7",
 <<<<<<< HEAD
@@ -65,6 +66,8 @@
 =======
 =======
 >>>>>>> bd9db1c... wip
+=======
+>>>>>>> 3af0ec6... removed now-logs
     "path-match": "1.2.4",
     "payment": "2.1.4",
     "postcss-easy-import": "2.0.0",
