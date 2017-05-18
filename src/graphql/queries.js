@@ -35,10 +35,24 @@ const getEventQuery = gql`query Event($collectiveSlug: String!, $eventSlug: Stri
       description,
       startsAt,
       endsAt,
+<<<<<<< HEAD
       location,
+=======
+      timezone,
+<<<<<<< HEAD
+      locationName,
+>>>>>>> e54bb4f... create/edit event
       address,
       lat,
       long,
+=======
+      location {
+        name,
+        address,
+        lat,
+        long
+      },
+>>>>>>> 1d3dfd6... InputTypeLocation
       tiers {
         id,
         name,
@@ -87,8 +101,18 @@ const getEventsQuery = gql`
       startsAt,
       endsAt,
       timezone,
-      location,
-      address,
+      location {
+        name,
+        address,
+        lat,
+        long
+      },
+      tiers {
+        id,
+        name,
+        description,
+        amount
+      },
       collective {
         id,
         slug,
@@ -102,3 +126,32 @@ const getEventsQuery = gql`
 `;
 
 export const addEventsData = graphql(getEventsQuery);
+
+const getAttendeesQuery = gql`
+  query Event($collectiveSlug: String!, $eventSlug: String!) {
+    Event(collectiveSlug: $collectiveSlug, eventSlug: $eventSlug) {
+      slug,
+      name,
+      responses {
+        createdAt,
+        quantity,
+        status,
+        description,
+        user {
+          id,
+          firstName,
+          lastName,
+          avatar,
+          username,
+          twitterHandle,
+          description
+        },
+        tier {
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const addAttendeesData = graphql(getAttendeesQuery);
