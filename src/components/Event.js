@@ -120,6 +120,23 @@ class Event extends React.Component {
     this.setState({ modal: null });
   }
 
+  getDefaultActions(props) {
+    const { LoggedInUser } = props;
+    const editUrl = `/${this.event.collective.slug}/events/${this.event.slug}/edit`;
+    if (LoggedInUser && LoggedInUser.canEditCollective) {
+      return [...this.defaultActions, {
+        className: 'whiteblue small',
+        component: <a href={editUrl}>EDIT</a>
+      }]
+    } else {
+      return this.defaultActions;
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({actions: this.getDefaultActions(props) });
+  }
+
   changeView(view) {
     let actions;
     switch (view) {
@@ -130,7 +147,7 @@ class Event extends React.Component {
         }];
         break;
       default:
-        actions = this.defaultActions;
+        actions = this.getDefaultActions();
         break;
     }
     this.setState({view, actions});
@@ -188,9 +205,15 @@ class Event extends React.Component {
 
     const info = (
       <HashLink to="#location">
+<<<<<<< HEAD
         <FormattedDate value={this.event.startsAt} weekday='short' day='numeric' month='long' />, &nbsp;
         <FormattedTime value={this.event.startsAt} timeZone={this.event.timezone} />&nbsp; - &nbsp;
         {this.event.location.name}
+=======
+        <FormattedDate value={Event.startsAt} weekday='short' day='numeric' month='long' />, &nbsp;
+        <FormattedTime value={Event.startsAt} timeZone={Event.timezone} />&nbsp; - &nbsp;
+        {Event.locationName}
+>>>>>>> 7dbcbbe... make Sustain great again
       </HashLink>
     );
 
@@ -213,6 +236,7 @@ class Event extends React.Component {
             twitterHandle={this.event.collective.twitterHandle}
             image={this.event.collective.logo || backgroundImage}
             className={this.state.status}
+            LoggedInUser={this.props.LoggedInUser}
             scripts={['stripe']}
             />
 
@@ -269,7 +293,16 @@ class Event extends React.Component {
                     </div>
                   </div>
 
+<<<<<<< HEAD
                   <Location location={this.event.location} />
+=======
+                  <Location
+                    location={Event.locationName}
+                    address={Event.address}
+                    lat={Event.lat}
+                    long={Event.long}
+                    />
+>>>>>>> 7dbcbbe... make Sustain great again
 
                   { responses.guests.length >= 10 &&
                     <section id="responses">

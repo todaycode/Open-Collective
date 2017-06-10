@@ -13,6 +13,7 @@ routes.add('events', '/');
 const pages = nextRoutes();
 
 pages.add('createEvent', '/:collectiveSlug/events/(new|create)');
+pages.add('events-iframe', '/:collectiveSlug/events/iframe');
 pages.add('event', '/:collectiveSlug/events/:eventSlug');
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -23,14 +24,18 @@ pages.add('events', '/');
 >>>>>>> e54bb4f... create/edit event
 =======
 pages.add('nametags', '/:collectiveSlug/events/:eventSlug/nametags');
+<<<<<<< HEAD
 >>>>>>> af9cec0... /:collectiveSlug/events/:eventSlug/nametags.pdf
 pages.add('button', '/:collectiveSlug/donate/button');
+=======
+pages.add('button', '/:collectiveSlug/:verb(contribute|donate)/button');
+>>>>>>> 4013f11... new contribute button
 
 module.exports = (server, app) => {
 
-  server.get('/:collectiveSlug/donate/button:size(|@2x).png', (req, res) => {
+  server.get('/:collectiveSlug/:verb(contribute|donate)/button:size(|@2x).png', (req, res) => {
     const color = (req.query.color === 'blue') ? 'blue' : 'white';
-    res.sendFile(path.join(__dirname, `../static/images/buttons/donate-button-${color}${req.params.size}.png`));
+    res.sendFile(path.join(__dirname, `../static/images/buttons/${req.params.verb}-button-${color}${req.params.size}.png`));
   });
 
   server.get('/:collectiveSlug/events/:eventSlug/nametags.pdf', (req, res) => {
@@ -53,13 +58,30 @@ module.exports = (server, app) => {
       });
   })
 
-  server.get('/:collectiveSlug/donate/button.js', (req, res) => {
+  server.get('/:collectiveSlug/:verb(contribute|donate)/button.js', (req, res) => {
+<<<<<<< HEAD
+    const content = fs.readFileSync(path.join(__dirname,'../templates/button.js'), 'utf8');
+=======
     const content = fs.readFileSync(path.join(__dirname,'../templates/widget.js'), 'utf8');
+>>>>>>> 4013f11... new contribute button
     _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
     const compiled = _.template(content);
     res.setHeader('content-type', 'application/javascript');
     res.send(compiled({
       collectiveSlug: req.params.collectiveSlug,
+      verb: req.params.verb,
+      host: process.env.WEBSITE_URL || "http://localhost:3000"
+    }))
+  });
+
+  server.get('/:collectiveSlug/events.js', (req, res) => {
+    const content = fs.readFileSync(path.join(__dirname,'../templates/events.js'), 'utf8');
+    _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
+    const compiled = _.template(content);
+    res.setHeader('content-type', 'application/javascript');
+    res.send(compiled({
+      collectiveSlug: req.params.collectiveSlug,
+      id: req.query.id,
       host: process.env.WEBSITE_URL || "http://localhost:3000"
     }))
   });

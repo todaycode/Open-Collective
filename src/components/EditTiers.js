@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import _ from 'lodash';
-import { defineMessages, injectIntl, FormattedDate, FormattedMessage } from 'react-intl';
+import { Button, Form } from 'react-bootstrap';
 
 import InputField from '../components/InputField';
-import colors from '../constants/colors';
-import Button from '../components/Button';
+import { getCurrencySymbol } from '../lib/utils';
 
 class EditTiers extends React.Component {
 
   static propTypes = {
     tiers: PropTypes.arrayOf(PropTypes.object),
+    currency: PropTypes.string.required,
     onChange: PropTypes.func.required
   };
 
@@ -32,7 +31,9 @@ class EditTiers extends React.Component {
         name: 'description'
       },
       {
-        name: 'amount'
+        name: 'amount',
+        pre: getCurrencySymbol(props.currency),
+        type: 'currency'
       }
     ];
   }
@@ -69,10 +70,12 @@ class EditTiers extends React.Component {
   renderTier(tier, index) {
     return (
       <div className="tier" key={`tier-${index}`}>
-        <div>
-          <a onClick={() => this.removeTier(index)}>[remove tier]</a>
+        <div className="tierActions">
+          <a href="#" onClick={() => this.removeTier(index)}>Remove Ticket</a>
         </div>
-        {this.fields.map(field => <InputField name={field.name} value={tier[field.name]} placeholder={field.placeholder} onChange={(value) => this.editTier(index, field.name, value)} />)}
+        <Form horizontal>
+          {this.fields.map(field => <InputField className="horizontal" name={field.name} type={field.type} value={tier[field.name]} pre={field.pre} placeholder={field.placeholder} onChange={(value) => this.editTier(index, field.name, value)} />)}
+        </Form>
       </div>
     );
   }
@@ -82,14 +85,25 @@ class EditTiers extends React.Component {
     return (
       <div className="EditTiers">
         <style jsx>{`
+          :global(.tierActions) {
+            text-align: right;
+            margin-right: 15px;
+            margin-bottom: -5px;
+            font-size: 1.3rem;
+          }
+          .editTiersActions {
+            text-align: right;
+            margin-right: 15px;
+            margin-top: -20px;
+          }
         `}</style>
 
         <div className="tiers">
           <h2>Tickets</h2>
           {this.state.tiers.map(this.renderTier)}
         </div>
-        <div>
-          <a onClick={() => this.addTier({})}>[add tier]</a>
+        <div className="editTiersActions">
+          <Button bsStyle="primary" onClick={() => this.addTier({})}>Add Another Ticket</Button>
         </div>
 
       </div>

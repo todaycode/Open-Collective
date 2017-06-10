@@ -7,18 +7,20 @@ import { addCreateEventMutation } from '../graphql/mutations';
 import moment from 'moment-timezone';
 import EventTemplatePicker from '../components/EventTemplatePicker';
 import EditEventForm from '../components/EditEventForm';
+import { Button } from 'react-bootstrap';
 
 class CreateEvent extends React.Component {
 
   static propTypes = {
-    collectiveSlug: PropTypes.string
+    collective: PropTypes.object
   }
 
   constructor(props) {
     super(props);
+    const timezone = moment.tz.guess();
     this.state = { event: { 
-      collective: { slug: props.collectiveSlug },
-      timezone: moment.tz.guess(), // "Europe/Brussels", // "America/New_York"
+      collective: props.collective,
+      timezone, // "Europe/Brussels", // "America/New_York"
     }, result: {} };
     this.createEvent = this.createEvent.bind(this);
     this.handleTemplateChange = this.handleTemplateChange.bind(this);
@@ -32,9 +34,10 @@ class CreateEvent extends React.Component {
       const event = res.data.createEvent;
       const eventUrl = `${window.location.protocol}//${window.location.host}/${event.collective.slug}/events/${event.slug}`;
       this.setState({ status: 'idle', result: { success: `Event created with success: ${eventUrl}` }});
+      window.location.replace(eventUrl);
     } catch (err) {
-      console.error(">>> createEvent error: ", err);
-      const errorMsg = (err.graphQLErrors) ? err.graphQLErrors[0].message : err.message;
+      console.error(">>> createEvent error: ", JSON.stringify(err));
+      const errorMsg = (err.graphQLErrors && err.graphQLErrors[0]) ? err.graphQLErrors[0].message : err.message;
       this.setState( { result: { error: errorMsg }})
       throw new Error(errorMsg);
     }
@@ -47,20 +50,34 @@ class CreateEvent extends React.Component {
 
   render() {
 
-    const title = "Create Event";
+    const collectiveName = this.props.collective && this.props.collective.name;
+    const canCreateEvent = this.props.LoggedInUser && this.props.LoggedInUser.canCreateEvent;
+    const title = `Create a New ${collectiveName} Event`;
 
-    console.log(">>> this.state.tiers", this.state.tiers);
     return (
       <div className="CreateEvent">
         <style jsx>{`
           .result {
             text-align: center;
+            margin-bottom: 5rem;
           }
           .success {
             color: green;
           }
           .error {
             color: red;
+          }
+          .EventTemplatePicker {
+            max-width: 700px;
+            margin: 0 auto;
+          }
+          .EventTemplatePicker .field {
+            margin: 1rem;
+          }
+
+          .login {
+            margin: 0 auto;
+            text-align: center;
           }
         `}</style>
 
@@ -71,14 +88,29 @@ class CreateEvent extends React.Component {
 
         <Body>
 
-          <h1>{title} based on <EventTemplatePicker collectiveSlug={this.props.collectiveSlug} onChange={this.handleTemplateChange} /></h1>
+          <h1>{title}</h1>
 
-          <EditEventForm event={this.state.event} onSubmit={this.createEvent} />
-          <div className="result">
-            <div className="success">{this.state.result.success}</div>
-            <div className="error">{this.state.result.error}</div>
-          </div>
+          {!canCreateEvent &&
+            <div className="login">
+              <p>You need to be logged in as a member of this collective to be able to create an event.</p>
+              <p><Button bsStyle="primary" href={`/${this.props.collective.slug}#support`}>Become a member</Button> <Button bsStyle="default" href={`/login?next=${this.props.collective.slug}/events/new`}>Login</Button></p>
+            </div>
+          }
+          {canCreateEvent &&
+            <div>
+              <div className="EventTemplatePicker">
+                <div className="field">
+                  <EventTemplatePicker label="Template" collectiveSlug={this.props.collective.slug} onChange={this.handleTemplateChange} />
+                </div>
+              </div>
 
+              <EditEventForm event={this.state.event} onSubmit={this.createEvent} />
+              <div className="result">
+                <div className="success">{this.state.result.success}</div>
+                <div className="error">{this.state.result.error}</div>
+              </div>
+            </div>
+          }
           </Body>
 
           <Footer />

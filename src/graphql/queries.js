@@ -2,6 +2,44 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+export const getLoggedInUserQuery = gql`
+  query LoggedInUser {
+    LoggedInUser {
+      id,
+      username,
+      firstName,
+      lastName,
+      avatar,
+      collectives {
+        id,
+        slug,
+        name,
+        role
+      }
+    }
+  }
+`;
+
+<<<<<<< HEAD
+>>>>>>> 1980447... show logged in user, fix create event
+=======
+export const getCollectiveQuery = gql`
+  query Collective($collectiveSlug: String!) {
+    Collective(collectiveSlug: $collectiveSlug) {
+      id,
+      slug,
+      name,
+      description,
+      backgroundImage,
+      logo,
+      currency
+    }
+  }
+`;
+
+>>>>>>> 6032982... fetching currency from the collective
 const getEventQuery = gql`
   query Event($collectiveSlug: String!, $eventSlug: String!) {
     Event(collectiveSlug: $collectiveSlug, eventSlug: $eventSlug) {
@@ -31,10 +69,14 @@ const getEventQuery = gql`query Event($collectiveSlug: String!, $eventSlug: Stri
 >>>>>>> bfc3279... added support for timezone
       id,
       slug,
+      createdByUser {
+        id
+      },
       name,
       description,
       startsAt,
       endsAt,
+<<<<<<< HEAD
 <<<<<<< HEAD
       location,
 =======
@@ -42,6 +84,10 @@ const getEventQuery = gql`query Event($collectiveSlug: String!, $eventSlug: Stri
 <<<<<<< HEAD
       locationName,
 >>>>>>> e54bb4f... create/edit event
+=======
+      timezone,
+      locationName,
+>>>>>>> 7dbcbbe... make Sustain great again
       address,
       lat,
       long,
@@ -66,6 +112,7 @@ const getEventQuery = gql`query Event($collectiveSlug: String!, $eventSlug: Stri
         slug,
         name,
         mission,
+        currency,
         backgroundImage,
         logo,
         stripePublishableKey
@@ -101,6 +148,7 @@ const getEventsQuery = gql`
       startsAt,
       endsAt,
       timezone,
+<<<<<<< HEAD
       location {
         name,
         address,
@@ -113,6 +161,10 @@ const getEventsQuery = gql`
         description,
         amount
       },
+=======
+      locationName,
+      address,
+>>>>>>> 7dbcbbe... make Sustain great again
       collective {
         id,
         slug,
@@ -133,7 +185,7 @@ const getAttendeesQuery = gql`
       slug,
       name,
       startsAt,
-      location,
+      locationName,
       responses {
         createdAt,
         quantity,
@@ -156,4 +208,20 @@ const getAttendeesQuery = gql`
   }
 `;
 
+<<<<<<< HEAD
 export const addAttendeesData = graphql(getAttendeesQuery);
+=======
+export const addCollectiveData = graphql(getCollectiveQuery);
+export const addEventData = graphql(getEventQuery);
+export const addEventsData = graphql(getEventsQuery);
+export const addAttendeesData = graphql(getAttendeesQuery);
+
+export const addGetLoggedInUserFunction = graphql(getLoggedInUserQuery, {
+  props: ({ data }) => ({
+    data,
+    getLoggedInUser: () => {
+      return data.refetch();
+    }
+  })
+});
+>>>>>>> 6032982... fetching currency from the collective
