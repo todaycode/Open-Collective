@@ -37,10 +37,18 @@
     "moment-timezone": "^0.5.13",
     "net": "1.0.2",
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     "next": "2.3.1",
 =======
     "next": "2.1.1",
 >>>>>>> 0266e9f... disable submit button when loading
+=======
+    "next": "^3.0.1-beta.1",
+>>>>>>> 6cf20e9... css fix and upgrade to next 3.0
+=======
+    "next": "2.1.1",
+>>>>>>> c6ea985... revert next
     "next-routes": "1.0.24",
     "node-sass": "4.5.0",
 <<<<<<< HEAD
