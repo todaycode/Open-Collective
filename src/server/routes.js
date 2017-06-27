@@ -20,6 +20,7 @@ pages.add('event', '/:collectiveSlug/events/:eventSlug');
 =======
 pages.add('editEvent', '/:collectiveSlug/events/:eventSlug/edit');
 pages.add('events', '/:collectiveSlug/events');
+pages.add('transactions', '/:collectiveSlug/transactions');
 pages.add('events', '/');
 >>>>>>> e54bb4f... create/edit event
 =======
