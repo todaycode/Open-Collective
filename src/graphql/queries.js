@@ -101,6 +101,7 @@ const getEventQuery = gql`query Event($collectiveSlug: String!, $eventSlug: Stri
 >>>>>>> 1d3dfd6... InputTypeLocation
       tiers {
         id,
+        type,
         name,
         description,
         amount,
@@ -157,6 +158,7 @@ const getEventsQuery = gql`
       },
       tiers {
         id,
+        type,
         name,
         description,
         amount
@@ -368,16 +370,22 @@ export const addGetLoggedInUserFunction = (component) => {
         if (window.localStorage.getItem('accessToken')) {
           return new Promise((resolve) => {
             setTimeout(async () => {
-              return data.refetch().then(res => {
-                if (res.data && res.data.LoggedInUser) {
-                  const LoggedInUser = {...res.data.LoggedInUser};
-                  if (LoggedInUser && LoggedInUser.collectives && collectiveSlug) {
-                    const membership = LoggedInUser.collectives.find(c => c.slug === collectiveSlug);
-                    LoggedInUser.membership = membership;
+              return data.refetch()
+                .then(res => {
+                  if (res.data && res.data.LoggedInUser) {
+                    const LoggedInUser = {...res.data.LoggedInUser};
+                    if (LoggedInUser && LoggedInUser.collectives && collectiveSlug) {
+                      const membership = LoggedInUser.collectives.find(c => c.slug === collectiveSlug);
+                      LoggedInUser.membership = membership;
+                    }
+                    console.log(">>> LoggedInUser", LoggedInUser);
+                    return resolve(LoggedInUser);
                   }
-                  return resolve(LoggedInUser);
-                }
-              });      
+                })
+                .catch(e => {
+                  console.error(">>> getLoggedInUserQuery error", e);
+                  return resolve(null);
+                });
             }, 0);
           });
         }

@@ -84,7 +84,11 @@ class CreateEvent extends React.Component {
 
         <Header
           title={title}
+<<<<<<< HEAD
           scripts={['google']}
+=======
+          LoggedInUser={this.props.LoggedInUser}
+>>>>>>> 61eeeae... edit type of tier (ticket, backer, sponsor)
           />
 
         <Body>

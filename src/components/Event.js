@@ -133,7 +133,6 @@ class Event extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log(">>> componentWillReceiveProps", props);
     if (props) {
       this.setState({actions: this.getDefaultActions(props) });
     }
@@ -239,7 +238,6 @@ class Event extends React.Component {
             image={this.event.collective.logo || backgroundImage}
             className={this.state.status}
             LoggedInUser={this.props.LoggedInUser}
-            scripts={['stripe']}
             />
 
           <Body>
