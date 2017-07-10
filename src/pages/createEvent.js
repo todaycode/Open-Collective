@@ -14,7 +14,11 @@ import NotFound from '../components/NotFound';
 >>>>>>> 6032982... fetching currency from the collective
 =======
 import Loading from '../components/Loading';
+<<<<<<< HEAD
 >>>>>>> dc1a5a1... events widget
+=======
+import { intersection } from 'lodash';
+>>>>>>> 20155ce... work in progress
 
 class CreateEventPage extends React.Component {
 
@@ -25,18 +29,23 @@ class CreateEventPage extends React.Component {
     this.state = { loading: true };
   }
 
+<<<<<<< HEAD
 >>>>>>> dc1a5a1... events widget
   static getInitialProps ({ query: { collectiveSlug } }) {
     return { collectiveSlug }
+=======
+  static getInitialProps ({ query: { parentCollectiveSlug } }) {
+    return { slug: parentCollectiveSlug }
+>>>>>>> 20155ce... work in progress
   }
 
 <<<<<<< HEAD
 =======
   async componentDidMount() {
-    const { getLoggedInUser } = this.props;
-    const LoggedInUser = getLoggedInUser && await getLoggedInUser(this.props.collectiveSlug);
+    const { getLoggedInUser, slug } = this.props;
+    const LoggedInUser = getLoggedInUser && await getLoggedInUser();
     if (LoggedInUser) {
-      LoggedInUser.canCreateEvent = Boolean(LoggedInUser.membership);
+      LoggedInUser.canCreateEvent = Boolean(intersection(LoggedInUser.roles[slug], ['HOST','ADMIN']).length);
     }
     this.setState({LoggedInUser, loading: false});
   }
@@ -70,7 +79,7 @@ class CreateEventPage extends React.Component {
       </IntlProvider>
 =======
       <div>
-        <CreateEvent collective={data.Collective} LoggedInUser={this.state.LoggedInUser} />
+        <CreateEvent parentCollective={data.Collective} LoggedInUser={this.state.LoggedInUser} />
       </div>
 >>>>>>> b28dbc6... better i18n
     );

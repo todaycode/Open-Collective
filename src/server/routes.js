@@ -1,9 +1,9 @@
 import path from 'path';
-import nextRoutes from 'next-routes';
 import _ from 'lodash';
 import fs from 'fs';
 import pdf from 'html-pdf';
 import moment from 'moment';
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 routes.add('event', '/:collectiveSlug/events/:eventSlug');
@@ -31,8 +31,29 @@ pages.add('button', '/:collectiveSlug/donate/button');
 =======
 pages.add('button', '/:collectiveSlug/:verb(contribute|donate)/button');
 >>>>>>> 4013f11... new contribute button
+=======
+import pages from './pages';
+<<<<<<< HEAD
+>>>>>>> 3e63f41... wip
+=======
+import { translateApiUrl } from '../lib/utils';
+import request from 'request';
+>>>>>>> 20155ce... work in progress
 
 module.exports = (server, app) => {
+
+  server.get('/favicon.*', (req, res) => res.send(404));
+
+  server.all('/api/*', (req, res) => {
+    console.log(">>> api request", translateApiUrl(req.url));
+    req
+      .pipe(request(translateApiUrl(req.url), { followRedirect: false }))
+      .on('error', (e) => {
+        console.error("error calling api", translateApiUrl(req.url), e);
+        res.status(500).send(e);
+      })
+      .pipe(res);
+  });
 
   server.get('/:collectiveSlug/:verb(contribute|donate)/button:size(|@2x).png', (req, res) => {
     const color = (req.query.color === 'blue') ? 'blue' : 'white';
