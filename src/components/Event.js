@@ -17,10 +17,15 @@ import { filterCollection } from '../lib/utils';
 import Markdown from 'react-markdown';
 import TicketsConfirmed from '../components/TicketsConfirmed';
 import { FormattedMessage, FormattedDate, FormattedTime } from 'react-intl';
+<<<<<<< HEAD
 import { pick, uniqBy, get, union } from 'lodash';
 import { capitalize } from '../lib/utils';
 import { Router } from '../server/pages';
 import { addEventMutations } from '../graphql/mutations';
+=======
+import { uniq } from 'underscore';
+import { exportMembers } from '../lib/export_file';
+>>>>>>> 5084c48... add export csv for list of attendees (for admins)
 
 const defaultBackgroundImage = '/static/images/defaultBackgroundImage.png';
 
@@ -262,8 +267,13 @@ class Event extends React.Component {
   }
 
   render() {
+<<<<<<< HEAD
     const { event } = this.state;
     const { LoggedInUser } = this.props;
+=======
+    const { LoggedInUser } = this.props;
+    const canEditEvent = LoggedInUser && LoggedInUser.canEditEvent;
+>>>>>>> 657ee04... added link to print nametags if canEditEvent
     const responses = {};
     responses.sponsors = filterCollection(event.orders, { tier: { name: /sponsor/i }});
 
@@ -315,7 +325,27 @@ class Event extends React.Component {
 
     return (
       <div>
-
+        <style jsx>{`
+          .adminActions {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.05rem;
+          }
+          .adminActions ul {
+            overflow: hidden;
+            text-align: center;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            list-style: none;
+          }
+          .adminActions ul li {
+            margin: 0 2rem;
+          }
+        `}</style>
         <TicketsConfirmed
           show={this.state.modal === 'TicketsConfirmed'}
           onClose={this.closeModal}
@@ -420,6 +450,15 @@ class Event extends React.Component {
                           </span>
                         }
                       </h1>
+                      { canEditEvent &&
+                      <div className="adminActions">
+                        <ul>
+                          <li><a href={`/${this.event.collective.slug}/events/${this.event.slug}/nametags.pdf`}>Print name tags</a></li>
+                          <li><a href={`mailto:${this.event.slug}@${this.event.collective.slug}.opencollective.com`}>Send email</a></li>
+                          <li><a onClick={ exportMembers.bind(this, this.event.collective.slug, this.event.slug) }>Export CSV</a></li>
+                        </ul>
+                      </div>
+                      }
                       <Responses responses={responses.guests} />
                     </section>
                   }

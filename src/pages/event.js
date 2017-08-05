@@ -48,7 +48,7 @@ class EventPage extends React.Component {
 
     return (
       <div>
-        <Event event={event} LoggedInUser={LoggedInUser} />
+        <Event event={event} LoggedInUser={LoggedInUser} client={this.props.client} />
       </div>
     );
   }
