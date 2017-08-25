@@ -28,11 +28,11 @@ class TransactionDetails extends React.Component {
 
     const type = transaction.type.toLowerCase();
 
-    const amountDetails = [intl.formatNumber(transaction.amount / 100, { currency: collective.currency, ...this.currencyStyle})];
+    const amountDetails = [intl.formatNumber(transaction.amount / 100, { currency: transaction.currency, ...this.currencyStyle})];
     const addFees = (feesArray) => {
       feesArray.forEach(feeName => {
         if (transaction[feeName]) {
-          amountDetails.push(`${intl.formatNumber(transaction[feeName] / 100, { currency: transaction.currency, ...this.currencyStyle})} (${intl.formatMessage(this.messages[feeName])})`);
+          amountDetails.push(`${intl.formatNumber(transaction[feeName] / 100, { currency: collective.currency, ...this.currencyStyle})} (${intl.formatMessage(this.messages[feeName])})`);
         }
       })
     }
@@ -124,8 +124,13 @@ class TransactionDetails extends React.Component {
             <span className="netAmountInGroupCurrency">
 >>>>>>> e6e13c8... added link to download invoice for a donation if logged in as member/host
               <FormattedNumber
+<<<<<<< HEAD
                 value={transaction.netAmountInCollectiveCurrency / 100}
                 currency={transaction.currency}
+=======
+                value={transaction.netAmountInGroupCurrency / 100}
+                currency={collective.currency}
+>>>>>>> 081bb03... how the right currency in the transaction details
                 {...this.currencyStyle}
                 />
             </span>

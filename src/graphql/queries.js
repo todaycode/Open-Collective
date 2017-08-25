@@ -490,6 +490,7 @@ const getEventCollectiveQuery = gql`
           avatar,
           username,
           twitterHandle,
+<<<<<<< HEAD
 >>>>>>> e6e13c8... added link to download invoice for a donation if logged in as member/host
           description
         }
@@ -508,6 +509,11 @@ const getEventCollectiveQuery = gql`
           twitterHandle
           description
         }
+=======
+          description,
+          email
+        },
+>>>>>>> 3e93a48... don't run a new query to exportMembers
         tier {
           id
           name
@@ -795,9 +801,20 @@ export const addCollectiveTransactionsData = graphql(getCollectiveTransactionsQu
 });
 >>>>>>> 488edbe... new route /:collectiveSlug/transactions
 export const addCollectiveData = graphql(getCollectiveQuery);
+<<<<<<< HEAD
+<<<<<<< HEAD
 export const addCollectiveToEditData = graphql(getCollectiveToEditQuery);
 export const addEventCollectiveData = graphql(getEventCollectiveQuery);
 export const addCollectiveTierData = graphql(getCollectiveTierQuery);
+=======
+
+// Need to bypass the cache otherwise it won't update the list of participants with the email addresses when we refetch the query as an admin
+export const addEventData = graphql(getEventQuery, { options: { fetchPolicy: 'network-only' }});
+
+>>>>>>> 137a983... fetch email addresses to export members
+=======
+export const addEventData = graphql(getEventQuery);
+>>>>>>> 6519b74... bypass the cache only if admin
 export const addEventsData = graphql(getEventsQuery);
 export const addAttendeesData = graphql(getAttendeesQuery);
 export const addTiersData = graphql(getTiersQuery);

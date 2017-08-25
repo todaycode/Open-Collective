@@ -64,8 +64,12 @@ class Event extends React.Component {
       showInterestedForm: false,
       order: {},
       api: { status: 'idle' },
+<<<<<<< HEAD
       event: this.props.event,
       actions: this.defaultActions
+=======
+      actions: this.getDefaultActions(this.props)
+>>>>>>> d7dcdf9... make sure we show the edit event on reload
     };
 
     // To test confirmation screen, uncomment the following:
@@ -177,7 +181,7 @@ class Event extends React.Component {
 
   componentWillReceiveProps(props) {
     if (props) {
-      this.setState({actions: this.getDefaultActions(props) });
+      this.setState({ actions: this.getDefaultActions(props) });
     }
   }
 
@@ -452,11 +456,11 @@ class Event extends React.Component {
                         }
                       </h1>
                       { canEditEvent &&
-                      <div className="adminActions">
+                      <div className="adminActions" id="adminActions">
                         <ul>
                           <li><a href={`/${this.event.collective.slug}/events/${this.event.slug}/nametags.pdf`}>Print name tags</a></li>
                           <li><a href={`mailto:${this.event.slug}@${this.event.collective.slug}.opencollective.com`}>Send email</a></li>
-                          <li className="desktopOnly"><a onClick={ exportMembers.bind(this, this.event.collective.slug, this.event.slug) }>Export CSV</a></li>
+                          <li><a onClick={ () => exportMembers(this.event) }>Export CSV</a></li>
                         </ul>
                       </div>
                       }

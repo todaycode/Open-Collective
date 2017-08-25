@@ -31,43 +31,12 @@ function formatDate(d) {
   return [d.getFullYear(), (mm < 10) ? `0${mm}` : mm, (dd < 10) ? `0${dd}` : dd].join('-');
 }
 
-export async function exportMembers(collectiveSlug, eventSlug) {
+export async function exportMembers(event) {
   const date = formatDate(new Date);
-  const res = await this.props.client.query({
-    query: gql`
-      query Event($collectiveSlug: String!, $eventSlug: String!) {
-        Event(collectiveSlug: $collectiveSlug, eventSlug: $eventSlug) {
-          id,
-          responses {
-            id
-            createdAt
-            quantity
-            status
-            description
-            user {
-              id
-              name
-              twitterHandle
-              description
-              email
-            },
-            tier {
-              id
-              name
-            }
-          }
-        }
-      }
-    `,
-    variables: {
-      collectiveSlug,
-      eventSlug
-    }
-  });
-  const rows = res.data.Event.responses.map(r => {
+  const rows = event.responses.map(r => {
     return {
       createdAt: formatDate(new Date(r.createdAt)),
-      tier: r.tier.name,
+      tier: r.tier && r.tier.name,
       status: r.status,
       quantity: r.quantity,
       name: r.user.name,
@@ -77,5 +46,5 @@ export async function exportMembers(collectiveSlug, eventSlug) {
     }
   });
   const csv = json2csv(rows);
-  return exportFile('text/plain;charset=utf-8', `${date.replace('-','')}-${collectiveSlug}-${eventSlug}.csv`, csv);
+  return exportFile('text/plain;charset=utf-8', `${date.replace('-','')}-${event.collective.slug}-${event.slug}.csv`, csv);
 }
