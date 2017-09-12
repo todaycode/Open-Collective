@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Transaction from './Transaction';
+import Expense from './Expense';
 import { ButtonGroup, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-class Transactions extends React.Component {
+class Expenses extends React.Component {
 
   static propTypes = {
     collective: PropTypes.object,
-    transactions: PropTypes.array,
+    expenses: PropTypes.array,
     refetch: PropTypes.func,
     fetchMore: PropTypes.func,
     LoggedInUser: PropTypes.object
@@ -29,16 +29,16 @@ class Transactions extends React.Component {
     });
   }
 
-  refetch(type) {
-    this.setState({type});
-    this.props.refetch({type});
+  refetch(status) {
+    this.setState({status});
+    this.props.refetch({status});
   }
 
   render() {
-    const { collective, transactions, LoggedInUser } = this.props;
+    const { collective, expenses, LoggedInUser } = this.props;
 
     return (
-      <div className="Transactions">
+      <div className="Expenses">
         <style jsx>{`
           :global(.loadMoreBtn) {
             margin: 1rem;
@@ -59,27 +59,27 @@ class Transactions extends React.Component {
 
         <div className="filter">
           <ButtonGroup className="filterBtnGroup">
-            <Button className="filterBtn" bsStyle={!this.state.type ? 'primary' : 'default'} onClick={() => this.refetch()}>
-              <FormattedMessage id='transactions.all' defaultMessage='all' />
+            <Button className="filterBtn" bsStyle={!this.state.status ? 'primary' : 'default'} onClick={() => this.refetch()}>
+              <FormattedMessage id='expenses.all' defaultMessage='all' />
             </Button>
-            <Button className="filterBtn" bsStyle={this.state.type === 'CREDIT' ? 'primary' : 'default'} onClick={() => this.refetch('CREDIT')}>
-              <FormattedMessage id='transactions.credits' defaultMessage='credits' />
+            <Button className="filterBtn" bsStyle={this.state.status === 'PENDING' ? 'primary' : 'default'} onClick={() => this.refetch('PENDING')}>
+              <FormattedMessage id='expenses.pending' defaultMessage='pending' />
             </Button>
-            <Button className="filterBtn" bsStyle={this.state.type === 'DEBIT' ? 'primary' : 'default'} onClick={() => this.refetch('DEBIT')}>
-              <FormattedMessage id='transactions.debits' defaultMessage='debits' />
+            <Button className="filterBtn" bsStyle={this.state.status === 'PAID' ? 'primary' : 'default'} onClick={() => this.refetch('PAID')}>
+              <FormattedMessage id='expenses.paid' defaultMessage='paid' />
             </Button>
           </ButtonGroup>
         </div>
 
-        {transactions.map((transaction) =>
-          <Transaction
-            key={transaction.id}
+        {expenses.map((expense) =>
+          <Expense
+            key={expense.id}
             collective={collective}
-            transaction={transaction}
+            expense={expense}
             LoggedInUser={LoggedInUser}
             />
         )}
-        { transactions.length % 10 === 0 &&
+        { expenses.length % 10 === 0 &&
           <div className="loadMoreBtn">
             <Button bsStyle='default' onClick={this.fetchMore}>
               {this.state.loading && <FormattedMessage id='loading' defaultMessage='loading' />}
@@ -92,4 +92,4 @@ class Transactions extends React.Component {
   }
 }
 
-export default Transactions;
+export default Expenses;

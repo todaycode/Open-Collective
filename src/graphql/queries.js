@@ -273,6 +273,8 @@ const getCollectiveQuery = gql`
         id
         yearlyBudget
         backers
+        transactions
+        expenses
         totalAmountSent
       }
 >>>>>>> 20155ce... work in progress
@@ -282,25 +284,12 @@ const getCollectiveQuery = gql`
         type
         name
         description
+        button
         amount
         presets
         interval
         currency
         maxQuantity
-        orders {
-          id
-          publicMessage
-          createdAt
-          totalTransactions
-          fromCollective {
-            id
-            name
-            image
-            slug
-            twitterHandle
-            description
-          }
-        }
       }
       memberOf {
         id
@@ -335,10 +324,12 @@ const getCollectiveQuery = gql`
         tier {
           id
           name
+          currency
         }
         member {
           id
           name
+          type
           image
           slug
           twitterHandle
@@ -675,9 +666,14 @@ const getCollectiveTierQuery = gql`
   }
 `;
 
+<<<<<<< HEAD
 >>>>>>> 3e63f41... wip
 const getCollectiveTransactionsQuery = gql`
   query CollectiveTransactions($slug: String!, $type: String, $limit: Int, $offset: Int) {
+=======
+const getCollectiveCoverQuery = gql`
+  query CollectiveCover($slug: String!) {
+>>>>>>> bf84558... added Expense components
     Collective(slug: $slug) {
       id
       slug
@@ -687,44 +683,10 @@ const getCollectiveTransactionsQuery = gql`
       settings
       image
     }
-    allTransactions(slug: $slug, type: $type, limit: $limit, offset: $offset) {
-      id
-      uuid
-      description
-      createdAt
-      type
-      amount
-      currency
-      netAmountInCollectiveCurrency
-      hostFeeInHostCurrency
-      platformFeeInHostCurrency
-      paymentProcessorFeeInHostCurrency
-      paymentMethod {
-        service
-      }
-      fromCollective {
-        id
-        name
-        slug
-        image
-      }
-      host {
-        id
-        name
-      }
-      ... on Expense {
-        category
-        attachment
-      }
-      ... on Order {
-        subscription {
-          interval
-        }
-      }
-    }
   }
 `;
 
+<<<<<<< HEAD
 const getTransactionQuery = gql`
   query Transaction($id: Int!) {
     Transaction(id: $id) {
@@ -803,6 +765,10 @@ export const addCollectiveTransactionsData = graphql(getCollectiveTransactionsQu
 export const addCollectiveData = graphql(getCollectiveQuery);
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+export const addCollectiveData = graphql(getCollectiveQuery);
+export const addCollectiveCoverData = graphql(getCollectiveCoverQuery);
+>>>>>>> bf84558... added Expense components
 export const addCollectiveToEditData = graphql(getCollectiveToEditQuery);
 export const addEventCollectiveData = graphql(getEventCollectiveQuery);
 export const addCollectiveTierData = graphql(getCollectiveTierQuery);
@@ -819,24 +785,6 @@ export const addEventsData = graphql(getEventsQuery);
 export const addAttendeesData = graphql(getAttendeesQuery);
 export const addTiersData = graphql(getTiersQuery);
 export const addUserData = graphql(getUserQuery);
-
-export const addGetTransaction = (component) => {
-  const accessToken = typeof window !== 'undefined' && window.localStorage.getItem('accessToken');
-
-  // if we don't have an accessToken, there is no need to get the details of a transaction
-  // as we won't have access to any more information than the allTransactions query
-  if (!accessToken) return component;
-
-  return graphql(getTransactionQuery, {
-    options(props) {
-      return {
-        variables: {
-          id: props.transaction.id
-        }
-      }
-    }
-  })(component);
-}
 
 export const addGetLoggedInUserFunction = (component) => {
   const accessToken = typeof window !== 'undefined' && window.localStorage.getItem('accessToken');
