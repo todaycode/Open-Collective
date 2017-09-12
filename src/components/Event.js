@@ -350,6 +350,9 @@ class Event extends React.Component {
           .adminActions ul li {
             margin: 0 2rem;
           }
+          #tickets :global(.tier) {
+            margin: 4rem auto;            
+          }
         `}</style>
         <TicketsConfirmed
           show={this.state.modal === 'TicketsConfirmed'}
@@ -409,11 +412,6 @@ class Event extends React.Component {
                     </div>
 
                     <div id="tickets">
-                      <style jsx>{`
-                        #tickets :global(.tier) {
-                          margin: 4rem auto;            
-                        }
-                      `}</style>
                       {event.tiers.map((tier) =>
                         <Tier
                           key={tier.id}

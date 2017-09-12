@@ -1,9 +1,9 @@
 {
   "name": "opencollective-frontend",
-  "version": "0.0.2",
+  "version": "2.0.0-beta1",
   "private": true,
   "engines": {
-    "node": "7.7.4"
+    "node": "8.4.0"
   },
   "dependencies": {
     "accepts": "1.3.3",
@@ -44,6 +44,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "next": "2.3.1",
 =======
     "next": "2.1.1",
@@ -62,6 +63,10 @@
 >>>>>>> 28a8682... Edit connected accounts and payment methods
     "next-routes": "1.0.40",
 >>>>>>> 3e63f41... wip
+=======
+    "next": "^3.2.2",
+    "next-routes": "^1.0.40",
+>>>>>>> e23c512... update next, fix babel issue
     "node-sass": "4.5.0",
 <<<<<<< HEAD
 <<<<<<< HEAD
