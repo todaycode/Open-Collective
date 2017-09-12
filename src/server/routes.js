@@ -21,9 +21,12 @@ pages.add('event', '/:collectiveSlug/events/:eventSlug');
 pages.add('editEvent', '/:collectiveSlug/events/:eventSlug/edit');
 pages.add('events', '/:collectiveSlug/events');
 pages.add('transactions', '/:collectiveSlug/transactions');
+<<<<<<< HEAD
 pages.add('events', '/');
 >>>>>>> e54bb4f... create/edit event
 =======
+=======
+>>>>>>> e6e13c8... added link to download invoice for a donation if logged in as member/host
 pages.add('nametags', '/:collectiveSlug/events/:eventSlug/nametags');
 <<<<<<< HEAD
 >>>>>>> af9cec0... /:collectiveSlug/events/:eventSlug/nametags.pdf

@@ -445,6 +445,7 @@ const getEventCollectiveQuery = gql`
         amount
         currency
         maxQuantity
+<<<<<<< HEAD
       }
       parentCollective {
         id
@@ -460,12 +461,36 @@ const getEventCollectiveQuery = gql`
         id
         createdAt
         role
-        user {
+        member {
           id
           name
           image
-          username
+          slug
           twitterHandle
+=======
+      },
+      collective {
+        id,
+        slug,
+        name,
+        mission,
+        currency,
+        backgroundImage,
+        logo,
+        stripePublishableKey
+      },
+      responses {
+        id,
+        createdAt,
+        quantity,
+        status,
+        description,
+        user {
+          name,
+          avatar,
+          username,
+          twitterHandle,
+>>>>>>> e6e13c8... added link to download invoice for a donation if logged in as member/host
           description
         }
       }
@@ -475,11 +500,11 @@ const getEventCollectiveQuery = gql`
         quantity
         processedAt
         publicMessage
-        user {
+        fromCollective {
           id
           name
           image
-          username
+          slug
           twitterHandle
           description
         }
@@ -560,6 +585,7 @@ const getEventsQuery = gql`
 export const addEventsData = graphql(getEventsQuery);
 
 const getAttendeesQuery = gql`
+<<<<<<< HEAD
   query Collective($slug: String!) {
     Collective(slug: $slug) {
       slug
@@ -574,6 +600,23 @@ const getAttendeesQuery = gql`
         quantity
         processedAt
         description
+=======
+  query Event($collectiveSlug: String!, $eventSlug: String!) {
+    Event(collectiveSlug: $collectiveSlug, eventSlug: $eventSlug) {
+      slug,
+      name,
+      startsAt,
+      location {
+        name,
+        address
+      },
+      responses {
+        id,
+        createdAt,
+        quantity,
+        status,
+        description,
+>>>>>>> 3f114f9... fix nametags
         user {
           id
           firstName
