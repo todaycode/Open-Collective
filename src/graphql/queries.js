@@ -15,6 +15,7 @@ export const getLoggedInUserQuery = gql`
       image
       CollectiveId
       collective {
+        id
         name
         type
         paymentMethods {

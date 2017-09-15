@@ -255,7 +255,6 @@ class Event extends React.Component {
   }
 
   handleOrderTier(tier) {
-    console.log(">>> handleOrderTier", tier);
     this.updateOrder(tier);
 
     const { event, order } = this.state;
