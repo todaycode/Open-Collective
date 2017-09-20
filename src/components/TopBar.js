@@ -82,7 +82,12 @@ class TopBar extends React.Component {
             <li><a href="https://medium.com/open-collective">Blog</a></li>
           </ul>
           <div className="separator"></div>
+<<<<<<< HEAD
           <a href="/login?next=/">Login</a>
+=======
+          { !LoggedInUser && <a href="/signin?next=/">Login</a> }
+          { LoggedInUser && <TopBarProfileMenu LoggedInUser={LoggedInUser} /> }
+>>>>>>> 2b606ab... using /signin - white title for cover - ...
         </div>
       </div>
     )

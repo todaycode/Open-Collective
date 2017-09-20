@@ -107,7 +107,7 @@ class OrderForm extends React.Component {
 
   componentDidMount() {
     if (typeof Stripe !== "undefined") {
-      const stripePublishableKey = (typeof window !== "undefined" && window.location.hostname === 'localhost') ? 'pk_test_5aBB887rPuzvWzbdRiSzV3QB' : 'pk_live_qZ0OnX69UlIL6pRODicRzsZy';
+      const stripePublishableKey = (typeof window !== "undefined" && (window.location.hostname === 'localhost' || window.location.hostname === 'staging.opencollective.com')) ? 'pk_test_5aBB887rPuzvWzbdRiSzV3QB' : 'pk_live_qZ0OnX69UlIL6pRODicRzsZy';
       // eslint-disable-next-line
       Stripe.setPublishableKey(stripePublishableKey);
     }
@@ -471,11 +471,11 @@ class OrderForm extends React.Component {
         }
         
         <div className="order">
-          <h2>Order details</h2>
+          <h2>Contribution details</h2>
           <Row>
             <Col sm={12}>
               <div className="form-group">
-                <label className="col-sm-3 control-label">Order</label>
+                <label className="col-sm-3 control-label">Contribution</label>
                 <Col sm={9}>
                   <TierComponent
                     tier={this.state.tier}

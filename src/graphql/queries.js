@@ -625,6 +625,7 @@ const getCollectiveTierQuery = gql`
       id
       slug
       name
+      type
       image
       description
       twitterHandle
