@@ -19,6 +19,7 @@ export const getLoggedInUserQuery = gql`
         name
         type
         paymentMethods {
+          id
           uuid
           name
           data
@@ -34,6 +35,7 @@ export const getLoggedInUserQuery = gql`
           name
           currency
           paymentMethods {
+            id
             uuid
             name
             data
@@ -657,6 +659,7 @@ const getCollectiveCoverQuery = gql`
 >>>>>>> bf84558... added Expense components
     Collective(slug: $slug) {
       id
+      type
       slug
       name
       currency

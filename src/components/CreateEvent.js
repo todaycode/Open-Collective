@@ -159,11 +159,15 @@ class CreateEvent extends React.Component {
               <div className="login">
                 <p>You need to be logged in as a member of this collective to be able to create an event.</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <p><Button bsStyle="primary" href={`/${collective.slug}#support`}>Become a member</Button> <Button bsStyle="default" href={`/login?next=${collective.slug}/events/new`}>Login</Button></p>
 >>>>>>> 20155ce... work in progress
 =======
                 <p><Button bsStyle="primary" href={`/${collective.slug}#support`}>Become a member</Button> <Button bsStyle="default" href={`/signin?next=${collective.slug}/events/new`}>Login</Button></p>
 >>>>>>> 2b606ab... using /signin - white title for cover - ...
+=======
+                <p><Button bsStyle="primary" href={`/${collective.slug}#support`}>Become a member</Button> <Button bsStyle="default" href={`/signin?next=/${collective.slug}/events/new`}>Login</Button></p>
+>>>>>>> df13894... fix /signin
               </div>
             }
             {canCreateEvent &&
