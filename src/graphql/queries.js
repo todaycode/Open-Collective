@@ -238,6 +238,7 @@ const getCollectiveToEditQuery = gql`
         uuid
         name
         data
+        monthlyLimitPerMember
       }
       connectedAccounts {
         id
