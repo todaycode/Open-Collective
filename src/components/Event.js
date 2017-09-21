@@ -357,7 +357,7 @@ class Event extends React.Component {
             margin: 0 2rem;
           }
           #tickets :global(.tier) {
-            margin: 4rem auto;            
+            margin: 4rem auto;
           }
         `}</style>
         <TicketsConfirmed
