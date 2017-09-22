@@ -178,7 +178,6 @@ const getCollectiveToEditQuery = gql`
           id
           publicMessage
           createdAt
-          totalTransactions
           fromCollective {
             id
             name
@@ -295,6 +294,19 @@ const getCollectiveQuery = gql`
         interval
         currency
         maxQuantity
+        stats {
+          id
+          totalOrders
+          availableQuantity
+        }
+        orders(limit: 5) {
+          fromCollective {
+            id
+            slug
+            name
+            image
+          }
+        }
       }
       memberOf {
         id
