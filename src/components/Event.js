@@ -72,12 +72,19 @@ class Event extends React.Component {
       order: {},
       api: { status: 'idle' },
 <<<<<<< HEAD
+<<<<<<< HEAD
       event: this.props.event,
       actions: this.defaultActions
 =======
       actions: this.getDefaultActions(this.props)
 >>>>>>> d7dcdf9... make sure we show the edit event on reload
     };
+=======
+      event: this.props.event
+    }
+
+    this.state.actions = this.getDefaultActions(this.props);
+>>>>>>> 948d8e6... added events on collective page, consolidated avatars, fix bug when no credit card on file
 
     // To test confirmation screen, uncomment the following:
     // this.state.view = "GetTicket";
@@ -266,14 +273,17 @@ class Event extends React.Component {
       return this.createOrder(order);
     }
     this.setState({ order, showInterestedForm: false });
-    let route = `/${event.slug}/order/${order.tier.id}`;
-    if (order.totalAmount) {
-      route += `/${order.totalAmount / 100}`;
+    const route = `/${event.parentCollective.slug}/events/${event.slug}/order/${order.tier.id}`;
+    const params = {
+      eventSlug: event.slug,
+      collectiveSlug: event.parentCollective.slug,
+      TierId: order.tier.id,
+      quantity: order.quantity,
+      totalAmount: order.totalAmount,
+      interval: order.interval
     }
-    if (order.interval) {
-      route += `/${order.interval}`;
-    }
-    Router.pushRoute(route);
+    console.log(">>> pushing route", route, "with params", params);
+    Router.pushRoute('orderEventTier', params);
   }
 
   render() {
@@ -402,7 +412,7 @@ class Event extends React.Component {
               {this.state.view == 'GetTicket' &&
                 <div className="content" >              
                   <OrderForm
-                    collective={this.event}
+                    collective={event}
                     onSubmit={this.createOrder}
                     quantity={this.state.order.quantity}
                     tier={this.state.order.tier || event.tiers[0]}
@@ -460,12 +470,12 @@ class Event extends React.Component {
                           </span>
                         }
                       </h1>
-                      { LoggedInUser.canEditEvent &&
+                      { LoggedInUser && LoggedInUser.canEditEvent &&
                       <div className="adminActions" id="adminActions">
                         <ul>
-                          <li><a href={`/${this.event.collective.slug}/events/${this.event.slug}/nametags.pdf`}>Print name tags</a></li>
-                          <li><a href={`mailto:${this.event.slug}@${this.event.collective.slug}.opencollective.com`}>Send email</a></li>
-                          <li><a onClick={ () => exportMembers(this.event) }>Export CSV</a></li>
+                          <li><a href={`/${event.parentCollective.slug}/events/${event.slug}/nametags.pdf`}>Print name tags</a></li>
+                          <li><a href={`mailto:${event.slug}@${event.parentCollective.slug}.opencollective.com`}>Send email</a></li>
+                          <li><a onClick={ () => exportMembers(event) }>Export CSV</a></li>
                         </ul>
                       </div>
                       }

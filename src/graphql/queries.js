@@ -400,8 +400,8 @@ const getEventQuery = gql`query Event($collectiveSlug: String!, $eventSlug: Stri
 =======
 =======
 const getEventCollectiveQuery = gql`
-  query Collective($slug: String!) {
-    Collective(slug: $slug) {
+  query Collective($eventSlug: String!) {
+    Collective(slug: $eventSlug) {
       id
       slug
       createdByUser {
@@ -516,6 +516,7 @@ const getEventCollectiveQuery = gql`
 
 export const addEventData = graphql(getEventQuery);
 
+<<<<<<< HEAD
 const getEventsQuery = gql`
 <<<<<<< HEAD
   query allEvents($collectiveSlug: String) {
@@ -582,6 +583,8 @@ const getEventsQuery = gql`
 
 export const addEventsData = graphql(getEventsQuery);
 
+=======
+>>>>>>> 948d8e6... added events on collective page, consolidated avatars, fix bug when no credit card on file
 const getAttendeesQuery = gql`
 <<<<<<< HEAD
   query Collective($slug: String!) {
@@ -636,6 +639,7 @@ const getAttendeesQuery = gql`
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 export const addAttendeesData = graphql(getAttendeesQuery);
 =======
 =======
@@ -678,6 +682,8 @@ const getCollectiveTierQuery = gql`
 const getCollectiveTransactionsQuery = gql`
   query CollectiveTransactions($slug: String!, $type: String, $limit: Int, $offset: Int) {
 =======
+=======
+>>>>>>> 948d8e6... added events on collective page, consolidated avatars, fix bug when no credit card on file
 const getCollectiveCoverQuery = gql`
   query CollectiveCover($slug: String!) {
 >>>>>>> bf84558... added Expense components
@@ -779,6 +785,7 @@ export const addCollectiveCoverData = graphql(getCollectiveCoverQuery);
 >>>>>>> bf84558... added Expense components
 export const addCollectiveToEditData = graphql(getCollectiveToEditQuery);
 export const addEventCollectiveData = graphql(getEventCollectiveQuery);
+<<<<<<< HEAD
 export const addCollectiveTierData = graphql(getCollectiveTierQuery);
 =======
 
@@ -790,6 +797,8 @@ export const addEventData = graphql(getEventQuery, { options: { fetchPolicy: 'ne
 export const addEventData = graphql(getEventQuery);
 >>>>>>> 6519b74... bypass the cache only if admin
 export const addEventsData = graphql(getEventsQuery);
+=======
+>>>>>>> 948d8e6... added events on collective page, consolidated avatars, fix bug when no credit card on file
 export const addAttendeesData = graphql(getAttendeesQuery);
 export const addTiersData = graphql(getTiersQuery);
 export const addUserData = graphql(getUserQuery);
