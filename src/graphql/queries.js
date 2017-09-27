@@ -333,6 +333,7 @@ const getCollectiveQuery = gql`
           description
           settings
           image
+          backgroundImage
           stats {
             id
             backers
