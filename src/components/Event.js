@@ -32,7 +32,11 @@ import { Router } from '../server/pages';
 import { addEventMutations } from '../graphql/mutations';
 >>>>>>> bf84558... added Expense components
 import { exportMembers } from '../lib/export_file';
+<<<<<<< HEAD
 >>>>>>> 5084c48... add export csv for list of attendees (for admins)
+=======
+import { Link } from '../server/pages';
+>>>>>>> 5845d1a... fix for /events/new and /edit
 
 const defaultBackgroundImage = '/static/images/defaultBackgroundImage.png';
 
@@ -69,7 +73,7 @@ class Event extends React.Component {
     this.state = {
       view: 'default',
       showInterestedForm: false,
-      order: {},
+      order: { tier: {} },
       api: { status: 'idle' },
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -173,13 +177,13 @@ class Event extends React.Component {
 
   getDefaultActions(props) {
     const { LoggedInUser } = props || this.props;
-    const editUrl = `/${this.state.event.slug}/edit`;
+    const editRoute = `/${this.state.event.parentCollective.slug}/events/${this.state.event.slug}/edit`;
     if (LoggedInUser) {
       const actions = [ ...this.defaultActions ];
       if (LoggedInUser.canEditEvent) {
         actions.push({
           className: 'whiteblue small',
-          component: <a href={editUrl}>EDIT</a>
+          component: <Link route={editRoute}><a>EDIT</a></Link>
         });
       }
       if (this.state.event.members.find( member => member.member.id === LoggedInUser.CollectiveId && member.role === 'FOLLOWER')) {
