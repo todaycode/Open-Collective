@@ -2,13 +2,17 @@ import React from 'react';
 <<<<<<< HEAD
 =======
 import TopBarProfileMenu from './TopBarProfileMenu';
+<<<<<<< HEAD
 import { Link } from '../server/pages';
 >>>>>>> df13894... fix /signin
+=======
+>>>>>>> fa600af... fix for 404 when click on create event, better signin/signoff flow
 
 const logo = '/static/images/opencollective-icon.svg';
 
 class TopBar extends React.Component {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   constructor(props) {
@@ -46,6 +50,8 @@ class TopBar extends React.Component {
     this.toggleProfileMenu(e);
   }
 
+=======
+>>>>>>> fa600af... fix for 404 when click on create event, better signin/signoff flow
   onClickSubscriptions(e) {
     this.props.pushState(null, '/subscriptions')
     this.toggleProfileMenu(e);
@@ -85,7 +91,12 @@ class TopBar extends React.Component {
 
 >>>>>>> df13894... fix /signin
   render() {
+<<<<<<< HEAD
     const {className} = this.props;
+=======
+    const { className, LoggedInUser } = this.props;
+
+>>>>>>> fa600af... fix for 404 when click on create event, better signin/signoff flow
     return (
       <div className={`${className} TopBar`}>
         <style jsx>{`
@@ -132,7 +143,14 @@ class TopBar extends React.Component {
           background-color: #e6e6e6;
           vertical-align: middle;
         }
-        .nav a {
+        @media(max-width: 380px) {
+          ul {
+            display: none;
+          }
+        }
+        `}</style>
+        <style jsx global>{`
+        .TopBar .nav a {
           box-sizing: border-box;
           display: inline-block;
           font-size: 12px;
@@ -143,15 +161,9 @@ class TopBar extends React.Component {
           padding: 4px 16px;
           cursor: pointer;
         }
-        .nav a:last-child {
+        .TopBar .nav a:last-child {
           margin-right: 0;
           padding-right: 0;
-        }
-
-        @media(max-width: 380px) {
-          ul {
-            display: none;
-          }
         }
         `}</style>
         <img src={logo} width="40" height="40" className="logo" alt="Open Collective logo" />
@@ -164,6 +176,7 @@ class TopBar extends React.Component {
           <div className="separator"></div>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <a href="/login?next=/">Login</a>
 =======
           { !LoggedInUser && <a href="/signin?next=/">Login</a> }
@@ -172,6 +185,9 @@ class TopBar extends React.Component {
 >>>>>>> df13894... fix /signin
           { LoggedInUser && <TopBarProfileMenu LoggedInUser={LoggedInUser} /> }
 >>>>>>> 2b606ab... using /signin - white title for cover - ...
+=======
+          <TopBarProfileMenu LoggedInUser={LoggedInUser} />
+>>>>>>> fa600af... fix for 404 when click on create event, better signin/signoff flow
         </div>
       </div>
     )
