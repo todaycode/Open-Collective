@@ -11,8 +11,13 @@ import { Link } from '../server/pages';
 =======
 import PropTypes from 'prop-types';
 import TopBarProfileMenu from './TopBarProfileMenu';
+<<<<<<< HEAD
 import { FormattedMessage } from 'react-intl';
 >>>>>>> 72e482d... Better status in top bar for logging in / logging out
+=======
+import { defineMessages, FormattedMessage } from 'react-intl';
+import withIntl from '../lib/withIntl';
+>>>>>>> 3517ef1... Link OC Logo to homepage, fix edit tickets and Latest Expense title
 
 const logo = '/static/images/opencollective-icon.svg';
 
@@ -64,7 +69,17 @@ class TopBar extends React.Component {
     LoggedInUser: PropTypes.object
   }
 
+<<<<<<< HEAD
 >>>>>>> 72e482d... Better status in top bar for logging in / logging out
+=======
+  constructor(props) {
+    super(props);
+    this.messages = defineMessages({
+      'menu.homepage': { id: 'menu.homepage', defaultMessage: `Go to Open Collective Homepage`}
+    });
+  }
+
+>>>>>>> 3517ef1... Link OC Logo to homepage, fix edit tickets and Latest Expense title
   onClickSubscriptions(e) {
     this.props.pushState(null, '/subscriptions')
     this.toggleProfileMenu(e);
@@ -105,9 +120,13 @@ class TopBar extends React.Component {
 >>>>>>> df13894... fix /signin
   render() {
 <<<<<<< HEAD
+<<<<<<< HEAD
     const {className} = this.props;
 =======
     const { className, LoggedInUser } = this.props;
+=======
+    const { className, LoggedInUser, intl } = this.props;
+>>>>>>> 3517ef1... Link OC Logo to homepage, fix edit tickets and Latest Expense title
 
 >>>>>>> fa600af... fix for 404 when click on create event, better signin/signoff flow
     return (
@@ -175,7 +194,7 @@ class TopBar extends React.Component {
           padding-right: 0;
         }
         `}</style>
-        <img src={logo} width="40" height="40" className="logo" alt="Open Collective logo" />
+        <a href="/" title={intl.formatMessage(this.messages['menu.homepage'])}><img src={logo} width="40" height="40" className="logo" alt="Open Collective logo" /></a>
         <div className="nav">
           <ul className="mediumScreenOnly">
             <li><a className="menuItem" href="/learn-more"><FormattedMessage id="menu.howItWorks" defaultMessage="How it works" /></a></li>
@@ -203,4 +222,4 @@ class TopBar extends React.Component {
   }
 }
 
-export default TopBar;
+export default withIntl(TopBar);
