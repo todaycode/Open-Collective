@@ -315,6 +315,17 @@ const getCollectiveQuery = gql`
         name
         image
       }
+      members {
+        id
+        role
+        member {
+          id
+          name
+          slug
+          type
+          image
+        }
+      }
       memberOf {
         id
         createdAt
