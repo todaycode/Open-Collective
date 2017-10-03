@@ -273,11 +273,11 @@ const getCollectiveQuery = gql`
       createdAt
       stats {
         id
+        balance
         yearlyBudget
         backers
         sponsors
         collectives
-        balance
         transactions
         expenses
         totalAmountSent
