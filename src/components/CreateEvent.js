@@ -10,6 +10,7 @@ import EditEventForm from '../components/EditEventForm';
 import CollectiveCover from '../components/CollectiveCover';
 import { Button } from 'react-bootstrap';
 import { get } from 'lodash';
+import { FormattedMessage } from 'react-intl';
 
 class CreateEvent extends React.Component {
 
@@ -146,6 +147,7 @@ class CreateEvent extends React.Component {
 
             {!canCreateEvent &&
               <div className="login">
+<<<<<<< HEAD
                 <p>You need to be logged in as a member of this collective to be able to create an event.</p>
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -157,6 +159,10 @@ class CreateEvent extends React.Component {
 =======
                 <p><Button bsStyle="primary" href={`/${collective.slug}#support`}>Become a member</Button> <Button bsStyle="default" href={`/signin?next=/${collective.slug}/events/new`}>Login</Button></p>
 >>>>>>> df13894... fix /signin
+=======
+                <p><FormattedMessage id="events.create.login" defaultMessage="You need to be logged in as a core contributor of this collective to be able to create an event." /></p>
+                <p><Button bsStyle="primary" href={`/signin?next=/${collective.slug}/events/new`}><FormattedMessage id="login.button" defaultMessage="login" /></Button></p>
+>>>>>>> 0a49a85... fix become a member on create event
               </div>
             }
             {canCreateEvent &&
