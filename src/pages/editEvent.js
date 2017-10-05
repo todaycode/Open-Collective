@@ -39,9 +39,13 @@ class EditEventPage extends React.Component {
     const event = data.Collective;
 
     if (LoggedInUser) {
+<<<<<<< HEAD
       LoggedInUser.canEditEvent = (event.createdByUser && event.createdByUser.id === LoggedInUser.id) 
         || intersection(LoggedInUser.roles[slug], ['HOST','ADMIN']).length > 0
         || intersection(LoggedInUser.roles[parentCollectiveSlug], ['HOST','ADMIN']).length > 0;
+=======
+      LoggedInUser.canEditEvent = LoggedInUser.membership && (['HOST', 'MEMBER'].indexOf(LoggedInUser.membership.role) !== -1 || event.createdByUser &&  event.createdByUser.id === LoggedInUser.id);
+>>>>>>> b866beb... fix for no  event.createdByUser
     }
 
     return (
