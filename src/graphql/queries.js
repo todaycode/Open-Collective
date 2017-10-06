@@ -174,19 +174,6 @@ const getCollectiveToEditQuery = gql`
         interval
         currency
         maxQuantity
-        orders {
-          id
-          publicMessage
-          createdAt
-          fromCollective {
-            id
-            name
-            image
-            slug
-            twitterHandle
-            description
-          }
-        }
       }
       memberOf {
         id
@@ -213,7 +200,7 @@ const getCollectiveToEditQuery = gql`
           }
         }
       }
-      members {
+      members(roles: ["ADMIN", "MEMBER"]) {
         id
         createdAt
         role
