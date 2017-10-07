@@ -30,11 +30,15 @@ import { uniqBy, get, union } from 'lodash';
 import { capitalize } from '../lib/utils';
 import { Router } from '../server/pages';
 import { addEventMutations } from '../graphql/mutations';
+<<<<<<< HEAD
 >>>>>>> bf84558... added Expense components
 import { exportMembers } from '../lib/export_file';
 <<<<<<< HEAD
 >>>>>>> 5084c48... add export csv for list of attendees (for admins)
 =======
+=======
+import { exportRSVPs } from '../lib/export_file';
+>>>>>>> 84a4983... Show event title and fix export RSVPs
 import { Link } from '../server/pages';
 >>>>>>> 5845d1a... fix for /events/new and /edit
 
@@ -400,6 +404,7 @@ class Event extends React.Component {
               {this.state.view === 'default' &&
                 <CollectiveCover
                   collective={event}
+                  title={event.name}
                   style={get(event, 'settings.style.hero.cover') || get(event.parentCollective, 'settings.style.hero.cover')}                  
                   />
               }
@@ -479,7 +484,7 @@ class Event extends React.Component {
                         <ul>
                           <li><a href={`/${event.parentCollective.slug}/events/${event.slug}/nametags.pdf`}>Print name tags</a></li>
                           <li><a href={`mailto:${event.slug}@${event.parentCollective.slug}.opencollective.com`}>Send email</a></li>
-                          <li><a onClick={ () => exportMembers(event) }>Export CSV</a></li>
+                          <li><a onClick={ () => exportRSVPs(event) }>Export CSV</a></li>
                         </ul>
                       </div>
                       }

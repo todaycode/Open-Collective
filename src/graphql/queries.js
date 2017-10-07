@@ -493,6 +493,9 @@ const getEventCollectiveQuery = gql`
           slug
           twitterHandle
           description
+          ... on User {
+            email
+          }
         }
 =======
           description,
