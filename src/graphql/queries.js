@@ -396,6 +396,7 @@ const getEventCollectiveQuery = gql`
   query Collective($eventSlug: String!) {
     Collective(slug: $eventSlug) {
       id
+      type
       slug
       createdByUser {
         id
