@@ -244,6 +244,7 @@ const getCollectiveQuery = gql`
   query Collective($slug: String!) {
     Collective(slug: $slug) {
       id
+      isActive
       type
       slug
       createdByUser {
