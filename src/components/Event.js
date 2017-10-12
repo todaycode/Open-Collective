@@ -303,10 +303,6 @@ class Event extends React.Component {
     const responses = {};
     responses.sponsors = filterCollection(event.orders, { tier: { name: /sponsor/i }});
 
-    const tiers = [...event.tiers].sort((a, b) => {
-      return (a.amount > b.amount) ? 1 : -1;
-    });
-
     const guests = {};
     guests.interested = [];
     filterCollection(event.members, { role: 'FOLLOWER' }).map(follower => {
@@ -441,7 +437,7 @@ class Event extends React.Component {
                     </div>
 
                     <div id="tickets">
-                      {tiers.map((tier) =>
+                      {event.tiers.map((tier) =>
                         <Tier
                           key={tier.id}
                           className="tier"
