@@ -1,5 +1,6 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { intersection, get } from 'lodash';
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -268,7 +269,9 @@ const getCollectiveQuery = gql`
         sponsors
         collectives
         transactions
-        expenses
+        expenses {
+          all
+        }
         totalAmountSent
       }
 >>>>>>> 20155ce... work in progress
@@ -694,6 +697,7 @@ const getCollectiveCoverQuery = gql`
       backgroundImage
       settings
       image
+      isHost
     }
   }
 `;
@@ -827,11 +831,36 @@ export const addGetLoggedInUserFunction = (component) => {
                   roles[member.collective.slug].push(member.role);
                 });
                 LoggedInUser.roles = roles;
+
+                /**
+                 * CanEditExpense if LoggedInUser is:
+                 * - author of the expense and expense.status === 'PENDING'
+                 * - admin or host of expense.collective
+                 * - admin or host of expense.collective.host
+                 */
+                LoggedInUser.canEditExpense = (expense) => {
+                  if (expense.fromCollective && expense.fromCollective.id === LoggedInUser.collective.id && expense.status === 'PENDING') return true;
+                  if (expense.collective) {
+                    if (intersection(roles[expense.collective.slug], ['HOST', 'ADMIN']).length > 0) return true;
+                    const hostSlug = get(expense, 'collective.host.slug');
+                    if (intersection(roles[hostSlug], ['HOST', 'ADMIN']).length > 0) return true;
+                  } 
+                  return false;
+                }
+
+                /**
+                 * CanPayExpense if LoggedInUser is HOST or ADMIN of the HOST of the collective
+                 */
+                LoggedInUser.canPayExpense = (expense) => {
+                  const hostSlug = get(expense, 'collective.host.slug');
+                  if (intersection(roles[hostSlug], ['HOST', 'ADMIN']).length > 0) return true;
+                  return false;                  
+                }
               }
               console.log(">>> LoggedInUser", LoggedInUser);
               return resolve(LoggedInUser);
             } catch (e) {
-              console.error(">>> getLoggedInUser error : ", e);
+              console.error(">>> getLoggedInUser error:", e);
               return resolve(null);
             }
         });
