@@ -269,7 +269,9 @@ const getCollectiveQuery = gql`
         sponsors
         collectives
         transactions
-        expenses
+        expenses {
+          all
+        }
         totalAmountSent
       }
 >>>>>>> 20155ce... work in progress
