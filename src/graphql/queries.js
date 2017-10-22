@@ -591,6 +591,7 @@ const getEventsQuery = gql`
   }
 `;
 
+<<<<<<< HEAD
 export const addEventsData = graphql(getEventsQuery);
 
 =======
@@ -694,6 +695,8 @@ const getCollectiveTransactionsQuery = gql`
 =======
 =======
 >>>>>>> 948d8e6... added events on collective page, consolidated avatars, fix bug when no credit card on file
+=======
+>>>>>>> 5b2e73d... fix /events
 const getCollectiveCoverQuery = gql`
   query CollectiveCover($slug: String!) {
 >>>>>>> bf84558... added Expense components
@@ -797,6 +800,7 @@ export const addCollectiveCoverData = graphql(getCollectiveCoverQuery);
 export const addCollectiveToEditData = graphql(getCollectiveToEditQuery);
 export const addEventCollectiveData = graphql(getEventCollectiveQuery);
 <<<<<<< HEAD
+<<<<<<< HEAD
 export const addCollectiveTierData = graphql(getCollectiveTierQuery);
 =======
 
@@ -811,6 +815,8 @@ export const addEventsData = graphql(getEventsQuery);
 =======
 >>>>>>> 948d8e6... added events on collective page, consolidated avatars, fix bug when no credit card on file
 export const addAttendeesData = graphql(getAttendeesQuery);
+=======
+>>>>>>> 5b2e73d... fix /events
 export const addTiersData = graphql(getTiersQuery);
 export const addUserData = graphql(getUserQuery);
 
