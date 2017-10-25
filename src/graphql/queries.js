@@ -22,6 +22,7 @@ export const getLoggedInUserQuery = gql`
         paymentMethods {
           id
           uuid
+          service
           name
           data
         }
@@ -47,6 +48,7 @@ export const getLoggedInUserQuery = gql`
             id
             uuid
             name
+            service
             data
             balance
           }
