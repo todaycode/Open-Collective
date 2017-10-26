@@ -275,8 +275,12 @@ const getCollectiveQuery = gql`
         id
         balance
         yearlyBudget
-        backers
-        sponsors
+        backers {
+          all
+          users
+          organizations
+          collectives
+        }
         collectives
         transactions
         expenses {
@@ -303,7 +307,7 @@ const getCollectiveQuery = gql`
           totalOrders
           availableQuantity
         }
-        orders(limit: 5) {
+        orders(limit: 30) {
           fromCollective {
             id
             slug
