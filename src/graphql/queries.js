@@ -171,7 +171,9 @@ const getCollectiveToEditQuery = gql`
       stats {
         id
         yearlyBudget
-        backers
+        backers {
+          all
+        }
         totalAmountSent
       }
       tiers {
@@ -206,7 +208,9 @@ const getCollectiveToEditQuery = gql`
           image
           stats {
             id
-            backers
+            backers {
+              all
+            }
             yearlyBudget
           }
         }
