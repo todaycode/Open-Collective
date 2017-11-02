@@ -58,6 +58,7 @@ export const getLoggedInUserQuery = gql`
   }
 `;
 
+<<<<<<< HEAD
 export const getUserQuery = gql`
   query User($username: String!) {
     User(username: $username) {
@@ -104,6 +105,8 @@ export const getCollectiveQuery = gql`
       backgroundImage,
       logo,
 =======
+=======
+>>>>>>> 6878cde... added export csv/json in editCollective
 const getTiersQuery = gql`
   query Collective($slug: String!) {
     Collective(slug: $slug) {
@@ -192,7 +195,9 @@ const getCollectiveToEditQuery = gql`
         id
         createdAt
         role
-        totalDonations
+        stats {
+          totalDonations
+        }
         tier {
           id
           name
@@ -220,7 +225,9 @@ const getCollectiveToEditQuery = gql`
         createdAt
         role
         description
-        totalDonations
+        stats {
+          totalDonations
+        }
         tier {
           id
           name
@@ -345,7 +352,9 @@ const getCollectiveQuery = gql`
           id
           role
           createdAt
-          totalDonations
+          stats {
+            totalDonations
+          }
           collective {
             id
             name
@@ -830,7 +839,6 @@ export const addAttendeesData = graphql(getAttendeesQuery);
 =======
 >>>>>>> 5b2e73d... fix /events
 export const addTiersData = graphql(getTiersQuery);
-export const addUserData = graphql(getUserQuery);
 
 export const addGetLoggedInUserFunction = (component) => {
   const accessToken = typeof window !== 'undefined' && window.localStorage.getItem('accessToken');
@@ -858,6 +866,16 @@ export const addGetLoggedInUserFunction = (component) => {
                   roles[member.collective.slug].push(member.role);
                 });
                 LoggedInUser.roles = roles;
+
+                /**
+                 * CanEditCollective if LoggedInUser is
+                 * - creator of the collective
+                 * - is admin or host of the collective
+                 */
+                LoggedInUser.canEditCollective = (collective) => {
+                  return (collective.createdByUser && collective.createdByUser.id === LoggedInUser.id) 
+                  || intersection(LoggedInUser.roles[slug], ['HOST','ADMIN']).length > 0;
+                }
 
                 /**
                  * CanEditExpense if LoggedInUser is:
