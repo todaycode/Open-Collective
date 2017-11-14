@@ -328,6 +328,8 @@ const getCollectiveQuery = gql`
           }
         }
       }
+      isHost
+      canApply
       host {
         id
         slug
@@ -337,6 +339,7 @@ const getCollectiveQuery = gql`
       members {
         id
         role
+        createdAt
         description
         member {
           id
