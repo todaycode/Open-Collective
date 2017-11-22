@@ -37,9 +37,18 @@ pages.add('button', '/:collectiveSlug/:verb(contribute|donate)/button');
 =======
 import pages from './pages';
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 3e63f41... wip
 =======
 import { translateApiUrl } from '../lib/utils';
+=======
+import { translateApiUrl, getCloudinaryUrl } from '../lib/utils';
+>>>>>>> 638a1ac... proxy images for CDN caching (via cloudflare)
+=======
+import { translateApiUrl } from '../lib/utils';
+import { getCloudinaryUrl } from './lib/utils';
+>>>>>>> 808fbe3... proxy images through /proxy
 import request from 'request';
 <<<<<<< HEAD
 >>>>>>> 20155ce... work in progress
@@ -68,6 +77,25 @@ module.exports = (server, app) => {
       .pipe(request(translateApiUrl(req.url), { followRedirect: false }))
       .on('error', (e) => {
         console.error("error calling api", translateApiUrl(req.url), e);
+        res.status(500).send(e);
+      })
+      .pipe(res);
+  });
+
+  /**
+   * Proxy all images so that we can serve them from the opencollective.com domain
+   * and we can cache them at cloudflare level (to reduce bandwidth at cloudinary level)
+   * Format: /proxy/images?src=:encoded_url&width=:width
+   */
+  server.get('/proxy/images', (req, res) => {
+    const { src, width, height, query } = req.query;
+
+    const url = getCloudinaryUrl(src, { width, height, query });
+
+    req
+      .pipe(request(url, { followRedirect: false }))
+      .on('error', (e) => {
+        console.error("error proxying ", url, e);
         res.status(500).send(e);
       })
       .pipe(res);
