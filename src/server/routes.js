@@ -58,7 +58,11 @@ import controllers from './controllers';
 >>>>>>> 915fa20... serving /:collectiveSlug/(sponsors|backers)/badge.svg from the new frontend server
 =======
 import * as mw from './middlewares';
+<<<<<<< HEAD
 >>>>>>> 33a7b4d... added google analytics
+=======
+import express from 'express';
+>>>>>>> 30a185b... added old assets for backward compatibility in /public
 
 module.exports = (server, app) => {
 
@@ -101,11 +105,14 @@ module.exports = (server, app) => {
       .pipe(res);
   });
 
+  
   /**
    * For backward compatibility.
    * Ideally we should consolidate those routes under:
    * `/:collectiveSlug/members/:backerType(all|users|organizations)`
    */
+  server.use('/public', express.static(path.join(__dirname, `../public`), { maxAge: '1d' }));  
+
   server.get('/:collectiveSlug/:backerType.svg', controllers.collectives.banner);
   server.get('/:collectiveSlug/:backerType/badge.svg', controllers.collectives.badge);
   server.get('/:collectiveSlug/:backerType/:position/avatar(.:format(png|jpg|svg))?', mw.maxAge(300), mw.ga, controllers.collectives.avatar);

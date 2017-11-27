@@ -87,7 +87,11 @@
 >>>>>>> 9512d66... freeze modules
 =======
     "next-routes": "^1.1.0",
+<<<<<<< HEAD
 >>>>>>> e470e22... Fix CMD+Click on CollectiveCard
+=======
+    "node-fetch": "^1.7.3",
+>>>>>>> 0b75411... fix server tests
     "node-sass": "4.5.0",
 <<<<<<< HEAD
 <<<<<<< HEAD
