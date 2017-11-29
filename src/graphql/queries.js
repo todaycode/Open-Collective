@@ -369,6 +369,7 @@ const getCollectiveQuery = gql`
             type
             image
             description
+            longDescription
             backgroundImage
           }
         }
@@ -742,6 +743,7 @@ const getCollectiveCoverQuery = gql`
 `;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const getTransactionQuery = gql`
   query Transaction($id: Int!) {
     Transaction(id: $id) {
@@ -780,10 +782,21 @@ const getTransactionQuery = gql`
           interval
         }
       }
+=======
+export const getPrepaidCardBalanceQuery = gql`
+  query checkPrepaidPaymentMethod($token: String!) {
+    prepaidPaymentMethod(token: $token) {
+      id,
+      name,
+      currency,
+      balance,
+      uuid
+>>>>>>> 3350797... working gift card flow
     }
   }
 `;
 
+<<<<<<< HEAD
 const TRANSACTIONS_PER_PAGE = 10;
 export const addCollectiveTransactionsData = graphql(getCollectiveTransactionsQuery, {
   options(props) {
@@ -821,6 +834,8 @@ export const addCollectiveData = graphql(getCollectiveQuery);
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 3350797... working gift card flow
 export const addCollectiveData = graphql(getCollectiveQuery);
 export const addCollectiveCoverData = graphql(getCollectiveCoverQuery);
 >>>>>>> bf84558... added Expense components
