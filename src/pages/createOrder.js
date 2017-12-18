@@ -71,6 +71,7 @@ class CreateOrderPage extends React.Component {
 
   async createOrder(order) {
     const { intl, data } = this.props;
+<<<<<<< HEAD
     order.collective = { id: data.Collective.id };
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -79,12 +80,24 @@ class CreateOrderPage extends React.Component {
     if (referral) {
       order.referral = { id: referral }
 =======
+=======
+>>>>>>> 15ff145... fix when matching fund id is invalid
 
-    if (this.referral) {
+    if (this.referral && this.referral > 0) {
       order.referral = { id: this.referral }
 >>>>>>> 30f07e8... using local storage to store referral and matchingFund
     }
+<<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 8221aaf... fixes opencollective/opencollective#759
+=======
+    if (this.state.matchingFund) {
+      order.matchingFund = this.state.matchingFund;
+    }
+=======
+>>>>>>> 15ff145... fix when matching fund id is invalid
+    order.paymentMethod = pick(order.paymentMethod, ['uuid', 'service', 'type', 'token', 'customerId', 'data', 'name', 'currency', 'save']);
+>>>>>>> 770b55d... fix
     if (this.state.LoggedInUser) {
       delete order.user;
     }
