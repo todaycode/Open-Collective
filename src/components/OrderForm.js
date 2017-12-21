@@ -383,7 +383,8 @@ class OrderForm extends React.Component {
   }
 
   error(msg) {
-    this.setState({ result: { error: msg }});
+    const error = `${msg}`;
+    this.setState({ result: { error }});
   }
 
   resetError() {
@@ -424,8 +425,8 @@ class OrderForm extends React.Component {
         try {
           res = await getStripeToken('cc', creditcard);
         } catch (e) {
-          console.log(">>> error: ", e);
-          this.setState({ result: { error: e }})
+          console.log(">>> error: ", typeof e, e);
+          this.error(e);
           return false;
         }
         const last4 = res.card.last4;
