@@ -460,7 +460,7 @@ class OrderForm extends React.Component {
   }
 
   signin() {
-    signin(this.state.user, window.location.href).then(() => {
+    signin(this.state.user, `${window.location.pathname}${window.location.search}`).then(() => {
       this.setState({ loginSent: true })
     })
   }
