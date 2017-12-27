@@ -15,10 +15,15 @@ import gql from 'graphql-tag'
 import Loading from '../components/Loading';
 import NotFound from '../components/NotFound';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { pick } from 'lodash';
 =======
 import storage from '../lib/storage';
 >>>>>>> 30f07e8... using local storage to store referral and matchingFund
+=======
+import storage from '../lib/storage';
+import { get, pick } from 'lodash';
+>>>>>>> d37ba03... added MatchingFund.expiryDate and ability to force a fund with Collective.settings.matchingFund
 
 class CreateOrderPage extends React.Component {
 
@@ -62,7 +67,7 @@ class CreateOrderPage extends React.Component {
       newState.LoggedInUser = LoggedInUser;
     }
     this.referral = storage.get('referral');
-    const matchingFund = storage.get('matchingFund');
+    const matchingFund = storage.get('matchingFund') || get(data, 'Collective.settings.matchingFund');
     if (matchingFund) {
       newState.matchingFund = matchingFund;
     }
