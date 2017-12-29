@@ -13,6 +13,7 @@ export const getLoggedInUserQuery = gql`
       firstName
       lastName
       email
+      paypalEmail
       image
       CollectiveId
       collective {
