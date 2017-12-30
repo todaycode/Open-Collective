@@ -165,8 +165,6 @@ query Transaction($id: Int!) {
     id
     uuid
     description
-    publicMessage
-    privateMessage
     createdAt
     type
     amount
@@ -178,7 +176,7 @@ query Transaction($id: Int!) {
     paymentMethod {
       name
     }
-    user {
+    createdByUser {
       id
       name
       username
@@ -190,9 +188,11 @@ query Transaction($id: Int!) {
     }
     ... on Expense {
       category
+      privateMessage
       attachment
     }
     ... on Donation {
+      publicMessage
       subscription {
         interval
       }

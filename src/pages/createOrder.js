@@ -18,8 +18,8 @@ import { pick } from 'lodash';
 
 class CreateOrderPage extends React.Component {
 
-  static getInitialProps ({ query: { collectiveSlug, eventSlug, TierId, amount, quantity, totalAmount, interval, description, verb, redeem } }) {
-    return { slug: eventSlug || collectiveSlug, TierId, quantity, totalAmount: totalAmount || amount * 100, interval, description, verb, redeem }
+  static getInitialProps ({ query: { collectiveSlug, eventSlug, TierId, amount, quantity, totalAmount, interval, description, verb, redeem, referral, matchingFund } }) {
+    return { slug: eventSlug || collectiveSlug, TierId, quantity, totalAmount: totalAmount || amount * 100, interval, description, verb, redeem, referral, matchingFund }
   }
 
   constructor(props) {
@@ -57,14 +57,21 @@ class CreateOrderPage extends React.Component {
   }
 
   async createOrder(order) {
-    const { intl, data } = this.props;
+    const { intl, data, referral, matchingFund } = this.props;
     order.collective = { id: data.Collective.id };
+<<<<<<< HEAD
     order.paymentMethod = pick(order.paymentMethod, ['uuid', 'service', 'type', 'token', 'customerId', 'data', 'name', 'currency', 'save']);
+=======
+    if (referral) {
+      order.referral = { id: referral }
+    }
+>>>>>>> 8221aaf... fixes opencollective/opencollective#759
     if (this.state.LoggedInUser) {
       delete order.user;
     }
     try {
       this.setState({ loading: true});
+      console.log(">>> createOrder", order);
       const res = await this.props.createOrder(order);
       const orderCreated = res.data.createOrder;
       this.setState({ loading: false, order, result: { success: intl.formatMessage(this.messages['order.success']) } });
@@ -163,6 +170,7 @@ class CreateOrderPage extends React.Component {
               LoggedInUser={this.state.LoggedInUser}
               onSubmit={this.createOrder}
               redeemFlow={this.props.redeem}
+              matchingFund={this.props.matchingFund}
               />
             <div className="result">
               <div className="success">{this.state.result.success}</div>
