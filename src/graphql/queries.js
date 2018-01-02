@@ -41,10 +41,6 @@ export const getLoggedInUserQuery = gql`
           stats {
             id
             balance
-            expenses {
-              id
-              pending
-            }
           }
           paymentMethods {
             id
