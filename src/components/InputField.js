@@ -163,7 +163,11 @@ class InputField extends React.Component {
         break;
       case 'date':
       case 'datetime':
+<<<<<<< HEAD
         const timeFormat = field.type === 'date' ? false : true;
+=======
+      console.log(">>> datetime", field);
+>>>>>>> 34d2dd2... wip
         this.input = (
         <FormGroup>
           {field.className === 'horizontal' &&
@@ -305,6 +309,7 @@ class InputField extends React.Component {
             className={field.className}
             autoFocus={field.focus}
             defaultValue={field.value || field.defaultValue}
+            value={field.value || field.defaultValue}
             onChange={event => this.handleChange(event.target.value)}
             >
             { field.options && field.options.map(option => {
