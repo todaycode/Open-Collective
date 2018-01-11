@@ -87,6 +87,7 @@
     "newrelic": "2.3.1",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> e6ce700... update package.json
     "next": "3.2.2",
 <<<<<<< HEAD
@@ -104,6 +105,9 @@
 =======
     "next": "4.2.1",
 >>>>>>> d367c5d... using stripe elements
+=======
+    "next": "4.2.2",
+>>>>>>> 72a186c... update next to 4.2.2
     "next-routes": "1.1.0",
     "node-fetch": "1.7.3",
 >>>>>>> aedeee7... new bitcoin payment method type
