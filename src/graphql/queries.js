@@ -742,6 +742,10 @@ const getCollectiveCoverQuery = gql`
       settings
       image
       isHost
+      stats {
+        id
+        balance
+      }
       host {
         id
         slug
