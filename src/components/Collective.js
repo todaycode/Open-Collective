@@ -123,6 +123,7 @@ class Collective extends React.Component {
 
 >>>>>>> 9b02eb7... create organization on /organizations/new
     const backersHash = this.collective.stats.backers.organizations > 0 ? '#organizations' : '#backers';
+<<<<<<< HEAD
     const actions = [
       {
         className: 'whiteblue',
@@ -171,6 +172,8 @@ class Collective extends React.Component {
       });
     }
 
+=======
+>>>>>>> a98cd7d... wip
     const backgroundImage = this.collective.backgroundImage || get(this.collective,'parentCollective.backgroundImage') || defaultBackgroundImage;
 
     const notification = {};
@@ -209,12 +212,6 @@ class Collective extends React.Component {
             max-width: 400px;
             width: 100%;
           }
-          .columns .actions {
-            text-align: center;
-          }
-          .columns .actions :global(button) {
-            margin: 0.5rem;
-          }
           .cardsList {
             display: flex;
             flex-wrap: wrap;
@@ -227,6 +224,12 @@ class Collective extends React.Component {
           .balance label {
             margin: 0 0.5rem;
             font-weight: 500;
+          }
+          .actions {
+            text-align: center;
+          }
+          .actions :global(button.btn) {
+            margin-right: 5px;
           }
           @media(min-width: 600px) {
             .sidebar {
@@ -265,11 +268,11 @@ class Collective extends React.Component {
 
             <MenuBar
               collective={this.collective}
+              LoggedInUser={LoggedInUser}
               />
 
             <StatsBar
-              info={intl.formatMessage(this.messages['collective.since'], { year: (new Date(this.collective.createdAt)).getFullYear() })}
-              actions={actions}
+              collective={this.collective}
               />
 
             <div>
@@ -283,6 +286,11 @@ class Collective extends React.Component {
                       referral={query.referral}
                       />
                   ))}
+                  <div className="CustomDonationTierCard">
+                    <Link route={`/${this.collective.slug}/donate`}>
+                      <a><FormattedMessage id="collective.tiers.donate" defaultMessage="Or make a one time donation" /></a>
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="content" >

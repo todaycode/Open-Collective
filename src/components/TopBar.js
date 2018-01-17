@@ -153,6 +153,8 @@ class TopBar extends React.Component {
           top: 0;
           right: 2rem;
           padding-top: 1rem;
+          display: flex;
+          align-items: center;
         }
         ul {
           display: inline-block;

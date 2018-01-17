@@ -330,6 +330,7 @@ const getCollectiveQuery = gql`
             type
             name
             image
+            website
           }
         }
       }
