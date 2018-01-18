@@ -15,11 +15,18 @@ export default ({ src, style = {}, height, type = 'ORGANIZATION', website }) => 
   if (!src && website) {
     src = `https://logo.clearbit.com/${getDomain(website)}`;
   }
+<<<<<<< HEAD
 >>>>>>> 2f8bcc9... using clearbit to deduce company logo
+=======
+  const backgroundStyle = { height, minWidth: height };
+  if (!src) {
+    backgroundStyle.backgroundImage = `url(${defaultImage[type]})`
+  }
+>>>>>>> 2d1b6fb... fix issue with transparent collective logo
   const image = imagePreview(src, defaultImage[type], { height: style.height });
 >>>>>>> 9b02eb7... create organization on /organizations/new
   return (
-    <div className="Logo" style={{ width: height, height, backgroundImage: `url(${defaultImage[type]})` }}>
+    <div className="Logo" style={backgroundStyle}>
       <style jsx>{`
         .Logo {
           background-repeat: no-repeat;

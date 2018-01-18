@@ -265,7 +265,11 @@
     "react-markdown": "2.4.4",
 =======
     "react-markdown": "3.1.1",
+<<<<<<< HEAD
 >>>>>>> d367c5d... using stripe elements
+=======
+    "react-quill": "^1.2.3",
+>>>>>>> 352a82d... wip
     "react-router": "4.2.0",
 =======
     "react-add-to-calendar": "^0.1.5",
