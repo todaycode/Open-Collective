@@ -165,9 +165,14 @@ class InputField extends React.Component {
       case 'datetime':
 <<<<<<< HEAD
         const timeFormat = field.type === 'date' ? false : true;
+<<<<<<< HEAD
 =======
       console.log(">>> datetime", field);
 >>>>>>> 34d2dd2... wip
+=======
+        const { closeOnSelect } = this.props;
+
+>>>>>>> 1e646a6... CSV with all transactions of a collective between a date range (#215)
         this.input = (
         <FormGroup>
           {field.className === 'horizontal' &&
@@ -182,7 +187,8 @@ class InputField extends React.Component {
                   value={moment.tz(new Date(this.state.value || field.defaultValue), context.timezone)}
                   isValidDate={field.validate}
                   onChange={date => date.toISOString ? this.handleChange(date.toISOString()) : false}
-                  />
+                  closeOnSelect={closeOnSelect}
+                />
               </Col>
             </div>
           }
@@ -195,7 +201,8 @@ class InputField extends React.Component {
                 value={moment.tz(new Date(this.state.value || field.defaultValue), context.timezone)}
                 isValidDate={field.validate}
                 onChange={date => date.toISOString ? this.handleChange(date.toISOString()) : false}
-                />
+                closeOnSelect={closeOnSelect}
+              />
               {field.description && <HelpBlock>{field.description}</HelpBlock>}
             </div>
           }

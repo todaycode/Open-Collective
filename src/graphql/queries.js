@@ -296,7 +296,10 @@ const getCollectiveQuery = gql`
           organizations
           collectives
         }
-        collectives
+        collectives {
+          host
+          parent
+        }
         transactions
         expenses {
           id

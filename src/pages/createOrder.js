@@ -13,6 +13,7 @@ import { Router } from '../server/pages';
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import Loading from '../components/Loading';
+<<<<<<< HEAD
 import NotFound from '../components/NotFound';
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -21,6 +22,9 @@ import { pick } from 'lodash';
 import storage from '../lib/storage';
 >>>>>>> 30f07e8... using local storage to store referral and matchingFund
 =======
+=======
+import NotFound from '../components/NotFoundPage';
+>>>>>>> 05cc50a... not found page
 import storage from '../lib/storage';
 import { get, pick } from 'lodash';
 >>>>>>> d37ba03... added MatchingFund.expiryDate and ability to force a fund with Collective.settings.matchingFund

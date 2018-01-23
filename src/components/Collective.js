@@ -314,13 +314,13 @@ class Collective extends React.Component {
                 </div>
               </section>
 
-              { this.collective.stats.collectives > 0 &&
-                <section id="hosting">
+              { get(this.collective, 'stats.collectives.host') > 0 &&
+                <section id="parenting">
                   <h1>
                     <FormattedMessage
-                      id="collective"
-                      values={{ n: this.collective.stats.collectives }}
-                      defaultMessage={`{n} {n, plural, one {collective} other {collectives}}`}
+                      id="collective.collective.memberOf.collective.parent.title"
+                      values={{ n: this.collective.stats.collectives.parent }}
+                      defaultMessage={`{n, plural, one {this collective is} other {{n} collectives are}} part of our collective`}
                       />
                   </h1>
                   <div className="cardsList">
@@ -334,7 +334,7 @@ class Collective extends React.Component {
                 </section>
               }
 
-              { this.collective.stats.backers.organizations > 0 &&
+              { get(this.collective, 'stats.backers.organizations') > 0 &&
                 <section id="organizations" className="tier">
                   <h1>
                     <FormattedMessage
@@ -353,7 +353,7 @@ class Collective extends React.Component {
                 </section>
               }
 
-              { this.collective.stats.backers.users > 0 &&
+              { get(this.collective, 'stats.backers.users') > 0 &&
                 <section id="backers" className="tier">
                   <h1>
                     <FormattedMessage
@@ -412,6 +412,7 @@ class Collective extends React.Component {
                       collective={this.collective}
                       LoggedInUser={LoggedInUser}
                       limit={5}
+                      showCSVlink={false}
                       />
                       <div className="actions">
                       <Button className="ViewAllTransactionsBtn" bsStyle="default" onClick={() => Router.pushRoute(`/${this.collective.slug}/transactions`)}><FormattedMessage id="transactions.viewAll" defaultMessage="View All Transactions" /></Button>

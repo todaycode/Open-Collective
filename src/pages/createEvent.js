@@ -9,10 +9,14 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 =======
 >>>>>>> b28dbc6... better i18n
 import { addGetLoggedInUserFunction, addCollectiveData } from '../graphql/queries';
+<<<<<<< HEAD
 import NotFound from '../components/NotFound';
 <<<<<<< HEAD
 >>>>>>> 6032982... fetching currency from the collective
 =======
+=======
+import NotFound from '../components/NotFoundPage';
+>>>>>>> 05cc50a... not found page
 import Loading from '../components/Loading';
 <<<<<<< HEAD
 >>>>>>> dc1a5a1... events widget
