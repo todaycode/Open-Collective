@@ -51,6 +51,7 @@ class InputTypeDropzone extends React.Component {
 
   handleChange(files) {
     const file = files[0];
+<<<<<<< HEAD
     upload(file)
       .then(fileUrl => {
         this.setState({ url: fileUrl });
@@ -60,6 +61,34 @@ class InputTypeDropzone extends React.Component {
         console.error(">>> error uploading image", file, err);
         this.setState({ error: "error uploading image, please try again" });
       });
+=======
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.setState({ value: e.target.result })
+    }
+    reader.readAsDataURL(file);
+    const formData = new FormData();
+    formData.append('file', file);
+    // for e2e testing purposes
+    if (window.location.hostname === 'localhost') {
+      return this.props.onChange(`http://${window.location.host}/static/images/receipt.svg`);
+    }
+    fetch('/api/images', {
+      method: 'post',
+      headers: this.addAuthTokenToHeader(),
+      body: formData,
+    })
+    .then(this.checkStatus)
+    .then(json => {
+      console.log(">>> upload response", json);
+      this.setState({ url: json.url });
+      return this.props.onChange(json.url);
+    })
+    .catch(err => {
+      console.error(">>> error uploading image", file, err);
+      this.setState({ error: "error uploading image, please try again" });
+    });
+>>>>>>> 296c2a8... fixing e2e tests
   }
 
   render() {
