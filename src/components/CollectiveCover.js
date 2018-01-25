@@ -16,7 +16,12 @@ class CollectiveCover extends React.Component {
   static propTypes = {
     collective: PropTypes.object.isRequired,
     href: PropTypes.string,
+<<<<<<< HEAD
     title: PropTypes.oneOf([PropTypes.string, PropTypes.node]),
+=======
+    cta: PropTypes.node,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+>>>>>>> cffb7af... added new types of tier with presets. Fixes opencollective/opencollective#853
     style: PropTypes.object,
   }
 
