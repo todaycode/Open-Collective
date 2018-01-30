@@ -259,6 +259,7 @@ const getCollectiveToEditQuery = gql`
         service
         username
         createdAt
+        settings
       }
     }
   }
