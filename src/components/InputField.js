@@ -9,8 +9,9 @@ import InputTypeDropzone from './InputTypeDropzone';
 import InputTypeLocation from './InputTypeLocation';
 import InputTypeCreditCard from './InputTypeCreditCard';
 import { Col, HelpBlock, FormGroup, InputGroup, FormControl, ControlLabel, Checkbox } from 'react-bootstrap';
+import Switch from "material-ui/Switch";
 
-function FieldGroup({ controlId, label, help, pre, post, button, className, ...props }) {
+function FieldGroup({ controlId, label, help, pre, post, after, button, className, ...props }) {
 
   const validationState = props.validationState === 'error' ? 'error' : null;
   delete props.validationState;
@@ -31,10 +32,11 @@ function FieldGroup({ controlId, label, help, pre, post, button, className, ...p
           { pre && <InputGroup.Addon>{pre}</InputGroup.Addon>}
           <FormControl {...inputProps} />
           { post && <InputGroup.Addon>{post}</InputGroup.Addon>}
+          { after && <div className="after">{after}</div>}
           { validationState && <FormControl.Feedback /> }
           { button && <InputGroup.Button>{button}</InputGroup.Button>}
           </InputGroup>
-          {help && <HelpBlock>{help}</HelpBlock>}
+          { help && <HelpBlock>{help}</HelpBlock>}
         </Col>
       </FormGroup>
     );
@@ -54,7 +56,7 @@ function FieldGroup({ controlId, label, help, pre, post, button, className, ...p
         { !pre && !post && !button &&
           <FormControl {...inputProps} ref={inputRef => inputRef && props.focus && inputRef.focus()} />
         }
-        {help && <HelpBlock>{help}</HelpBlock>}
+        { help && <HelpBlock>{help}</HelpBlock>}
       </FormGroup>
     );
   }
@@ -123,8 +125,8 @@ class InputField extends React.Component {
   render() {
 
     const field = this.props;
-
     const context = field.context || {};
+    let value = this.state.value;
 
     switch (this.props.type) {
       case 'creditcard':
@@ -148,6 +150,15 @@ class InputField extends React.Component {
                       </FormGroup>)
         break;
       case 'textarea':
+        value = value || this.props.defaultValue || '';
+        let after;
+        if (field.charCount) {
+          if (field.maxLength) {
+            after = `${field.maxLength - value.length} characters left`;
+          } else {
+            after = `${value.length} characters`;
+          }
+        }
         this.input =  (<FieldGroup
                           label={capitalize(field.label)}
                           componentClass="textarea"
@@ -155,6 +166,7 @@ class InputField extends React.Component {
                           placeholder={this.props.placeholder}
                           name={field.name}
                           help={field.description}
+                          after={after}
                           maxLength={field.maxLength}
                           value={this.state.value || this.props.defaultValue}
                           onChange={event => this.handleChange(event.target.value)}
@@ -286,7 +298,7 @@ class InputField extends React.Component {
         break;
 
       case 'currency':
-        let value = this.state.value || field.defaultValue;
+        value = value || field.defaultValue;
         value = (typeof value === 'number') ? value / 100 : '';
         this.input = (
           <FieldGroup
@@ -357,7 +369,7 @@ class InputField extends React.Component {
                       </FormGroup>)
         break;
 
-      case 'toggle':
+      case 'switch':
         this.input =  (<FormGroup controlId={field.name} help={field.description}>
                         {field.className === 'horizontal' &&
                           <div>
@@ -365,7 +377,7 @@ class InputField extends React.Component {
                               {capitalize(field.label)}
                             </Col>
                             <Col sm={9}>
-                              <Checkbox defaultChecked={field.defaultValue} onChange={event => this.handleChange(event.target.checked)}></Checkbox>
+                              <Switch defaultChecked={field.defaultValue} onChange={event => this.handleChange(event.target.checked)}></Switch>
                               {field.description && <HelpBlock>{field.description}</HelpBlock>}
                             </Col>
                           </div>
@@ -373,7 +385,7 @@ class InputField extends React.Component {
                         {field.className !== 'horizontal' &&
                           <div>
                             <ControlLabel>{capitalize(field.label)}</ControlLabel>
-                            <Checkbox defaultChecked={field.defaultValue} onChange={event => this.handleChange(event.target.checked)}></Checkbox>
+                            <Switch defaultChecked={field.defaultValue} onChange={event => this.handleChange(event.target.checked)}></Switch>
                             {field.description && <HelpBlock>{field.description}</HelpBlock>}
                           </div>
                         }
