@@ -21,7 +21,11 @@ class CollectiveCover extends React.Component {
 =======
     cta: PropTypes.node,
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+<<<<<<< HEAD
 >>>>>>> cffb7af... added new types of tier with presets. Fixes opencollective/opencollective#853
+=======
+    description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+>>>>>>> 972959d... Fix for membership tier for scuttlebutt
     style: PropTypes.object,
   }
 

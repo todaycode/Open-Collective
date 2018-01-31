@@ -747,6 +747,7 @@ const getCollectiveCoverQuery = gql`
       settings
       image
       isHost
+      tags
       stats {
         id
         balance
@@ -856,8 +857,20 @@ export const addCollectiveData = graphql(getCollectiveQuery);
 =======
 >>>>>>> 3350797... working gift card flow
 export const addCollectiveData = graphql(getCollectiveQuery);
+<<<<<<< HEAD
 export const addCollectiveCoverData = graphql(getCollectiveCoverQuery);
 >>>>>>> bf84558... added Expense components
+=======
+export const addCollectiveCoverData = graphql(getCollectiveCoverQuery, {
+  options(props) {
+    return {
+      variables: {
+        slug: props.collectiveSlug || props.slug
+      }
+    }
+  }
+});
+>>>>>>> e882965... Wip
 export const addCollectiveToEditData = graphql(getCollectiveToEditQuery);
 export const addEventCollectiveData = graphql(getEventCollectiveQuery);
 <<<<<<< HEAD

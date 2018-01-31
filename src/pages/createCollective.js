@@ -2,8 +2,13 @@ import withData from '../lib/withData';
 import withIntl from '../lib/withIntl';
 import React from 'react';
 import CreateCollective from '../components/CreateCollective';
+<<<<<<< HEAD
 import { addGetLoggedInUserFunction, addCollectiveData } from '../graphql/queries';
 import NotFound from '../components/NotFoundPage';
+=======
+import { addGetLoggedInUserFunction, addCollectiveCoverData } from '../graphql/queries';
+import NotFound from '../components/NotFound';
+>>>>>>> 7b85e91... Moving /apply and /create to new frontend
 import Loading from '../components/Loading';
 import { intersection } from 'lodash';
 
@@ -15,7 +20,7 @@ class CreateCollectivePage extends React.Component {
   }
 
   static getInitialProps ({ query: { hostCollectiveSlug } }) {
-    return { slug: hostCollectiveSlug }
+    return { slug: hostCollectiveSlug || "opencollective-host" }
   }
 
   async componentDidMount() {
@@ -47,4 +52,4 @@ class CreateCollectivePage extends React.Component {
   }
 }
 
-export default withData(withIntl(addGetLoggedInUserFunction(addCollectiveData(CreateCollectivePage))));
+export default withData(withIntl(addGetLoggedInUserFunction(addCollectiveCoverData(CreateCollectivePage))));
