@@ -31,6 +31,7 @@
     "eslint-plugin-react": "6.2.0",
     "express": "4.15.2",
     "express-session": "1.15.6",
+    "font-awesome": "^4.7.0",
     "fs": "0.0.1-security",
     "glob": "7.1.1",
     "global": "4.3.1",
@@ -268,8 +269,16 @@
 =======
     "react-markdown": "3.1.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> d367c5d... using stripe elements
 =======
+=======
+    "react-mde": "^2.3.2",
+>>>>>>> 1a84180... markdown editor, createUpdate
+=======
+    "react-mde": "git://github.com/xdamman/react-mde.git#npm",
+>>>>>>> bd04ed0... cta in cover, updated markdown editor, updated menu bar
     "react-quill": "^1.2.3",
 >>>>>>> 352a82d... wip
     "react-router": "4.2.0",
@@ -293,6 +302,7 @@
     "request": "2.81.0",
     "sass-loader": "6.0.3",
     "serve": "3.3.1",
+    "showdown": "^1.8.6",
     "styled-jsx": "2.2.1",
     "styled-jsx-plugin-postcss": "0.1.2",
     "svg-to-png": "3.1.2",
