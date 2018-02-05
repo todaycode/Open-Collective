@@ -251,7 +251,11 @@
     "react-add-to-calendar": "0.1.5",
 >>>>>>> 30bd5f4... make jest tests great again
     "react-apollo": "1.4.16",
+<<<<<<< HEAD
     "react-bootstrap": "0.31.0",
+=======
+    "react-bootstrap": "0.32.1",
+>>>>>>> f2402b3... fix react-bootstrap
     "react-datetime": "2.11.1",
     "react-dom": "16.2.0",
 >>>>>>> aedeee7... new bitcoin payment method type
