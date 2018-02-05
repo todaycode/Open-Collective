@@ -298,8 +298,8 @@ const getCollectiveQuery = gql`
           collectives
         }
         collectives {
-          host
-          parent
+          hosted
+          memberOf
         }
         transactions
         expenses {

@@ -6,6 +6,7 @@ export default ({ src, style = {}, height, type = 'ORGANIZATION', website }) => 
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 003ca78... Connect Twitter/Github/Stripe
@@ -13,6 +14,9 @@ export default ({ src, style = {}, height, type = 'ORGANIZATION', website }) => 
 =======
 =======
   if (!src && website) {
+=======
+  if (!src && website && type==='ORGANIZATION') {
+>>>>>>> a788972... new test for /create and /apply, accept ToS
     src = `https://logo.clearbit.com/${getDomain(website)}`;
   }
 <<<<<<< HEAD

@@ -362,7 +362,7 @@ class InputField extends React.Component {
                         }
                         {field.className !== 'horizontal' &&
                           <div>
-                            <ControlLabel>{capitalize(field.label)}</ControlLabel>
+                            { field.label && <ControlLabel>{capitalize(field.label)}</ControlLabel> }
                             <Checkbox defaultChecked={field.defaultValue} onChange={event => this.handleChange(event.target.checked)}>{field.description}</Checkbox>
                           </div>
                         }
@@ -427,6 +427,9 @@ class InputField extends React.Component {
           }
           .form-horizontal .form-group label {
             padding-top: 3px;
+          }
+          .inputField .checkbox label {
+            width: auto;
           }
         `}</style>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
