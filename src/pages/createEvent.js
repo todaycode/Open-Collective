@@ -48,10 +48,7 @@ class CreateEventPage extends React.Component {
   async componentDidMount() {
     const { getLoggedInUser, slug } = this.props;
     const LoggedInUser = getLoggedInUser && await getLoggedInUser();
-    if (LoggedInUser) {
-      LoggedInUser.canCreateEvent = Boolean(intersection(LoggedInUser.roles[slug], ['HOST','ADMIN']).length);
-    }
-    this.setState({LoggedInUser, loading: false});
+    this.setState({ LoggedInUser, loading: false });
   }
 
 >>>>>>> dc1a5a1... events widget
