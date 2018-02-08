@@ -10,7 +10,6 @@ import { addGetLoggedInUserFunction, addCollectiveCoverData } from '../graphql/q
 import NotFound from '../components/NotFound';
 >>>>>>> 7b85e91... Moving /apply and /create to new frontend
 import Loading from '../components/Loading';
-import { intersection } from 'lodash';
 
 class CreateCollectivePage extends React.Component {
 
