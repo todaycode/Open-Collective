@@ -155,6 +155,7 @@ class CreateOrderPage extends React.Component {
 
   render() {
     const { intl, data, interval, verb } = this.props;
+    const { loading, LoggedInUser } = this.state;
     const description = decodeURIComponent(this.props.description || "");
     const collective = data.Collective;
     if (data.loading) return (<Loading />);
@@ -202,16 +203,22 @@ class CreateOrderPage extends React.Component {
           description={collective.description}
           twitterHandle={collective.twitterHandle}
           image={collective.image || collective.backgroundImage}
-          className={this.state.loading && 'loading'}
-          LoggedInUser={this.state.LoggedInUser}
+          className={loading && 'loading'}
+          LoggedInUser={LoggedInUser}
           />
 
         <Body>
+
           <CollectiveCover
             collective={collective}
+<<<<<<< HEAD
+            href={`/${collective.slug}`}
+            LoggedInUser={LoggedInUser}
+=======
             href={href}
-            title={intl.formatMessage(this.messages[`${tier.type.toLowerCase()}.title`])}
+            title={intl.formatMessage(this.messages[`${tier.type.toLowerCase()}.title`], {name: tier.name.replace(/[s]$/,'')})}
             className="small"
+>>>>>>> 49664da... fix for tier name not showing up
             />
 
           <div className="content">

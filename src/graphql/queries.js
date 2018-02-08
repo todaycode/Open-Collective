@@ -2,6 +2,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { intersection, get } from 'lodash';
 import LoggedInUser from '../classes/LoggedInUser';
+import storage from '../lib/storage';
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -751,12 +752,29 @@ const getCollectiveCoverQuery = gql`
       stats {
         id
         balance
+        updates
+        events
+        yearlyBudget
       }
       host {
         id
         slug
         name
         image
+      }
+      members {
+        id
+        role
+        createdAt
+        description
+        member {
+          id
+          description
+          name
+          slug
+          type
+          image
+        }
       }
     }
   }
@@ -893,17 +911,47 @@ export const addAttendeesData = graphql(getAttendeesQuery);
 >>>>>>> 5b2e73d... fix /events
 export const addTiersData = graphql(getTiersQuery);
 
+const refreshLoggedInUser = async (data) => {
+  let res;
+  const startTime = new Date;
+
+  if (data.LoggedInUser) {
+    const user = new LoggedInUser(data.LoggedInUser);
+    console.info(`>>> LoggedInUser was already in data`);
+    storage.set("LoggedInUser", user, 1000 * 60 * 60);
+    return user;
+  }
+
+  try {
+    res = await data.refetch();
+    if (!res.data || !res.data.LoggedInUser) {
+      return null;
+    }
+    const user = new LoggedInUser(res.data.LoggedInUser);
+    const endTime = new Date;
+    const elapsedTime = Math.round((endTime.getTime() - startTime.getTime()) / 1000);
+    console.info(`>>> LoggedInUser fetched in ${elapsedTime} seconds`);
+    storage.set("LoggedInUser", user, 1000 * 60 * 60);
+    return user;
+  } catch (e) {
+    console.error(">>> getLoggedInUser error:", e);
+    storage.set("LoggedInUser", null);
+    return null;
+  }
+};
+
 export const addGetLoggedInUserFunction = (component) => {
   const accessToken = typeof window !== 'undefined' && window.localStorage.getItem('accessToken');
   if (!accessToken) return component;
   return graphql(getLoggedInUserQuery, {
     props: ({ data }) => ({
       data,
-      getLoggedInUser: () => {
-        const startTime = new Date;
+      getLoggedInUser: async () => {
         if (!window.localStorage.getItem('accessToken')) {
-          return Promise.resolve(null);
+          storage.set("LoggedInUser", null);
+          return null;
         }
+<<<<<<< HEAD
         return new Promise(async (resolve) => {
             let res;
             if (data.LoggedInUser) {
@@ -931,6 +979,14 @@ export const addGetLoggedInUserFunction = (component) => {
               return resolve(null);
             }
         });
+=======
+        const cache = storage.get("LoggedInUser");
+        if (cache) {
+          refreshLoggedInUser(data); // we don't wait.
+          return new LoggedInUser(cache);
+        }
+        return await refreshLoggedInUser(data);
+>>>>>>> 0c1d867... updated design and fixed e2e tests
       }
 <<<<<<< HEAD
     }

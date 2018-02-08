@@ -121,7 +121,7 @@ class CreateCollective extends React.Component {
             href={`/${host.slug}`}
             title={title}
             collective={host}
-            style={get(host, 'settings.style.hero.cover')}
+            className="small"
             />
 
           <div className="content" >

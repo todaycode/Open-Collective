@@ -259,6 +259,7 @@ class OrderForm extends React.Component {
 
   logout() {
     window.localStorage.removeItem('accessToken');
+    window.localStorage.removeItem('LoggedInUser');
     window.location.replace(window.location.href);
   }
 
