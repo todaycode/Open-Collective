@@ -214,11 +214,14 @@ class CreateOrderPage extends React.Component {
 <<<<<<< HEAD
             href={`/${collective.slug}`}
             LoggedInUser={LoggedInUser}
+<<<<<<< HEAD
 =======
             href={href}
             title={intl.formatMessage(this.messages[`${tier.type.toLowerCase()}.title`], {name: tier.name.replace(/[s]$/,'')})}
             className="small"
 >>>>>>> 49664da... fix for tier name not showing up
+=======
+>>>>>>> 614e52e... updating style for /donate and createOrder
             />
 
           <div className="content">
@@ -235,6 +238,7 @@ class CreateOrderPage extends React.Component {
               <div className="error">{this.state.result.error}</div>
             </div>
           </div>
+
         </Body>
         <Footer />
       </div>
@@ -265,6 +269,24 @@ query Collective($slug: String!) {
       name
       image
       backgroundImage
+    }
+    stats {
+      id
+      yearlyBudget
+    }
+    members {
+      id
+      role
+      createdAt
+      description
+      member {
+        id
+        description
+        name
+        slug
+        type
+        image
+      }
     }
     backgroundImage
     settings
