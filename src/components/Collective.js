@@ -181,7 +181,7 @@ class Collective extends React.Component {
     }
 
     return (
-      <div className="CollectivePage">
+      <div className={`CollectivePage ${this.collective.type}`}>
         <style jsx>{`
           .sidebar {
             display: flex;

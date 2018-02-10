@@ -307,6 +307,7 @@ const getCollectiveQuery = gql`
           id
           all
         }
+        updates
         totalAmountSent
         totalAmountRaised
       }
