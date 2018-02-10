@@ -184,6 +184,7 @@ class CreateOrderPage extends React.Component {
     // Tier names are inconsistent - singular or plural
     // To avoid header like "Become a backers", this hack removes the last character if it's an 's'
     const headerName = tier.name.charAt(tier.name.length-1) === 's' ? tier.name.slice(0, -1) : tier.name;
+    const coverClassName = collective.type === 'EVENT' ? 'small' : '';
 
     return (
       <div>
@@ -215,6 +216,7 @@ class CreateOrderPage extends React.Component {
             href={`/${collective.slug}`}
             LoggedInUser={LoggedInUser}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             href={href}
             title={intl.formatMessage(this.messages[`${tier.type.toLowerCase()}.title`], {name: tier.name.replace(/[s]$/,'')})}
@@ -222,6 +224,9 @@ class CreateOrderPage extends React.Component {
 >>>>>>> 49664da... fix for tier name not showing up
 =======
 >>>>>>> 614e52e... updating style for /donate and createOrder
+=======
+            className={coverClassName}
+>>>>>>> b9209c0... fix for event page, temporarily removing Interested Feature
             />
 
           <div className="content">
@@ -263,6 +268,11 @@ query Collective($slug: String!) {
       slug
       image
     }
+    location {
+      name
+    }
+    startsAt
+    endsAt
     parentCollective {
       id
       slug

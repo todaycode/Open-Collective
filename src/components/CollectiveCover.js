@@ -154,8 +154,8 @@ ${description}`
         .small .content {
           margin-top: 0px;
         }
-        .content a {
-          color: black;
+        .content a, .content :global(p a) {
+          color: white;
         }
         .content a:hover {
           color: #444;
