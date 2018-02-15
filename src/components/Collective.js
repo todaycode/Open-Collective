@@ -116,8 +116,11 @@ class Collective extends React.Component {
 =======
     const { intl, LoggedInUser, query } = this.props;
 
+<<<<<<< HEAD
     console.log("this.props.data", this.props.collective);
 >>>>>>> f44f88f... working version e2e
+=======
+>>>>>>> 8053456... cleanups
     const donateParams = { collectiveSlug: this.collective.slug, verb: 'donate' };
     if (referral) {
       donateParams.referral = referral;
