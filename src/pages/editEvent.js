@@ -38,6 +38,7 @@ class EditEventPage extends React.Component {
     const { LoggedInUser } = this.state;
     const event = data.Collective;
 
+<<<<<<< HEAD
     if (LoggedInUser) {
 <<<<<<< HEAD
       LoggedInUser.canEditEvent = (event.createdByUser && event.createdByUser.id === LoggedInUser.id) 
@@ -48,6 +49,8 @@ class EditEventPage extends React.Component {
 >>>>>>> b866beb... fix for no  event.createdByUser
     }
 
+=======
+>>>>>>> 3c77df1... LoggedInUser.canEditEvent
     return (
       <div>
         <EditEvent event={event} LoggedInUser={LoggedInUser} />

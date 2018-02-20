@@ -41,6 +41,7 @@ class EventPage extends React.Component {
     const event = data.Collective;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (LoggedInUser) {
       LoggedInUser.canEditEvent = (event.createdByUser && event.createdByUser.id === LoggedInUser.id) 
 <<<<<<< HEAD
@@ -64,6 +65,12 @@ class EventPage extends React.Component {
         data.refetch({ options: { fetchPolicy: 'network-only' }});
       }
 >>>>>>> 137a983... fetch email addresses to export members
+=======
+    if (LoggedInUser && LoggedInUser.canEditEvent(event)) {
+      // We refetch the data to get the email addresses of the participants
+      // We need to bypass the cache otherwise it won't update the list of participants with the email addresses
+      data.refetch({ options: { fetchPolicy: 'network-only' }});
+>>>>>>> 620c5df... Show edit event button
     }
 
     return (
