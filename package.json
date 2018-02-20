@@ -258,6 +258,7 @@
 >>>>>>> f2402b3... fix react-bootstrap
     "react-datetime": "2.11.1",
     "react-dom": "16.2.0",
+<<<<<<< HEAD
 >>>>>>> aedeee7... new bitcoin payment method type
     "react-dropzone": "4.0.0",
     "react-geosuggest": "2.3.4",
@@ -271,6 +272,12 @@
 >>>>>>> b28dbc6... better i18n
     "react-markdown": "2.4.4",
 =======
+=======
+    "react-dropzone": "4.2.8",
+    "react-geosuggest": "2.7.0",
+    "react-gmaps": "1.7.0",
+    "react-intl": "2.4.0",
+>>>>>>> 3bb6ec4... improve upload/error state for dropzone to upload image
     "react-markdown": "3.1.1",
 <<<<<<< HEAD
 <<<<<<< HEAD
