@@ -274,6 +274,7 @@ const getCollectiveQuery = gql`
       isActive
       type
       slug
+      path
       createdByUser {
         id
       }
@@ -451,6 +452,7 @@ const getEventCollectiveQuery = gql`
       id
       type
       slug
+      path
       createdByUser {
         id
       }
