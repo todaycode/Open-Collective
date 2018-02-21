@@ -538,7 +538,6 @@ const getEventCollectiveQuery = gql`
         id
         createdAt
         quantity
-        processedAt
         publicMessage
         fromCollective {
           id
