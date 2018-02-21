@@ -882,6 +882,9 @@ export const getSubscriptionsQuery = gql`
       id
       type
       slug
+      createdByUser {
+        id
+      }
       name
       company
       image
