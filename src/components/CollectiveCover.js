@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withIntl from '../lib/withIntl';
 import { defineMessages, FormattedMessage } from 'react-intl';
+<<<<<<< HEAD
 import { union, get } from 'lodash';
+=======
+import { Link } from '../server/pages';
+import { union, get, uniqBy } from 'lodash';
+>>>>>>> 2137b6e... don't repeat avatars in collective cover if multiple roles
 import { prettyUrl, formatCurrency, imagePreview } from '../lib/utils';
 import { Router } from '../server/pages';
 import Currency from './Currency';
@@ -99,7 +104,7 @@ ${description}`
       const members = collective.members.filter(m => m.role === 'MEMBER');
       const backers = collective.members.filter(m => m.role === 'BACKER');
       backers.sort((a, b) => b.stats && b.stats.totalDonations - a.stats && a.stats.totalDonations);
-      membersPreview = union(admins, members, backers).filter(m => m.member).slice(0, 5);
+      membersPreview = uniqBy(union(admins, members, backers).filter(m => m.member), m => m.member.id).slice(0, 5);
     }
     const additionalBackers = (get(stats, 'backers.all') || (get(collective, 'members') || []).length) - membersPreview.length;
 
@@ -272,7 +277,7 @@ ${description}`
             { company && company.substr(0,1) === '@' && <p className="company"><Link route={`/${company.substr(1)}`}>{company.substr(1)}</Link></p> }
             { company && company.substr(0,1) !== '@' && <p className="company">{company}</p> }
             { description && <p className="description">{description}</p> }
-            { collective.type === 'COLLECTIVE' &&
+            { collective.type !== 'EVENT' &&
               <div className="contact">
                 { collective.host && collective.isActive && <div className="host"><label><FormattedMessage id="collective.cover.hostedBy" defaultMessage="Hosted by" /></label><Link route={`/${collective.host.slug}`}>{collective.host.name} </Link></div> }
                 { collective.host && !collective.isActive && <div className="host"><label><FormattedMessage id="collective.cover.pendingApprovalFrom" defaultMessage="Pending approval from" /></label><Link route={`/${collective.host.slug}`}>{collective.host.name} </Link></div> }
