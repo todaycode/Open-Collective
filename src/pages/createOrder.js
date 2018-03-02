@@ -262,6 +262,7 @@ query Collective($slug: String!) {
     description
     twitterHandle
     image
+    isActive
     host {
       id
       name
