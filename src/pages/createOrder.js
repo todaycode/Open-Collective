@@ -257,6 +257,7 @@ query Collective($slug: String!) {
   Collective(slug: $slug) {
     id
     slug
+    path
     name
     type
     description
