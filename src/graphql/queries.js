@@ -6,7 +6,57 @@ import storage from '../lib/storage';
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+export const transactionFields = `
+  id
+  RefundTransactionId
+  uuid
+  description
+  createdAt
+  type
+  amount
+  currency
+  netAmountInCollectiveCurrency
+  hostFeeInHostCurrency
+  platformFeeInHostCurrency
+  paymentProcessorFeeInHostCurrency
+  paymentMethod {
+    service
+  }
+  fromCollective {
+    id
+    name
+    slug
+    image
+  }
+  host {
+    id
+    name
+    currency
+  }
+  ... on Expense {
+    category
+    attachment
+  }
+  ... on Order {
+    subscription {
+      interval
+    }
+  }
+`;
+
+export const getTransactionsQuery = gql`
+query Transactions($CollectiveId: Int!, $type: String, $limit: Int, $offset: Int, $dateFrom: String, $dateTo: String) {
+  allTransactions(CollectiveId: $CollectiveId, type: $type, limit: $limit, offset: $offset, dateFrom: $dateFrom, dateTo: $dateTo) {
+    ${transactionFields}
+  }
+}
+`;
+
+
+>>>>>>> c88eb8e... Add transaction refund button visible for site admins only (#278)
 export const getLoggedInUserQuery = gql`
   query LoggedInUser {
     LoggedInUser {
@@ -1112,4 +1162,7 @@ export const addGetLoggedInUserFunction = (component) => {
     })
   })(component);
 }
+<<<<<<< HEAD
 >>>>>>> b8ba07b... ssr
+=======
+>>>>>>> c88eb8e... Add transaction refund button visible for site admins only (#278)
