@@ -31,6 +31,7 @@
     "eslint-plugin-react": "6.2.0",
     "express": "4.15.2",
     "express-session": "1.15.6",
+    "file-saver": "1.3.3",
     "font-awesome": "^4.7.0",
     "fs": "0.0.1-security",
     "glob": "7.1.1",
@@ -40,7 +41,7 @@
     "graphql-request": "1.4.0",
     "graphql-tag": "1.2.3",
     "graphql-tools": "0.10.0",
-    "html-pdf": "chriskinsman/node-html-pdf#6d8b3e4",
+    "html-pdf": "2.2.0",
     "image-size": "0.6.1",
     "image-to-ascii": "3.0.5",
     "intl": "1.2.5",
@@ -169,6 +170,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "react": "15.3.1",
 >>>>>>> 3bd6241... added papertrail
 =======
@@ -184,6 +186,9 @@
     "react": "15.6.1",
 >>>>>>> 34b43ca... fix react version
 =======
+=======
+    "rc-table": "6.1.7",
+>>>>>>> 9e1ccea... add monthly invoices to /:orgCollective/transactions
     "react": "16.2.0",
 <<<<<<< HEAD
 <<<<<<< HEAD
