@@ -11,7 +11,6 @@ import storage from '../lib/storage';
 =======
 export const transactionFields = `
   id
-  RefundTransactionId
   uuid
   description
   createdAt
@@ -51,6 +50,9 @@ export const getTransactionsQuery = gql`
 query Transactions($CollectiveId: Int!, $type: String, $limit: Int, $offset: Int, $dateFrom: String, $dateTo: String) {
   allTransactions(CollectiveId: $CollectiveId, type: $type, limit: $limit, offset: $offset, dateFrom: $dateFrom, dateTo: $dateTo) {
     ${transactionFields}
+    refundTransaction {
+      ${transactionFields}
+    }
   }
 }
 `;
