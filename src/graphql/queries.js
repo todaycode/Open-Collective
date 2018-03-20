@@ -40,6 +40,7 @@ export const transactionFields = `
     attachment
   }
   ... on Order {
+    createdAt
     subscription {
       interval
     }
