@@ -16,7 +16,9 @@ import Logo from './Logo';
 import { defaultBackgroundImage } from '../constants/collectives';
 import Link from './Link';
 import Button from './Button';
+import GoalsCover from './GoalsCover';
 import MenuBar from './MenuBar';
+import TopBackersCoverWithData from './TopBackersCoverWithData';
 
 class CollectiveCover extends React.Component {
 
@@ -112,7 +114,6 @@ ${description}`
       <div className={`CollectiveCover ${className} ${type}`}>
         <style jsx>{`
         .cover {
-          display: flex;
           align-items: center;
           position: relative;
           text-align: center;
@@ -133,6 +134,7 @@ ${description}`
           left: 0;
           width: 100%;
           height: 100%;
+          z-index: 0;
         }
         .twitterHandle {
           background: url('/static/icons/twitter-handler.svg') no-repeat 0px 6px;
@@ -148,6 +150,7 @@ ${description}`
           opacity: 0.75;
         }
         .content {
+          z-index: 1;
           position: relative;
           display: flex;
           flex-direction: column;
@@ -224,6 +227,16 @@ ${description}`
           line-height: 36px;
           margin-left: 1rem;
         }
+        .statsContainer {
+          position: relative;
+          margin-top: 3rem;
+          padding: 3rem 1rem;
+          z-index: 1;
+          background-color: #252729;
+        }
+        .topContributors {
+          margin-top: -6rem;
+        }
         .stats {
           font-size: 1.3rem;
           display: flex;
@@ -270,6 +283,7 @@ ${description}`
         `}</style>
         <div className="cover">
           <div className="backgroundCover" style={style} />
+
           <div className="content">
             <Link route={href} className="goBack">
               { collective.type === 'USER' && <Avatar src={logo} className="logo" radius="10rem" /> }
@@ -294,30 +308,19 @@ ${description}`
                 </div>
               </div>
             }
-            { membersPreview.length > 0 &&
-              <div className="members">
-                { membersPreview.map(member => (
-                  <a onClick={() => Router.pushRoute(`/${member.member.slug}`)} title={this.getMemberTooltip(member)} key={member.member.slug}>
-                    <Avatar src={member.member.image} key={member.member.id} radius={36} />
-                  </a>
-                ))}
-                { additionalBackers > 0 &&
-                  <div className="MoreBackers">
-                    + {additionalBackers}
-                  </div>
-                }
-              </div>
-            }
-            { collective.type === 'COLLECTIVE' && stats && stats.yearlyBudget > 0 &&
-              <div className="stats">
-                <div className="stat">
-                  <div className="yearlyBudget value counter">
-                    { formattedYearlyIncome.split('').map((character, index) => <span key={`char-${index}`} className={/[^0-9]/.test(character) ? '-character' : '-digit'}>{character}</span>) }
-                  </div>
-                  <FormattedMessage id="collective.stats.yearlyBudget.label" defaultMessage="Estimated annual budget based on current donations" />
-                </div>
-              </div>
-            }
+
+          </div>
+
+          <div className="statsContainer">
+
+            <div className="topContributors">
+              <TopBackersCoverWithData
+                collective={this.props.collective}
+                LoggedInUser={LoggedInUser}
+                limit={5}
+                />
+            </div>
+
             { ['USER','ORGANIZATION'].indexOf(collective.type) !== -1 && stats && stats.totalAmountSent > 0 && !collective.isHost &&
               <div className="stats">
                 <div className="stat">
@@ -336,6 +339,13 @@ ${description}`
                 }
               </div>
             }
+            { className !== "small" &&
+              <GoalsCover
+                collective={collective}
+                LoggedInUser={LoggedInUser}
+                />
+            }
+
             { this.props.cta &&
               <Button className="blue" href={this.cta.href}>{this.cta.label}</Button>
             }

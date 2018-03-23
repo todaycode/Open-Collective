@@ -369,6 +369,7 @@ const getCollectiveQuery = gql`
         events
         totalAmountSent
         totalAmountRaised
+        totalAmountReceived
       }
 >>>>>>> 20155ce... work in progress
       tiers {
@@ -829,6 +830,9 @@ const getCollectiveCoverQuery = gql`
         updates
         events
         yearlyBudget
+        backers {
+          all
+        }
       }
       createdByUser {
         id
