@@ -320,7 +320,7 @@ ${description}`
                 <TopBackersCoverWithData
                   collective={this.props.collective}
                   LoggedInUser={LoggedInUser}
-                  limit={5}
+                  limit={10}
                   />
               </div>
             }
