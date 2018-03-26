@@ -240,6 +240,8 @@ ${description}`
         .stats {
           font-size: 1.3rem;
           display: flex;
+          justify-content: center;
+          color: white;
         }
         .stats .value {
           font-size: 3rem;
@@ -313,13 +315,15 @@ ${description}`
 
           <div className="statsContainer">
 
-            <div className="topContributors">
-              <TopBackersCoverWithData
-                collective={this.props.collective}
-                LoggedInUser={LoggedInUser}
-                limit={5}
-                />
-            </div>
+            { className !== "small" && collective.type === "COLLECTIVE" &&
+              <div className="topContributors">
+                <TopBackersCoverWithData
+                  collective={this.props.collective}
+                  LoggedInUser={LoggedInUser}
+                  limit={5}
+                  />
+              </div>
+            }
 
             { ['USER','ORGANIZATION'].indexOf(collective.type) !== -1 && stats && stats.totalAmountSent > 0 && !collective.isHost &&
               <div className="stats">
@@ -339,7 +343,8 @@ ${description}`
                 }
               </div>
             }
-            { className !== "small" &&
+
+            { className !== "small" && collective.type === "COLLECTIVE" &&
               <GoalsCover
                 collective={collective}
                 LoggedInUser={LoggedInUser}
