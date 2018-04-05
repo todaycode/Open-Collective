@@ -359,7 +359,9 @@ ${description}`
               }
 
               { this.props.cta &&
-                <Button className="blue" href={this.cta.href}>{this.cta.label}</Button>
+                <div>
+                  <Button className="blue" href={this.cta.href}>{this.cta.label}</Button>
+                </div>
               }
 
             </div>
