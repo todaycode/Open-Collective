@@ -241,6 +241,7 @@ ${description}`
         }
         .topContributors {
           margin-top: -6rem;
+          min-height: 30px;
         }
         .statsContainer .value {
           font-size: 3rem;
