@@ -128,12 +128,12 @@ class InputField extends React.Component {
     const field = this.props;
     const context = field.context || {};
     let value = this.state.value;
-
+    const horizontal = field.className && field.className.match(/horizontal/);
     switch (this.props.type) {
 
       case 'creditcard':
         this.input =  (<FormGroup controlId={field.name}>
-                        {field.className === 'horizontal' &&
+                        {horizontal &&
                           <div>
                             <Col componentClass={ControlLabel} sm={2}>
                               {capitalize(field.label)}
@@ -143,7 +143,7 @@ class InputField extends React.Component {
                             </Col>
                           </div>
                         }
-                        {field.className !== 'horizontal' &&
+                        {!horizontal &&
                           <div>
                             <ControlLabel>{capitalize(field.label)}</ControlLabel>
                             <InputTypeCreditCard onChange={this.handleChange} style={this.props.style}/>                   
@@ -191,7 +191,7 @@ class InputField extends React.Component {
 >>>>>>> 1e646a6... CSV with all transactions of a collective between a date range (#215)
         this.input = (
         <FormGroup>
-          {field.className === 'horizontal' &&
+          {horizontal &&
             <div>
               <Col componentClass={ControlLabel} sm={2}>
                 {capitalize(field.label)}
@@ -208,7 +208,7 @@ class InputField extends React.Component {
               </Col>
             </div>
           }
-          {field.className !== 'horizontal' &&
+          {!horizontal &&
             <div>
               {field.label && <ControlLabel>{`${capitalize(field.label)}`}</ControlLabel>}
               <DateTime
@@ -229,7 +229,7 @@ class InputField extends React.Component {
       case 'component':
         this.input = (
         <FormGroup>
-          {field.className === 'horizontal' &&
+          {horizontal &&
             <div>
               <Col componentClass={ControlLabel} sm={2}>
                 {capitalize(field.label)}
@@ -239,7 +239,7 @@ class InputField extends React.Component {
               </Col>
             </div>
           }
-          {field.className !== 'horizontal' &&
+          {!horizontal &&
             <div>
               {field.label && <ControlLabel>{`${capitalize(field.label)}`}</ControlLabel>}
               <field.component onChange={this.handleChange} {...field} {...field.options} />
@@ -268,7 +268,7 @@ class InputField extends React.Component {
       case 'dropzone':
         this.input = (
           <FormGroup>
-          {field.className === 'horizontal' &&
+          {horizontal &&
             <div>
               <Col componentClass={ControlLabel} sm={2}>
                 {capitalize(field.label)}
@@ -285,7 +285,7 @@ class InputField extends React.Component {
               </Col>
             </div>
           }
-          {field.className !== 'horizontal' &&
+          {!horizontal &&
             <div>
               {field.label && <ControlLabel>{`${capitalize(field.label)}`}</ControlLabel>}
               <InputTypeDropzone
@@ -355,7 +355,7 @@ class InputField extends React.Component {
 
       case 'checkbox':
         this.input =  (<FormGroup controlId={field.name}>
-                        {field.className === 'horizontal' &&
+                        {horizontal &&
                           <div>
                             <Col componentClass={ControlLabel} sm={2}>
                               {capitalize(field.label)}
@@ -365,7 +365,7 @@ class InputField extends React.Component {
                             </Col>
                           </div>
                         }
-                        {field.className !== 'horizontal' &&
+                        {!horizontal &&
                           <div>
                             { field.label && <ControlLabel>{capitalize(field.label)}</ControlLabel> }
                             <Checkbox defaultChecked={field.defaultValue} onChange={event => this.handleChange(event.target.checked)}>{field.description}</Checkbox>
@@ -376,7 +376,7 @@ class InputField extends React.Component {
 
       case 'switch':
         this.input =  (<FormGroup controlId={field.name} help={field.description}>
-                        {field.className === 'horizontal' &&
+                        {horizontal &&
                           <div>
                             <Col componentClass={ControlLabel} sm={2}>
                               {capitalize(field.label)}
@@ -387,7 +387,7 @@ class InputField extends React.Component {
                             </Col>
                           </div>
                         }
-                        {field.className !== 'horizontal' &&
+                        {!horizontal &&
                           <div>
                             <ControlLabel>{capitalize(field.label)}</ControlLabel>
                             <Switch defaultChecked={field.defaultValue} onChange={event => this.handleChange(event.target.checked)}></Switch>
