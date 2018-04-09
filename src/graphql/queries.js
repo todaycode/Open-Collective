@@ -830,6 +830,7 @@ const getCollectiveCoverQuery = gql`
         updates
         events
         yearlyBudget
+        totalAmountReceived
         backers {
           all
         }

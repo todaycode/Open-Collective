@@ -25,6 +25,7 @@ export default ({ src, style = {}, height, type = 'ORGANIZATION', website }) => 
   }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 2f8bcc9... using clearbit to deduce company logo
 =======
   const backgroundStyle = { height, minWidth: height };
@@ -36,6 +37,9 @@ export default ({ src, style = {}, height, type = 'ORGANIZATION', website }) => 
 >>>>>>> 9b02eb7... create organization on /organizations/new
 =======
   const backgroundStyle = { height, minWidth: Math.max(0, height/2) };
+=======
+  const backgroundStyle = { height, minWidth: Math.max(0, parseInt(height)/2) };
+>>>>>>> 332434b... make sure we show insufficiant balance when viewing all expenses across collectives of the host
   if (!src) {
     backgroundStyle.backgroundImage = `url(${defaultImage[type]})`
   }
