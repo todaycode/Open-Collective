@@ -19,10 +19,13 @@ import NotFound from '../components/NotFoundPage';
 >>>>>>> 05cc50a... not found page
 import Loading from '../components/Loading';
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> dc1a5a1... events widget
 =======
 import { intersection } from 'lodash';
 >>>>>>> 20155ce... work in progress
+=======
+>>>>>>> 6681829... eslint feedback in pages
 
 class CreateEventPage extends React.Component {
 
@@ -46,7 +49,7 @@ class CreateEventPage extends React.Component {
 <<<<<<< HEAD
 =======
   async componentDidMount() {
-    const { getLoggedInUser, slug } = this.props;
+    const { getLoggedInUser } = this.props;
     const LoggedInUser = getLoggedInUser && await getLoggedInUser();
     this.setState({ LoggedInUser, loading: false });
   }

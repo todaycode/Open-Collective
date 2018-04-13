@@ -23,7 +23,7 @@ class CreateCollectivePage extends React.Component {
   }
 
   async componentDidMount() {
-    const { getLoggedInUser, slug } = this.props;
+    const { getLoggedInUser } = this.props;
     const LoggedInUser = getLoggedInUser && await getLoggedInUser();
     this.setState({ LoggedInUser, loading: false });
   }
