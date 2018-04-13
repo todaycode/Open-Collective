@@ -18,18 +18,21 @@ const getStripeToken = (type = 'cc', data) => {
   // eslint-disable-next-line
   switch (type) {
     case 'cc': // credit card
-      return stripe.createToken(data).then(res => {
+      return window.stripe.createToken(data).then(res => {
         if (res.error) {
           throw new Error(res.error.message);
         }
         return { token: res.token.id, card: res.token.card };
       });
+<<<<<<< HEAD
       break;
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 6c51800... more eslint feedback in src
 
     case 'btc': // bitcoin
-      return stripe.createSource({
+      return window.stripe.createSource({
         type: 'bitcoin',
         amount: data.amount,
         currency: 'usd',
