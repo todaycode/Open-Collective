@@ -14,7 +14,6 @@ import ActionButton from '../components/Button';
 import TierComponent from './Tier';
 import InputField from './InputField';
 import MatchingFundWithData from './MatchingFundWithData';
-import RequestBitcoin from './RequestBitcoin';
 import ActionButton from './Button';
 import SectionTitle from './SectionTitle';
 >>>>>>> 614e52e... updating style for /donate and createOrder
