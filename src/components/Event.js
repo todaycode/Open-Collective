@@ -8,12 +8,12 @@ import Location from '../components/Location';
 import HashLink from 'react-scrollchor';
 import Tier from '../components/Tier';
 import NotificationBar from '../components/NotificationBar';
-import OrderForm from '../components/OrderForm';
 import InterestedForm from '../components/InterestedForm';
 import Sponsors from '../components/Sponsors';
 import Responses from '../components/Responses';
-import { filterCollection, formatCurrency } from '../lib/utils';
+import { capitalize, filterCollection, formatCurrency, trimObject } from '../lib/utils';
 import Markdown from 'react-markdown';
+<<<<<<< HEAD
 import TicketsConfirmed from '../components/TicketsConfirmed';
 <<<<<<< HEAD
 import { FormattedMessage, FormattedDate, FormattedTime } from 'react-intl';
@@ -27,10 +27,11 @@ import { addEventMutations } from '../graphql/mutations';
 import { uniq } from 'underscore';
 =======
 =======
+=======
+>>>>>>> 0d14167... eslint feedback in components
 import { defineMessages, FormattedMessage, FormattedDate, FormattedTime } from 'react-intl';
 >>>>>>> 5745bc1... notification after event is over to move money to parent collective
 import { uniqBy, get, union } from 'lodash';
-import { capitalize, trimObject } from '../lib/utils';
 import { Router } from '../server/pages';
 import { addEventMutations } from '../graphql/mutations';
 <<<<<<< HEAD
@@ -41,11 +42,14 @@ import { exportMembers } from '../lib/export_file';
 =======
 =======
 import { exportRSVPs } from '../lib/export_file';
+<<<<<<< HEAD
 >>>>>>> 84a4983... Show event title and fix export RSVPs
 import { Link } from '../server/pages';
 <<<<<<< HEAD
 >>>>>>> 5845d1a... fix for /events/new and /edit
 =======
+=======
+>>>>>>> 0d14167... eslint feedback in components
 import SectionTitle from './SectionTitle';
 import ExpensesSection from './ExpensesSection';
 <<<<<<< HEAD
@@ -152,7 +156,7 @@ class Event extends React.Component {
   }
 
   /**
-   * If user is logged in, we directly create a response 
+   * If user is logged in, we directly create a response
    * Otherwise, we show the form to enter an email address
    */
   async setInterested(member) {
@@ -447,13 +451,13 @@ class Event extends React.Component {
 =======
                   <section id="tickets">
                     { event.tiers.map((tier) =>
-                      <Tier
+                      (<Tier
                         key={tier.id}
                         tier={tier}
                         values={this.state.tierInfo[tier.id] || {}}
                         onChange={(response) => this.updateOrder(response)}
                         onClick={(response) => this.handleOrderTier(response)}
-                        />
+                        />)
                     )}
                   </section>
 >>>>>>> fbafc5f... cleaning event and fix css for tier

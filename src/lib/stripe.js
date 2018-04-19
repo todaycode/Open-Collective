@@ -25,6 +25,26 @@ const getStripeToken = (type = 'cc', data) => {
         return { token: res.token.id, card: res.token.card };
       });
       break;
+<<<<<<< HEAD
+=======
+
+    case 'btc': // bitcoin
+      return stripe.createSource({
+        type: 'bitcoin',
+        amount: data.amount,
+        currency: 'usd',
+        metadata: data.metadata,
+        owner: {
+          email: data.email,
+          name: data.name
+        }
+      }).then((res) => {
+        if (res.error) {
+          throw new Error(res.error.message);
+        }
+        return { token: res.source.id, card: res.source.bitcoin };
+      });
+>>>>>>> 07fbf2d... eslint --fix
   }
 }
 
