@@ -10,6 +10,7 @@ import { Link } from '../server/pages';
 >>>>>>> fa600af... fix for 404 when click on create event, better signin/signoff flow
 =======
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import TopBarProfileMenu from './TopBarProfileMenu';
 <<<<<<< HEAD
 import { FormattedMessage } from 'react-intl';
@@ -130,7 +131,7 @@ class TopBar extends React.Component {
 
 >>>>>>> fa600af... fix for 404 when click on create event, better signin/signoff flow
     return (
-      <div className={`${className} TopBar`}>
+      <div className={classNames(className, 'TopBar')}>
         <style jsx>{`
         .TopBar {
           height: 6rem;
