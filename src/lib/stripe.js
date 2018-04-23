@@ -25,6 +25,7 @@ const getStripeToken = (type = 'cc', data) => {
         return { token: res.token.id, card: res.token.card };
       });
 <<<<<<< HEAD
+<<<<<<< HEAD
       break;
 <<<<<<< HEAD
 =======
@@ -48,6 +49,8 @@ const getStripeToken = (type = 'cc', data) => {
         return { token: res.source.id, card: res.source.bitcoin };
       });
 >>>>>>> 07fbf2d... eslint --fix
+=======
+>>>>>>> 2b757ac... eslint
   }
 }
 
