@@ -1061,6 +1061,21 @@ export const getSubscriptionsQuery = gql`
           }
         }
       }
+
+      ... on Organization {
+        memberOf(limit: 60) {
+          id
+          role
+          createdAt
+          stats {
+            totalDonations
+            totalRaised
+          }
+          collective {
+            id
+          }
+        }
+      }
     }
   }
 `;
