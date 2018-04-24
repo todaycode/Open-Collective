@@ -88,6 +88,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> e6ce700... update package.json
     "next": "3.2.2",
 <<<<<<< HEAD
@@ -113,6 +114,10 @@
 =======
     "next-routes": "1.3.0",
 >>>>>>> 8053456... cleanups
+=======
+    "next": "5.1.0",
+    "next-routes": "1.4.1",
+>>>>>>> 8c34a03... wip
     "node-fetch": "1.7.3",
 >>>>>>> aedeee7... new bitcoin payment method type
     "node-sass": "4.5.0",
