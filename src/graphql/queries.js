@@ -1081,7 +1081,38 @@ export const getSubscriptionsQuery = gql`
   }
 `;
 
+<<<<<<< HEAD
 >>>>>>> f44f88f... working version e2e
+=======
+export const searchCollectivesQuery = gql`
+  query search($term: String!) {
+    search(term: $term) {
+      id
+      isActive
+      type
+      slug
+      path
+      name
+      company
+      image
+      backgroundImage
+      description
+      longDescription
+      website
+      currency
+      stats {
+        id
+        balance
+        yearlyBudget
+        backers {
+          all
+        }
+      }
+    }
+  }
+`;
+
+>>>>>>> aaa828d... feat(graphql/queries): add search query for collectives
 export const addCollectiveData = graphql(getCollectiveQuery);
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1125,6 +1156,7 @@ export const addAttendeesData = graphql(getAttendeesQuery);
 >>>>>>> 5b2e73d... fix /events
 export const addTiersData = graphql(getTiersQuery);
 export const addSubscriptionsData = graphql(getSubscriptionsQuery);
+export const addSearchQueryData = graphql(searchCollectivesQuery);
 
 const refreshLoggedInUser = async (data) => {
   let res;
