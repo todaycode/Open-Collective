@@ -1085,29 +1085,34 @@ export const getSubscriptionsQuery = gql`
 >>>>>>> f44f88f... working version e2e
 =======
 export const searchCollectivesQuery = gql`
-  query search($term: String!) {
-    search(term: $term) {
-      id
-      isActive
-      type
-      slug
-      path
-      name
-      company
-      image
-      backgroundImage
-      description
-      longDescription
-      website
-      currency
-      stats {
+  query search($term: String!, $limit: Int, $offset: Int) {
+    search(term: $term, limit: $limit, offset: $offset) {
+      collectives {
         id
-        balance
-        yearlyBudget
-        backers {
-          all
+        isActive
+        type
+        slug
+        path
+        name
+        company
+        image
+        backgroundImage
+        description
+        longDescription
+        website
+        currency
+        stats {
+          id
+          balance
+          yearlyBudget
+          backers {
+            all
+          }
         }
       }
+      limit
+      offset
+      total
     }
   }
 `;
