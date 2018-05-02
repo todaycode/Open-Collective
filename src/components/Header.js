@@ -217,8 +217,12 @@ class Header extends React.Component {
       <TopBar className={className} />
 =======
       <div id="top" />
+<<<<<<< HEAD
       <TopBar className={className} LoggedInUser={this.props.LoggedInUser} />
 >>>>>>> 0c1d867... updated design and fixed e2e tests
+=======
+      <TopBar className={className} LoggedInUser={this.props.LoggedInUser} showSearch={this.props.showSearch} />
+>>>>>>> 74c02fa... feat(TopBar): add responsive search input
     </header>
     );
   }
