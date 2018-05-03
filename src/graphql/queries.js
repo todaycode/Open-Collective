@@ -1,7 +1,9 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import moment from 'moment';
 import LoggedInUser from '../classes/LoggedInUser';
 import storage from '../lib/storage';
+import * as api from '../lib/api';
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1188,6 +1190,15 @@ const refreshLoggedInUser = async (data) => {
   }
 };
 
+const maybeRefreshAccessToken = async (currentToken) => {
+  const { exp } = JSON.parse(atob(currentToken.split('.')[1]));
+  const shouldUpdate = moment(exp * 1000).subtract(1, 'month').isBefore(new Date);
+  if (shouldUpdate) {
+    const { token } = await api.refreshToken(currentToken);
+    window.localStorage.getItem('accessToken', token);
+  }
+};
+
 export const addGetLoggedInUserFunction = (component) => {
   const accessToken = typeof window !== 'undefined' && window.localStorage.getItem('accessToken');
   if (!accessToken) return component;
@@ -1195,10 +1206,12 @@ export const addGetLoggedInUserFunction = (component) => {
     props: ({ data }) => ({
       data,
       getLoggedInUser: async () => {
-        if (!window.localStorage.getItem('accessToken')) {
+        const token = window.localStorage.getItem('accessToken');
+        if (!token) {
           storage.set("LoggedInUser", null);
           return null;
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
         return new Promise(async (resolve) => {
             let res;
@@ -1228,6 +1241,12 @@ export const addGetLoggedInUserFunction = (component) => {
             }
         });
 =======
+=======
+
+        // Just issue the request, don't wait for this call
+        maybeRefreshAccessToken(token);
+
+>>>>>>> 3aef8fe... Refresh authentication token it't 1 month or less to expire (#358)
         const cache = storage.get("LoggedInUser");
         if (cache) {
           refreshLoggedInUser(data); // we don't wait.
