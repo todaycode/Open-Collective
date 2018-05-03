@@ -104,7 +104,8 @@
     "git:clean": "./scripts/git_clean.sh",
     "postinstall": "npm run build",
     "hint": "eslint '**/*.js' --quiet",
-    "pretest": "npm run hint"
+    "pretest": "npm run hint",
+    "commit": "git-cz"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -114,7 +115,9 @@
     "babel-preset-stage-0": "^6.24.1",
     "chai": "4.1.2",
     "chromeless": "1.4.0",
+    "commitizen": "^2.9.6",
     "cypress": "1.4.1",
+    "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.19.1",
     "eslint-config-opencollective": "^1.1.8",
     "eslint-plugin-cypress": "^2.0.1",
@@ -145,5 +148,10 @@
       "raf/polyfill",
       "<rootDir>/test/setup.js"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
