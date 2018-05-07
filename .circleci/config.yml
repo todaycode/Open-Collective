@@ -1,0 +1,29 @@
+version: 2
+jobs:
+   build:
+     branches:
+       ignore:
+         - staging
+         - production
+     docker:
+       - image: 'circleci/node:8.11.1'
+     environment:
+       - NODE_ENV: circleci
+     steps:
+       - checkout
+       - run:
+           name: setup
+           command: ./scripts/setup_circleci.sh
+       - run:
+           name: install
+           command: npm install
+       - run:
+           name: test
+           command: npm test
+       - run:
+           name: release
+           command: npm run semantic-release || true
+       - save_cache:
+           key: dependency-cache
+           paths:
+             - "~/cache"
