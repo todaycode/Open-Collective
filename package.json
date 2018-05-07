@@ -1,6 +1,10 @@
 {
   "name": "opencollective-frontend",
   "version": "2.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opencollective/frontend.git"
+  },
   "private": true,
   "engines": {
     "node": "8.4.0"
@@ -105,7 +109,8 @@
     "postinstall": "npm run build",
     "hint": "eslint '**/*.js' --quiet",
     "pretest": "npm run hint",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -132,6 +137,7 @@
     "raf": "^3.4.0",
     "react-test-renderer": "16.2.0",
     "regenerator-runtime": "0.11.0",
+    "semantic-release": "^15.3.1",
     "sinon": "2.4.1"
   },
   "postcss": {
