@@ -559,11 +559,12 @@ class OrderForm extends React.Component {
       type: 'text',
       name: 'prepaidcard',
       button: <Button
-        className='prepaidapply'
+        className="prepaidapply"
         disabled={prepaidcard.loading}
-        onClick={() => this.applyPrepaidCardBalance()}>
+        onClick={() => this.applyPrepaidCardBalance()}
+        >
         {intl.formatMessage(this.messages['prepaidcard.apply'])}
-        </Button>,
+      </Button>,
       required: true,
       label: intl.formatMessage(this.messages['prepaidcard.label']),
       defaultValue: prepaidcard['token'],
@@ -655,9 +656,9 @@ class OrderForm extends React.Component {
                           <FormattedMessage id="tier.order.ticket.info" defaultMessage="Event info" />
                         </label>
                         <Col sm={10}>
-                        <FormattedDate value={collective.startsAt} weekday='short' day='numeric' month='long' />, &nbsp;
-                        <FormattedTime value={collective.startsAt} timeZone={collective.timezone} />&nbsp; - &nbsp;
-                        { get(collective, 'location.name') }
+                          <FormattedDate value={collective.startsAt} weekday="short" day="numeric" month="long" />, &nbsp;
+                          <FormattedTime value={collective.startsAt} timeZone={collective.timezone} />&nbsp; - &nbsp;
+                          { get(collective, 'location.name') }
                         </Col>
                       </div>
                     </Col>
@@ -699,27 +700,29 @@ class OrderForm extends React.Component {
               }
               <Row>
                 <Col sm={12}>
-                <InputField
-                  label="Message (public)"
-                  type="textarea"
-                  name="publicMessage"
-                  className="horizontal"
-                  placeholder={intl.formatMessage(this.messages['order.publicMessage.placeholder'])}
-                  defaultValue={order.publicMessage}
-                  maxLength={255}
-                  onChange={(value) => this.handleChange("order", "publicMessage", value)}
-                  />
+                  <InputField
+                    label="Message (public)"
+                    type="textarea"
+                    name="publicMessage"
+                    className="horizontal"
+                    placeholder={intl.formatMessage(this.messages['order.publicMessage.placeholder'])}
+                    defaultValue={order.publicMessage}
+                    maxLength={255}
+                    onChange={(value) => this.handleChange("order", "publicMessage", value)}
+                    />
                 </Col>
               </Row>
             </section>
           }
           <section className="userDetailsForm">
-            <SectionTitle section="userDetails" subtitle={
-              <div>
-                { !LoggedInUser && <FormattedMessage id="tier.order.userdetails.description" defaultMessage="If you wish to remain anonymous, only provide an email address without any other personal details." /> }
-                { LoggedInUser && <FormattedMessage id="tier.order.userdetails.description.loggedin" defaultMessage="If you wish to remain anonymous, logout and use another email address without providing any other personal details." /> }
-              </div>
-            } />
+            <SectionTitle
+              section="userDetails" subtitle={
+                <div>
+                  { !LoggedInUser && <FormattedMessage id="tier.order.userdetails.description" defaultMessage="If you wish to remain anonymous, only provide an email address without any other personal details." /> }
+                  { LoggedInUser && <FormattedMessage id="tier.order.userdetails.description.loggedin" defaultMessage="If you wish to remain anonymous, logout and use another email address without providing any other personal details." /> }
+                </div>
+            }
+                                    />
 
             { !LoggedInUser &&
               <Row key={`email.input`}>
@@ -755,9 +758,9 @@ class OrderForm extends React.Component {
                 />
             }
 
-        </section>
+          </section>
 
-        { !fromCollective.id && this.state.orgDetails.show &&
+          { !fromCollective.id && this.state.orgDetails.show &&
           <section className="organizationDetailsForm">
             <SectionTitle section="organizationDetails" />
             <Row key={`organization.name.input`}>
@@ -798,7 +801,7 @@ class OrderForm extends React.Component {
           </section>
         }
 
-        { !requireLogin &&
+          { !requireLogin &&
           <div>
             { order.totalAmount > 0 &&
               <section className="paymentDetails">
@@ -808,13 +811,13 @@ class OrderForm extends React.Component {
                   <Row>
                     <Col sm={12}>
                       <InputField
-                      className="horizontal"
-                      type="select"
-                      name="paymentMethodTypeSelector"
-                      options={this.paymentMethodTypeOptions}
-                      label={intl.formatMessage(this.messages['paymentMethod.type'])}
-                      onChange={(value) => this.handleChange("paymentMethod", "type", value)}
-                      />
+                        className="horizontal"
+                        type="select"
+                        name="paymentMethodTypeSelector"
+                        options={this.paymentMethodTypeOptions}
+                        label={intl.formatMessage(this.messages['paymentMethod.type'])}
+                        onChange={(value) => this.handleChange("paymentMethod", "type", value)}
+                        />
                     </Col>
                   </Row>
                 }
@@ -845,9 +848,11 @@ class OrderForm extends React.Component {
                       }
                       <div>
                         { !prepaidcard.expanded &&
-                          <a className='gift-card-expander' onClick={() => this.setState({
+                          <a
+                            className="gift-card-expander" onClick={() => this.setState({
                             prepaidcard: Object.assign({}, this.state.prepaidcard, {expanded: true})
-                          })}><FormattedMessage id="paymentMethod.useGiftCard" defaultMessage="Use a Gift Card" /></a>
+                          })}
+                                                           ><FormattedMessage id="paymentMethod.useGiftCard" defaultMessage="Use a Gift Card" /></a>
                         }
                         { prepaidcard.expanded &&
                           <Row key={`prepaidcard.input`}>
@@ -877,8 +882,8 @@ class OrderForm extends React.Component {
                 { (collective.host || order.totalAmount === 0) &&
                   <div className="actions">
                     <div className="submit">
-                      <ActionButton className="blue" onClick={this.handleSubmit} disabled={ this.state.loading}>
-                        {this.state.loading ? <FormattedMessage id='form.processing' defaultMessage='processing' /> : order.tier.button || capitalize(intl.formatMessage(this.messages['order.button']))}
+                      <ActionButton className="blue" onClick={this.handleSubmit} disabled={this.state.loading}>
+                        {this.state.loading ? <FormattedMessage id="form.processing" defaultMessage="processing" /> : order.tier.button || capitalize(intl.formatMessage(this.messages['order.button']))}
                       </ActionButton>
                     </div>
                     { order.totalAmount > 0 &&
@@ -893,7 +898,8 @@ class OrderForm extends React.Component {
                               interval: order.interval || order.tier.interval,
                               collective: collective.name
                             }
-                          } />
+                          }
+                          />
                           { (order.interval || order.tier.interval) &&
                             <div>
                               <FormattedMessage id="collective.host.cancelanytime" defaultMessage="You can cancel anytime." />
@@ -902,7 +908,7 @@ class OrderForm extends React.Component {
                       </div>
                     }
                     <div className="result">
-                      { this.state.loading && <div className="loading"><FormattedMessage id='form.processing' defaultMessage='processing' />...</div> }
+                      { this.state.loading && <div className="loading"><FormattedMessage id="form.processing" defaultMessage="processing" />...</div> }
                       { this.state.result.success &&
                         <div className="success">
                           {this.state.result.success}
@@ -920,7 +926,7 @@ class OrderForm extends React.Component {
             </Row>
           </div>
         }
-      </Form>
+        </Form>
 
       </div>
     )

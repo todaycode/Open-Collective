@@ -99,6 +99,7 @@ class CreateEvent extends React.Component {
         `}</style>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Header
           title={title}
 <<<<<<< HEAD
@@ -133,8 +134,18 @@ class CreateEvent extends React.Component {
             className={this.state.status}
             LoggedInUser={this.props.LoggedInUser}
             />
+=======
+        <Header
+          title={title}
+          description={collective.description}
+          twitterHandle={collective.twitterHandle}
+          image={collective.image || collective.backgroundImage}
+          className={this.state.status}
+          LoggedInUser={this.props.LoggedInUser}
+          />
+>>>>>>> d9e7825... eslint (version 1.2.0) --fix
 
-          <Body>
+        <Body>
 
           <CollectiveCover
             href={`/${collective.slug}`}
@@ -182,9 +193,9 @@ class CreateEvent extends React.Component {
               </div>
             }
           </div>
-          </Body>
+        </Body>
 
-          <Footer />
+        <Footer />
       </div>
     );
   }

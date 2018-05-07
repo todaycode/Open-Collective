@@ -117,16 +117,16 @@ class CreateCollective extends React.Component {
           }
         `}</style>
 
-          <Header
-            title={title}
-            description={host.description}
-            twitterHandle={host.twitterHandle}
-            image={host.image || host.backgroundImage}
-            className={this.state.status}
-            LoggedInUser={LoggedInUser}
-            />
+        <Header
+          title={title}
+          description={host.description}
+          twitterHandle={host.twitterHandle}
+          image={host.image || host.backgroundImage}
+          className={this.state.status}
+          LoggedInUser={LoggedInUser}
+          />
 
-          <Body>
+        <Body>
 
           <CollectiveCover
             href={`/${host.slug}`}
@@ -167,9 +167,9 @@ class CreateCollective extends React.Component {
               </div>
             }
           </div>
-          </Body>
+        </Body>
 
-          <Footer />
+        <Footer />
       </div>
     );
   }

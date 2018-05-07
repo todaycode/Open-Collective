@@ -45,24 +45,24 @@ class Header extends React.Component {
       title += ` - Open Collective`;
     }
     return (
-    <header>
+      <header>
 
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:logo" content="/static/images/opencollectiveicon240x240" size="240x240" />
-        <meta property="og:logo" content="/static/images/opencollectiveicon48x48" size="48x48" />
-        <meta property="og:logo" content="/static/images/opencollectivelogo480x80" size="480x80" />
-        <meta property="og:logo" content="/static/images/opencollectivelogo480x80@2x" size="960x160" />
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta property="og:logo" content="/static/images/opencollectiveicon240x240" size="240x240" />
+          <meta property="og:logo" content="/static/images/opencollectiveicon48x48" size="48x48" />
+          <meta property="og:logo" content="/static/images/opencollectivelogo480x80" size="480x80" />
+          <meta property="og:logo" content="/static/images/opencollectivelogo480x80@2x" size="960x160" />
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Rubik" />
-        { css && <link rel="stylesheet" href={css} /> }
-        <title>{title}</title>
-        { this.meta.map(({name, content}, index) => <meta property={name} content={content} key={`meta-${index}`} />) }
-      </Head>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Rubik" />
+          { css && <link rel="stylesheet" href={css} /> }
+          <title>{title}</title>
+          { this.meta.map(({name, content}, index) => <meta property={name} content={content} key={`meta-${index}`} />) }
+        </Head>
 
-      <style jsx global>{`
+        <style jsx global>{`
       @font-face {
         font-family: 'montserratlight';
         src: url('/static/fonts/montserrat/montserrat-light-webfont.eot');
@@ -213,6 +213,7 @@ class Header extends React.Component {
       }
 
       `}
+<<<<<<< HEAD
       </style>
 <<<<<<< HEAD
       <TopBar className={className} />
@@ -225,6 +226,12 @@ class Header extends React.Component {
       <TopBar className={className} LoggedInUser={this.props.LoggedInUser} showSearch={this.props.showSearch} />
 >>>>>>> 74c02fa... feat(TopBar): add responsive search input
     </header>
+=======
+        </style>
+        <div id="top" />
+        <TopBar className={className} LoggedInUser={this.props.LoggedInUser} showSearch={this.props.showSearch} />
+      </header>
+>>>>>>> d9e7825... eslint (version 1.2.0) --fix
     );
   }
 }
