@@ -249,7 +249,10 @@
 >>>>>>> 5b2922d... fix npm install
 =======
     "react-add-to-calendar": "0.1.5",
+<<<<<<< HEAD
 >>>>>>> 30bd5f4... make jest tests great again
+=======
+>>>>>>> dd5bcac... remove react-addons-test-utils (deprecated)
     "react-apollo": "1.4.16",
 <<<<<<< HEAD
     "react-bootstrap": "0.31.0",
