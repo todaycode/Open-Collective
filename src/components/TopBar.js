@@ -68,7 +68,7 @@ class TopBar extends React.Component {
 >>>>>>> fa600af... fix for 404 when click on create event, better signin/signoff flow
 =======
   static propTypes = {
-    LoggedInUser: PropTypes.object.isRequired,
+    LoggedInUser: PropTypes.object,
     showSearch: PropTypes.bool,
   }
 

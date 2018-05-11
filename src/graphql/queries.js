@@ -1,9 +1,7 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import moment from 'moment';
-import LoggedInUser from '../classes/LoggedInUser';
-import storage from '../lib/storage';
-import * as api from '../lib/api';
+
+import withLoggedInUser from '../lib/withLoggedInUser';
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -231,6 +229,7 @@ const getCollectiveToEditQuery = gql`
       settings
       createdAt
       isHost
+      expensePolicy
       stats {
         id
         yearlyBudget
@@ -1165,38 +1164,11 @@ export const addTiersData = graphql(getTiersQuery);
 export const addSubscriptionsData = graphql(getSubscriptionsQuery);
 export const addSearchQueryData = graphql(searchCollectivesQuery);
 
-const refreshLoggedInUser = async (data) => {
-  let res;
-
-  if (data.LoggedInUser) {
-    const user = new LoggedInUser(data.LoggedInUser);
-    storage.set("LoggedInUser", user, 1000 * 60 * 60);
-    return user;
+export const addGetLoggedInUserFunction = component => {
+  if (process.env.NODE_ENV == 'development') {
+    console.warn('addGetLoggedInUserFunction is deprecated, use withLoggedInUser instead');
   }
-
-  try {
-    res = await data.refetch();
-    if (!res.data || !res.data.LoggedInUser) {
-      storage.set("LoggedInUser", null);
-      return null;
-    }
-    const user = new LoggedInUser(res.data.LoggedInUser);
-    storage.set("LoggedInUser", user, 1000 * 60 * 60);
-    return user;
-  } catch (e) {
-    console.error(">>> getLoggedInUser error:", e);
-    storage.set("LoggedInUser", null);
-    return null;
-  }
-};
-
-const maybeRefreshAccessToken = async (currentToken) => {
-  const { exp } = JSON.parse(atob(currentToken.split('.')[1]));
-  const shouldUpdate = moment(exp * 1000).subtract(1, 'month').isBefore(new Date);
-  if (shouldUpdate) {
-    const { token } = await api.refreshToken(currentToken);
-    window.localStorage.getItem('accessToken', token);
-  }
+<<<<<<< HEAD
 };
 
 export const addGetLoggedInUserFunction = (component) => {
@@ -1263,6 +1235,9 @@ export const addGetLoggedInUserFunction = (component) => {
 =======
     })
   })(component);
+=======
+  return withLoggedInUser(component);
+>>>>>>> a58e533... refactor: addGetLoggedInUserFunction -> withLoggedInUser
 }
 <<<<<<< HEAD
 >>>>>>> b8ba07b... ssr

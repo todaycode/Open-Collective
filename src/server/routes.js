@@ -1,5 +1,5 @@
 import path from 'path';
-import _ from 'lodash';
+import { template } from 'lodash';
 import fs from 'fs';
 import pdf from 'html-pdf';
 import moment from 'moment';
@@ -187,11 +187,15 @@ module.exports = (server, app) => {
   server.get('/:collectiveSlug/:verb(contribute|donate)/button.js', (req, res) => {
 <<<<<<< HEAD
     const content = fs.readFileSync(path.join(__dirname,'../templates/button.js'), 'utf8');
+<<<<<<< HEAD
 =======
     const content = fs.readFileSync(path.join(__dirname,'../templates/widget.js'), 'utf8');
 >>>>>>> 4013f11... new contribute button
     _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
     const compiled = _.template(content);
+=======
+    const compiled = template(content, { interpolate: /{{([\s\S]+?)}}/g });
+>>>>>>> 6430557... build: optimize lodash bundling
     res.setHeader('content-type', 'application/javascript');
     res.send(compiled({
       collectiveSlug: req.params.collectiveSlug,
@@ -202,8 +206,7 @@ module.exports = (server, app) => {
 
   server.get('/:collectiveSlug/:widget(widget|events|collectives|banner).js', (req, res) => {
     const content = fs.readFileSync(path.join(__dirname,'../templates/widget.js'), 'utf8');
-    _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
-    const compiled = _.template(content);
+    const compiled = template(content, { interpolate: /{{([\s\S]+?)}}/g });
     res.setHeader('content-type', 'application/javascript');
     res.send(compiled({
       style: "{}",
