@@ -1,4 +1,4 @@
-import r2 from 'r2';
+import 'isomorphic-fetch';
 import sizeOf from 'image-size';
 import request from 'request';
 import { queryString, getCloudinaryUrl } from '../lib/utils';
@@ -34,10 +34,11 @@ export async function badge(req, res) {
     }
 
     try {
-      const imageRequest = await r2(imageUrl).text;
+      const imageRequest = await fetch(imageUrl);
+      const image = await imageRequest.text();
       res.setHeader('content-type','image/svg+xml;charset=utf-8');
       res.setHeader('cache-control','max-age=600');
-      return res.send(imageRequest);
+      return res.send(image);
     } catch (e) {
       console.error(">>> error while fetching", imageUrl, e);
       res.setHeader('cache-control','max-age=30');

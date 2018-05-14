@@ -1,5 +1,4 @@
-import r2 from 'r2';
-import fetch from 'node-fetch';
+import 'isomorphic-fetch';
 
 const WEBSITE_URL = process.env.WEBSITE_URL || "https://staging.opencollective.com";
 
@@ -9,37 +8,37 @@ describe("badge.routes.test.js", () => {
   describe("backerType (backers|sponsors)", () => {
 
     test("returns a 404 if slug doesn't exist", async () => {
-      const res = await r2(`${WEBSITE_URL}/webpack222/backers/badge.svg${cacheBurst}`).response;
+      const res = await fetch(`${WEBSITE_URL}/webpack222/backers/badge.svg${cacheBurst}`);
       expect(res.status).toEqual(404);
     });
 
     test("loads the backers badge", async () => {
-      const res = await r2(`${WEBSITE_URL}/apex/backers/badge.svg${cacheBurst}`).text;
-      expect(res).toMatch(/backers<\/text>/);
+      const res = await fetch(`${WEBSITE_URL}/apex/backers/badge.svg${cacheBurst}`);
+      expect(await res.text()).toMatch(/backers<\/text>/);
     });
 
     test("loads the sponsors badge", async () => {
-      const res = await r2(`${WEBSITE_URL}/apex/sponsors/badge.svg${cacheBurst}`).text;
-      expect(res).toMatch(/sponsors<\/text>/);
+      const res = await fetch(`${WEBSITE_URL}/apex/sponsors/badge.svg${cacheBurst}`);
+      expect(await res.text()).toMatch(/sponsors<\/text>/);
     });
 
     test("returns a 404 if slug doesn't exist", async () => {
-      const res = await r2(`${WEBSITE_URL}/apex222/backers/0/avatar.svg${cacheBurst}`).response;
+      const res = await fetch(`${WEBSITE_URL}/apex222/backers/0/avatar.svg${cacheBurst}`);
       expect(res.status).toEqual(404);
     });
 
     test("loads the first backer avatar.svg", async () => {
-      const res = await r2(`${WEBSITE_URL}/apex/backers/0/avatar.svg${cacheBurst}`).text;
-      expect(res).toMatch(/<image width="64" height="64"/);
+      const res = await fetch(`${WEBSITE_URL}/apex/backers/0/avatar.svg${cacheBurst}`);
+      expect(await res.text()).toMatch(/<image width="64" height="64"/);
     });
 
     test("loads the first sponsor avatar.svg", async () => {
-      const res = await r2(`${WEBSITE_URL}/apex/sponsors/0/avatar.svg${cacheBurst}`).text;
-      expect(res).toMatch(/height="64"/);
+      const res = await fetch(`${WEBSITE_URL}/apex/sponsors/0/avatar.svg${cacheBurst}`);
+      expect(await res.text()).toMatch(/height="64"/);
     });
 
     test("redirects to the website of the second backer", async () => {
-      const res = await r2(`${WEBSITE_URL}/apex/backers/1/website${cacheBurst}`).response;
+      const res = await fetch(`${WEBSITE_URL}/apex/backers/1/website${cacheBurst}`);
       expect(res.status).toEqual(200);
       expect(res.url).toMatch(/utm_campaign=apex/);
       expect(res.url).toMatch(/utm_medium=github/);
@@ -49,13 +48,13 @@ describe("badge.routes.test.js", () => {
 
   describe("custom tiers", () => {
     test("loads the badge", async () => {
-      const res = await r2(`${WEBSITE_URL}/apex/tiers/sponsors/badge.svg${cacheBurst}`).text;
-      expect(res).toMatch(/Sponsors<\/text>/);
+      const res = await fetch(`${WEBSITE_URL}/apex/tiers/sponsors/badge.svg${cacheBurst}`);
+      expect(await res.text()).toMatch(/Sponsors<\/text>/);
     });
 
     test("loads the first member avatar.svg", async () => {
-      const res = await r2(`${WEBSITE_URL}/apex/tiers/sponsors/0/avatar.svg${cacheBurst}`).text;
-      expect(res).toMatch(/<image width="140" height="64"/);
+      const res = await fetch(`${WEBSITE_URL}/apex/tiers/sponsors/0/avatar.svg${cacheBurst}`);
+      expect(await res.text()).toMatch(/<image width="140" height="64"/);
     });
 
   });
