@@ -120,6 +120,7 @@
     "next": "6.0.2",
 >>>>>>> 8cf6809... chore(packages): apply all minor/safe updates to package.json
     "next-routes": "1.4.1",
+<<<<<<< HEAD
 >>>>>>> 8c34a03... wip
     "node-fetch": "1.7.3",
 <<<<<<< HEAD
@@ -170,6 +171,9 @@
 =======
 >>>>>>> da86bf8... build(postcss): remove unused postcss configuration
 =======
+=======
+    "node-fetch": "2.1.2",
+>>>>>>> 567ae27... chore(packages): update node-fetch and r2
     "payment": "2.3.0",
 >>>>>>> 8cf6809... chore(packages): apply all minor/safe updates to package.json
     "postcss-nested": "3.0.0",
@@ -283,7 +287,7 @@
 =======
 =======
     "qrcode.react": "0.8.0",
-    "r2": "2.0.0",
+    "r2": "2.0.1",
     "raw-loader": "0.5.1",
     "rc-table": "6.2.0",
 >>>>>>> 8cf6809... chore(packages): apply all minor/safe updates to package.json
@@ -436,7 +440,7 @@
     "babel-plugin-react-intl": "^2.4.0",
     "chromeless": "1.5.2",
     "commitizen": "^2.9.6",
-    "cypress": "1.4.1",
+    "cypress": "2.1.0",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.19.1",
     "eslint-config-opencollective": "^1.2.1",
