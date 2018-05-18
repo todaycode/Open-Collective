@@ -1106,10 +1106,14 @@ export const searchCollectivesQuery = gql`
         stats {
           id
           balance
+          totalAmountSent
           yearlyBudget
           backers {
             all
           }
+        }
+        memberOf(role: "BACKER") {
+          id
         }
       }
       limit
