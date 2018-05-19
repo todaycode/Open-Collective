@@ -183,7 +183,7 @@ class OrderForm extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    this.componentWillReceiveProps(this.props);
+    this.UNSAFE_componentWillReceiveProps(this.props);
   }
 
   populatePaymentMethodTypes() {
@@ -266,7 +266,7 @@ class OrderForm extends React.Component {
     return fromCollectiveOptions;
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     const { LoggedInUser } = props;
     if (!LoggedInUser) return;
     if (!this._isMounted) return; // Fixes error: Can only update a mounted or mounting component
