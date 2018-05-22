@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import withData from '../lib/withData';
 import withIntl from '../lib/withIntl';
 import { get } from 'lodash';
@@ -7,6 +8,11 @@ import gql from 'graphql-tag'
 
 import ExpensesWithData from '../apps/expenses/components/ExpensesWithData';
 import ExpensesStatsWithData from '../apps/expenses/components/ExpensesStatsWithData';
+=======
+import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
+import { get } from 'lodash';
+>>>>>>> adbb6f8... chore(eslint): Linting for CollectivePickerWithData & host.expenses
 
 import { addGetLoggedInUserFunction } from '../graphql/queries';
 import Header from '../components/Header';
@@ -22,12 +28,14 @@ import CollectivePicker from '../components/CollectivePickerWithData';
 import withData from '../lib/withData';
 import withIntl from '../lib/withIntl';
 import ExpensesWithData from '../components/ExpensesWithData';
-import { get } from 'lodash';
 import CollectivePicker, { AddFundsFormWithData } from '../components/CollectivePickerWithData';
+<<<<<<< HEAD
 import ExpensesStatsWithData from '../components/ExpensesStatsWithData';
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 >>>>>>> 5d9caaa... chore(host.expenses): Move add funds form outside collective picker
+=======
+>>>>>>> adbb6f8... chore(eslint): Linting for CollectivePickerWithData & host.expenses
 
 class HostExpensesPage extends React.Component {
 
@@ -101,7 +109,8 @@ class HostExpensesPage extends React.Component {
             }
           }
         }
-        `}</style>
+        `}
+        </style>
 
         <Header
           title={collective.name}
@@ -126,9 +135,11 @@ class HostExpensesPage extends React.Component {
               <CollectivePicker
                 query={this.props.query}
                 hostCollectiveSlug={this.props.collectiveSlug}
+                hostCollective={collective}
                 LoggedInUser={LoggedInUser}
                 onChange={this.pickCollective}
-                toggleAddFunds={this.toggleAddFunds} />
+                toggleAddFunds={this.toggleAddFunds}
+                />
             </div>
             <div className="col large pullLeft">
               { this.state.showAddFunds &&
@@ -136,7 +147,8 @@ class HostExpensesPage extends React.Component {
                   hostCollective={collective}
                   selectedCollective={selectedCollective}
                   toggleAddFunds={this.toggleAddFunds}
-                  LoggedInUser={LoggedInUser} /> }
+                  LoggedInUser={LoggedInUser}
+                  /> }
 
               { !this.state.showAddFunds &&
                 <div>
@@ -151,7 +163,7 @@ class HostExpensesPage extends React.Component {
                     LoggedInUser={this.state.LoggedInUser}
                     filters={true}
                     editable={true}
-                  />
+                    />
                 </div> }
             </div>
           </div>
