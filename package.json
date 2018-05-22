@@ -351,8 +351,12 @@
 =======
     "react-datetime": "2.14.0",
     "react-dom": "16.3.2",
+<<<<<<< HEAD
     "react-dropzone": "4.2.9",
 >>>>>>> 8cf6809... chore(packages): apply all minor/safe updates to package.json
+=======
+    "react-dropzone": "4.2.10",
+>>>>>>> 2b49479... fix(package): update react-dropzone to version 4.2.10
     "react-geosuggest": "2.7.0",
     "react-gmaps": "1.9.0",
     "react-intl": "2.4.0",
@@ -436,6 +440,7 @@
     "start": "node build/server",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "test": "jest src/* && npm run test:e2e",
 =======
     "test": "jest src/* && npm run test:e2e && npm run test:server",
@@ -445,6 +450,12 @@
 >>>>>>> 1b90632... Fix "Collective Currency" header column on the transactions CSV (#218)
     "test:server": "jest test/server/*",
     "test:e2e": "./scripts/run_e2e_tests.sh",
+=======
+    "test": "npm run test:src && npm run test:e2e",
+    "test:src": "TZ=UTC jest src/*",
+    "test:server": "TZ=UTC jest test/server/*",
+    "test:e2e": "TZ=UTC ./scripts/run_e2e_tests.sh",
+>>>>>>> 96310df... test: make test:src and test:server quiet
     "build:server": "babel -D ./src -d ./build --ignore src/templates/widget.js,src/**/__tests__/* && cp src/templates/widget.js build/templates/",
     "build:langs": "rm -rf build/messages && babel src/**/*.js > /dev/null && babel-node scripts/translate.js",
     "deploy:production": "git push production master",
@@ -496,7 +507,6 @@
       "\\.(css|less)$": "<rootDir>/test/mocks/styleMock.js"
     },
     "setupFiles": [
-      "raf/polyfill",
       "<rootDir>/test/setup.js"
     ]
   },
