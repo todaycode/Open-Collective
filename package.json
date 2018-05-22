@@ -117,11 +117,15 @@
 =======
     "moment-timezone": "0.5.17",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "newrelic": "4.1.0",
     "next": "6.0.2",
 >>>>>>> 8cf6809... chore(packages): apply all minor/safe updates to package.json
 =======
     "newrelic": "4.1.1",
+=======
+    "newrelic": "4.1.2",
+>>>>>>> 4763476... fix(package): update newrelic to version 4.1.2
     "next": "6.0.3",
 <<<<<<< HEAD
 >>>>>>> e4629d2... chore(package): update dependencies
