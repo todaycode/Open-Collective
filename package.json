@@ -307,9 +307,13 @@
 >>>>>>> 8cf6809... chore(packages): apply all minor/safe updates to package.json
 =======
     "rc-table": "6.2.1",
+<<<<<<< HEAD
 >>>>>>> e4629d2... chore(package): update dependencies
     "react": "16.3.2",
 >>>>>>> 2d9a9da... chore(packages): update to next.js 6, babel 7 and related dependencies
+=======
+    "react": "16.4.0",
+>>>>>>> 84bbbc1... fix(package): update react to version 16.4.0
     "react-add-to-calendar": "0.1.5",
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -354,11 +358,15 @@
     "react-dropzone": "4.2.8",
 =======
     "react-datetime": "2.14.0",
+<<<<<<< HEAD
     "react-dom": "16.3.2",
 <<<<<<< HEAD
     "react-dropzone": "4.2.9",
 >>>>>>> 8cf6809... chore(packages): apply all minor/safe updates to package.json
 =======
+=======
+    "react-dom": "16.4.0",
+>>>>>>> f7c4ce9... fix(package): update react-dom to version 16.4.0
     "react-dropzone": "4.2.10",
 >>>>>>> 2b49479... fix(package): update react-dropzone to version 4.2.10
     "react-geosuggest": "2.7.0",
@@ -503,7 +511,7 @@
     "react-test-renderer": "^16.3.2",
     "regenerator-runtime": "^0.11.1",
     "semantic-release": "^15.4.1",
-    "sinon": "5.0.7",
+    "sinon": "5.0.8",
     "webpack-bundle-analyzer": "^2.12.0"
   },
   "jest": {
