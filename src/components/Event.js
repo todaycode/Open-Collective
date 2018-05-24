@@ -51,10 +51,14 @@ import { Link } from '../server/pages';
 =======
 >>>>>>> 0d14167... eslint feedback in components
 import SectionTitle from './SectionTitle';
+<<<<<<< HEAD
 import ExpensesSection from './ExpensesSection';
 <<<<<<< HEAD
 >>>>>>> c68915d... add budget to event collective
 =======
+=======
+import ExpensesSection from '../apps/expenses/components/ExpensesSection';
+>>>>>>> 9b4dc95... fix loading ExpensesSection for event page
 import withIntl from '../lib/withIntl';
 import Button from './Button';
 import SendMoneyToCollectiveBtn from './SendMoneyToCollectiveBtn';
