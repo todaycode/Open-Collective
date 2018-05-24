@@ -116,7 +116,7 @@ class CollectivePickerWithData extends React.Component {
   }
 
   onChange(CollectiveId) {
-    const collectives = this.hostCollective.collectives;
+    const collectives = this.hostCollective.collectives.collectives;
     const selectedCollective = CollectiveId > 0 && collectives.find(c => c.id === CollectiveId);
     this.setState({ CollectiveId });
     this.props.onChange(selectedCollective);
@@ -204,7 +204,7 @@ class CollectivePickerWithData extends React.Component {
       return (<div />);
     }
 
-    const collectives = [...this.hostCollective.collectives];
+    const collectives = [...this.hostCollective.collectives.collectives];
 
     const selectedCollective = collectives.find(c => c.id === this.state.CollectiveId);
     const selectedTitle = selectedCollective ? this.renderCollectiveMenuItem(selectedCollective, 'selected') : <div className="defaultTitle"><FormattedMessage id="expenses.allCollectives" defaultMessage="All Collectives" /></div>;
@@ -350,21 +350,24 @@ query Collective($hostCollectiveSlug: String!, $orderBy: CollectiveOrderField, $
       currency
     }
     collectives(orderBy: $orderBy, orderDirection: $orderDirection) {
-      id
-      slug
-      name
-      currency
-      hostFeePercent
-      stats {
+      total
+      collectives {
         id
-        balance
-        expenses {
+        slug
+        name
+        currency
+        hostFeePercent
+        stats {
           id
-          all
-          pending
-          paid
-          rejected
-          approved
+          balance
+          expenses {
+            id
+            all
+            pending
+            paid
+            rejected
+            approved
+          }
         }
       }
     }
