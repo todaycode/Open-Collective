@@ -26,9 +26,9 @@ winstonPapertrail.on('error', () => {
 
 winston.handleExceptions(transports);
 
-const logger = new winston.Logger( { transports } );
+export const logger = new winston.Logger( { transports } );
 
-const loggerMiddleware = {
+export const loggerMiddleware = {
   logger: expressWinston.logger({
       transports,
       meta: false, // optional: control whether you want to log the meta data about the request (default to true)
@@ -44,5 +44,3 @@ const loggerMiddleware = {
     }),
     errorLogger: expressWinston.errorLogger( { transports } )
 }
-
-module.exports = { logger, loggerMiddleware };

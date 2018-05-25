@@ -11,7 +11,7 @@ import controllers from './controllers';
 import * as mw from './middlewares';
 import express from 'express';
 
-module.exports = (server, app) => {
+export default (server, app) => {
 
   const DEBUG = process.env.DEBUG || false;
 
