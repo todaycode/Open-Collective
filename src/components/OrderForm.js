@@ -40,7 +40,8 @@ class OrderForm extends React.Component {
     onSubmit: PropTypes.func,
     matchingFund: PropTypes.string,
     redeemFlow: PropTypes.bool,
-    intl: PropTypes.object
+    intl: PropTypes.object,
+    client: PropTypes.object
   }
 
   constructor(props) {
@@ -76,14 +77,6 @@ class OrderForm extends React.Component {
 
     this.paymentMethodsOptions = [];
     this.allowOrganizations = (order.tier.type !== 'TICKET');
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.error = this.error.bind(this);
-    this.resetError = this.resetError.bind(this);
-    this.validate = this.validate.bind(this);
-    this.resetOrder = this.resetOrder.bind(this);
-    this.populateProfiles = this.populateProfiles.bind(this);
 
     this.messages = defineMessages({
       'order.contributeAs': { id: 'tier.order.contributeAs', defaultMessage: `Contribute as` },
@@ -187,6 +180,15 @@ class OrderForm extends React.Component {
     this.UNSAFE_componentWillReceiveProps(this.props);
   }
 
+  UNSAFE_componentWillReceiveProps(props) {
+    const { LoggedInUser } = props;
+    if (!LoggedInUser) return;
+    if (!this._isMounted) return; // Fixes error: Can only update a mounted or mounting component
+    this.setState({ LoggedInUser, isNewUser: !LoggedInUser });
+    this.populateProfiles(LoggedInUser);
+    setTimeout(() => this.selectProfile(LoggedInUser.CollectiveId), 0); // need to pass a cycle to let setState take effect
+  }
+
   // All the following methods are arrow functions and auto-bind
 
   populatePaymentMethodTypes = () => {
@@ -235,7 +237,7 @@ class OrderForm extends React.Component {
    * Otherwise, you can order a tier as an individual or as any organization that you are an admin of
    * @param {*} LoggedInUser
    */
-  populateProfiles(LoggedInUser) {
+  populateProfiles = (LoggedInUser) => {
     const { intl } = this.props;
     const fromCollectiveOptions = [], collectivesById = {};
 
@@ -264,25 +266,15 @@ class OrderForm extends React.Component {
 
     this.collectivesById = collectivesById;
     this.fromCollectiveOptions = fromCollectiveOptions;
-    return fromCollectiveOptions;
   }
 
-  UNSAFE_componentWillReceiveProps(props) {
-    const { LoggedInUser } = props;
-    if (!LoggedInUser) return;
-    if (!this._isMounted) return; // Fixes error: Can only update a mounted or mounting component
-    this.setState({ LoggedInUser, isNewUser: !LoggedInUser });
-    this.populateProfiles(LoggedInUser);
-    setTimeout(() => this.selectProfile(LoggedInUser.CollectiveId), 0); // need to pass a cycle to let setState take effect
-  }
-
-  logout() {
+  logout = () => {
     window.localStorage.removeItem('accessToken');
     window.localStorage.removeItem('LoggedInUser');
     window.location.replace(window.location.href);
   }
 
-  selectProfile(profile) {
+  selectProfile = (profile) => {
     if (profile === 'logout') {
       return this.logout();
     }
@@ -317,12 +309,13 @@ class OrderForm extends React.Component {
     }
 
     this.setState(newState);
+
     if (typeof window !== "undefined") {
       window.state = newState;
     }
   }
 
-  handleChange(obj, attr, value) {
+  handleChange = (obj, attr, value) => {
     this.resetError();
     const newTier = { ...this.state.order.tier }
     const newOrder = { ...this.state.order };
@@ -367,7 +360,7 @@ class OrderForm extends React.Component {
     }
   }
 
-  async handleSubmit() {
+  handleSubmit = async () => {
     if (! await this.validate()) return false;
     this.setState({ loading: true });
     const { paymentMethod, order, fromCollective, user } = this.state;
@@ -398,16 +391,16 @@ class OrderForm extends React.Component {
     this.setState({ loading: false });
   }
 
-  error(msg) {
+  error = (msg) => {
     const error = `${msg}`;
     this.setState({ result: { error }});
   }
 
-  resetError() {
+  resetError = () => {
     this.setState({ result: { error: null }});
   }
 
-  async validate() {
+  validate = async () => {
     const TEST_ENVIRONMENT = (typeof window !== 'undefined' && window.location.search.match(/test=e2e/) && (window.location.hostname === 'staging.opencollective.com' || window.location.hostname === 'localhost'));
 
     const { intl } = this.props;
@@ -490,17 +483,17 @@ class OrderForm extends React.Component {
     return true;
   }
 
-  resetOrder() {
+  resetOrder = () => {
     this.setState({ order: {} });
   }
 
-  signin() {
+  signin = () => {
     signin(this.state.user, `${window.location.pathname}${window.location.search}`).then(() => {
       this.setState({ loginSent: true })
     })
   }
 
-  async applyPrepaidCardBalance() {
+  applyPrepaidCardBalance = async () => {
     const { prepaidcard, creditcard, order } = this.state;
 
     this.setState({
@@ -533,12 +526,17 @@ class OrderForm extends React.Component {
     }
   }
 
+  expandGiftCard = () => {
+    this.setState({ prepaidcard: Object.assign({}, this.state.prepaidcard, { expanded: true }) });
+  }
+
   render() {
     const { intl, collective, LoggedInUser } = this.props;
     const { order, prepaidcard, creditcard, fromCollective } = this.state;
     const currency = order.tier.currency || collective.currency;
 
     this.populatePaymentMethodTypes();
+
     const showNewCreditCardForm = !prepaidcard.show && creditcard.show && (!creditcard.uuid || creditcard.uuid === 'other');
     const requireLogin = !this.state.isNewUser && !LoggedInUser;
     const inputEmail = {
@@ -551,7 +549,7 @@ class OrderForm extends React.Component {
       onChange: (value) => this.handleChange("user", "email", value)
     };
     if (!this.state.isNewUser) {
-      inputEmail.button = <Button onClick={() => this.signin()} focus={true}>Login</Button>;
+      inputEmail.button = <Button onClick={this.signin} focus={true}>Login</Button>;
       if (!this.state.loginSent) {
         inputEmail.description = intl.formatMessage(this.messages['email.description.login']);
       } else {
@@ -563,13 +561,15 @@ class OrderForm extends React.Component {
     const inputPrepaidcard = {
       type: 'text',
       name: 'prepaidcard',
-      button: <Button
-        className="prepaidapply"
-        disabled={prepaidcard.loading}
-        onClick={() => this.applyPrepaidCardBalance()}
-        >
-        {intl.formatMessage(this.messages['prepaidcard.apply'])}
-      </Button>,
+      button: (
+        <Button
+          className="prepaidapply"
+          disabled={prepaidcard.loading}
+          onClick={this.applyPrepaidCardBalance}
+          >
+          {intl.formatMessage(this.messages['prepaidcard.apply'])}
+        </Button>
+      ),
       required: true,
       label: intl.formatMessage(this.messages['prepaidcard.label']),
       defaultValue: prepaidcard['token'],
@@ -598,7 +598,8 @@ class OrderForm extends React.Component {
           .OrderForm textarea[name="publicMessage"] {
             height: 10rem;
           }
-        `}</style>
+        `}
+        </style>
         <style jsx>{`
         .OrderForm {
           margin: 0 auto;
@@ -645,7 +646,8 @@ class OrderForm extends React.Component {
           color: ${colors.blue};
           margin-left: 205px;
         }
-        `}</style>
+        `}
+        </style>
         <Form horizontal>
 
 <<<<<<< HEAD
@@ -724,7 +726,8 @@ class OrderForm extends React.Component {
 >>>>>>> 9279ea6... define a custom expense policy
           <section className="userDetailsForm">
             <SectionTitle
-              section="userDetails" subtitle={
+              section="userDetails"
+              subtitle={
                 <div>
                   { !LoggedInUser && <FormattedMessage id="tier.order.userdetails.description" defaultMessage="If you wish to remain anonymous, only provide an email address without any other personal details." /> }
                   { LoggedInUser && <FormattedMessage id="tier.order.userdetails.description.loggedin" defaultMessage="If you wish to remain anonymous, logout and use another email address without providing any other personal details." /> }
@@ -750,7 +753,7 @@ class OrderForm extends React.Component {
                     {...field}
                     defaultValue={this.state.user[field.name]}
                     onChange={(value) => this.handleChange("user", field.name, value)}
-                  />
+                    />
                 </Col>
               </Row>
             ))}
@@ -763,7 +766,7 @@ class OrderForm extends React.Component {
                 name="fromCollectiveSelector"
                 onChange={CollectiveId => this.selectProfile(CollectiveId)}
                 options={this.fromCollectiveOptions}
-              />
+                />
             }
 
             { !LoggedInUser && this.state.isNewUser && (
@@ -777,7 +780,7 @@ class OrderForm extends React.Component {
                     description={intl.formatMessage(this.messages['newsletterOptIn.description'])}
                     defaultValue={this.state.user['newsletterOptIn']}
                     onChange={(value) => this.handleChange('user', 'newsletterOptIn', value)}
-                  />
+                    />
                 </Col>
               </Row>
             )}
@@ -839,9 +842,9 @@ class OrderForm extends React.Component {
                           <FormattedMessage id="tier.order.ticket.info" defaultMessage="Event info" />
                         </label>
                         <Col sm={10}>
-                        <FormattedDate value={collective.startsAt} weekday='short' day='numeric' month='long' />, &nbsp;
-                        <FormattedTime value={collective.startsAt} timeZone={collective.timezone} />&nbsp; - &nbsp;
-                        { get(collective, 'location.name') }
+                          <FormattedDate value={collective.startsAt} weekday="short" day="numeric" month="long" />, &nbsp;
+                          <FormattedTime value={collective.startsAt} timeZone={collective.timezone} />&nbsp; - &nbsp;
+                          { get(collective, 'location.name') }
                         </Col>
                       </div>
                     </Col>
@@ -883,16 +886,16 @@ class OrderForm extends React.Component {
               }
               <Row>
                 <Col sm={12}>
-                <InputField
-                  label="Message (public)"
-                  type="textarea"
-                  name="publicMessage"
-                  className="horizontal"
-                  placeholder={intl.formatMessage(this.messages['order.publicMessage.placeholder'])}
-                  defaultValue={order.publicMessage}
-                  maxLength={255}
-                  onChange={(value) => this.handleChange("order", "publicMessage", value)}
-                  />
+                  <InputField
+                    label="Message (public)"
+                    type="textarea"
+                    name="publicMessage"
+                    className="horizontal"
+                    placeholder={intl.formatMessage(this.messages['order.publicMessage.placeholder'])}
+                    defaultValue={order.publicMessage}
+                    maxLength={255}
+                    onChange={(value) => this.handleChange("order", "publicMessage", value)}
+                    />
                 </Col>
               </Row>
             </section>
@@ -942,11 +945,9 @@ class OrderForm extends React.Component {
                       }
                       <div>
                         { !prepaidcard.expanded &&
-                          <a
-                            className="gift-card-expander" onClick={() => this.setState({
-                            prepaidcard: Object.assign({}, this.state.prepaidcard, {expanded: true})
-                          })}
-                                                           ><FormattedMessage id="paymentMethod.useGiftCard" defaultMessage="Use a Gift Card" /></a>
+                          <a className="gift-card-expander" onClick={this.expandGiftCard}>
+                            <FormattedMessage id="paymentMethod.useGiftCard" defaultMessage="Use a Gift Card" />
+                          </a>
                         }
                         { prepaidcard.expanded &&
                           <Row key={`prepaidcard.input`}>
