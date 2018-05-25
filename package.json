@@ -473,8 +473,12 @@
     "test:src": "TZ=UTC jest src/*",
     "test:server": "TZ=UTC jest test/server/*",
     "test:e2e": "TZ=UTC ./scripts/run_e2e_tests.sh",
+<<<<<<< HEAD
 >>>>>>> 96310df... test: make test:src and test:server quiet
     "build:server": "babel -D ./src -d ./build --ignore src/templates/widget.js,src/**/__tests__/* && cp src/templates/widget.js build/templates/",
+=======
+    "build:server": "babel --copy-files ./src --out-dir ./build --ignore src/templates/widget.js,src/**/__tests__/*",
+>>>>>>> 5fcd578... build: use long arguments and remove file copy which is already done by default
     "build:langs": "rm -rf build/messages && babel src/**/*.js > /dev/null && babel-node scripts/translate.js",
     "deploy:production": "git push production master",
     "deploy:staging": "git push -f staging master && heroku ps:scale web=1 -a opencollective-staging-api && heroku ps:scale web=1 -a oc-staging-frontend && heroku ps:scale web=1 -a opencollective-staging-website",
