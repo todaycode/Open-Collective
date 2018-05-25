@@ -4,7 +4,6 @@ import TopBar from './TopBar';
 
 import { truncate, getQueryParams } from '../lib/utils';
 import storage from '../lib/storage';
-import colors from '../constants/colors';
 
 class Header extends React.Component {
 
@@ -61,6 +60,7 @@ class Header extends React.Component {
           <title>{title}</title>
           { this.meta.map(({name, content}, index) => <meta property={name} content={content} key={`meta-${index}`} />) }
         </Head>
+<<<<<<< HEAD
 
         <style jsx global>{`
       @font-face {
@@ -228,6 +228,8 @@ class Header extends React.Component {
     </header>
 =======
         </style>
+=======
+>>>>>>> 61f0ae1... refactor(styles): move global styles to injectGlobal declaration
         <div id="top" />
         <TopBar className={className} LoggedInUser={this.props.LoggedInUser} showSearch={this.props.showSearch} />
       </header>
