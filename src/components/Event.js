@@ -310,6 +310,7 @@ class Event extends React.Component {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <FormattedDate value={this.event.startsAt} weekday='short' day='numeric' month='long' />, &nbsp;
         <FormattedTime value={this.event.startsAt} timeZone={this.event.timezone} />&nbsp; - &nbsp;
         {this.event.location.name}
@@ -324,6 +325,17 @@ class Event extends React.Component {
         <FormattedDate value={event.startsAt} weekday="short" day="numeric" month="long" />, &nbsp;
 >>>>>>> d9e7825... eslint (version 1.2.0) --fix
         <FormattedTime value={event.startsAt} timeZone={event.timezone} />&nbsp; - &nbsp;
+=======
+        {!event.startsAt &&
+          console.warn(`Event: event.startsAt should not be empty. event.id: ${event.id}`)
+        }
+        {event.startsAt &&
+          <React.Fragment>
+            <FormattedDate value={event.startsAt} weekday="short" day="numeric" month="long" />, &nbsp;
+            <FormattedTime value={event.startsAt} timeZone={event.timezone} />&nbsp; - &nbsp;
+          </React.Fragment>
+        }
+>>>>>>> 3c32d1f... refactor: update logging
         {event.location.name}
 >>>>>>> 20155ce... work in progress
       </HashLink>

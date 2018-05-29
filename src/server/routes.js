@@ -4,6 +4,7 @@ import fs from 'fs';
 import pdf from 'html-pdf';
 import moment from 'moment';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 routes.add('event', '/:collectiveSlug/events/:eventSlug');
@@ -53,20 +54,30 @@ import request from 'request';
 <<<<<<< HEAD
 >>>>>>> 20155ce... work in progress
 =======
+=======
+import request from 'request';
+import express from 'express';
+
+import pages from './pages';
+>>>>>>> 3c32d1f... refactor: update logging
 import controllers from './controllers';
 <<<<<<< HEAD
 >>>>>>> 915fa20... serving /:collectiveSlug/(sponsors|backers)/badge.svg from the new frontend server
 =======
 import * as mw from './middlewares';
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 33a7b4d... added google analytics
 =======
 import express from 'express';
 >>>>>>> 30a185b... added old assets for backward compatibility in /public
+=======
+import { logger } from './logger';
+import { getCloudinaryUrl } from './lib/utils';
+import { translateApiUrl } from '../lib/utils';
+>>>>>>> 3c32d1f... refactor: update logging
 
 module.exports = (server, app) => {
-
-  const DEBUG = process.env.DEBUG || false;
 
   server.get('*', mw.ga, (req, res, next) => {
     req.app = app;
@@ -84,11 +95,12 @@ module.exports = (server, app) => {
   });
 
   server.all('/api/*', (req, res) => {
-    if (DEBUG) console.log(">>> api request", translateApiUrl(req.url));
+    const apiUrl = translateApiUrl(req.url);
+    logger.debug(">>> API request %s", apiUrl);
     req
-      .pipe(request(translateApiUrl(req.url), { followRedirect: false }))
+      .pipe(request(apiUrl, { followRedirect: false }))
       .on('error', (e) => {
-        console.error("error calling api", translateApiUrl(req.url), e);
+        logger.error(">>> Error calling API %s", apiUrl, e);
         res.status(500).send(e);
       })
       .pipe(res);
@@ -107,7 +119,7 @@ module.exports = (server, app) => {
     req
       .pipe(request(url, { followRedirect: false }))
       .on('error', (e) => {
-        console.error("error proxying ", url, e);
+        logger.error(">>> Error proxying %s", url, e);
         res.status(500).send(e);
       })
       .pipe(res);
@@ -178,7 +190,7 @@ module.exports = (server, app) => {
         res.setHeader('content-disposition', `inline; filename="${filename}"`); // or attachment?
         pdf.create(html, options).toStream((err, stream) => {
           if (err) {
-            console.log(">>> error while generating pdf", req.url, err);
+            logger.error(">>> Error while generating pdf at %s", req.url, err);
             return next(err);
           }
           stream.pipe(res);
