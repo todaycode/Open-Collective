@@ -1,14 +1,13 @@
 import React from 'react';
-import withData from '../lib/withData';
-import withIntl from '../lib/withIntl';
-import { get } from 'lodash';
+import PropTypes from 'prop-types';
+
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { get } from 'lodash';
 
 import ExpensesWithData from '../apps/expenses/components/ExpensesWithData';
 import ExpensesStatsWithData from '../apps/expenses/components/ExpensesStatsWithData';
 
-import { addGetLoggedInUserFunction } from '../graphql/queries';
 import Header from '../components/Header';
 import Body from '../components/Body';
 import Footer from '../components/Footer';
@@ -17,12 +16,21 @@ import Loading from '../components/Loading';
 import ErrorPage from '../components/ErrorPage';
 import CollectivePicker from '../components/CollectivePickerWithData';
 
+import withData from '../lib/withData';
+import withIntl from '../lib/withIntl';
+import withLoggedInUser from '../lib/withLoggedInUser';
 
 class HostExpensesPage extends React.Component {
 
-  static getInitialProps (props) {
-    const { query, data } = props;
-    return { collectiveSlug: query.hostCollectiveSlug, data, query, ssr: false }
+  static getInitialProps ({ query: { hostCollectiveSlug } }) {
+    return { collectiveSlug: hostCollectiveSlug, ssr: false }
+  }
+
+  static propTypes = {
+    collectiveSlug: PropTypes.string, // for addData
+    ssr: PropTypes.bool,
+    data: PropTypes.object, // from withData
+    getLoggedInUser: PropTypes.func.isRequired, // from withLoggedInUser
   }
 
   constructor(props) {
@@ -32,7 +40,7 @@ class HostExpensesPage extends React.Component {
 
   async componentDidMount() {
     const { getLoggedInUser } = this.props;
-    const LoggedInUser = getLoggedInUser && await getLoggedInUser(this.props.collectiveSlug);
+    const LoggedInUser = await getLoggedInUser();
     this.setState({ LoggedInUser });
   }
 
@@ -84,7 +92,8 @@ class HostExpensesPage extends React.Component {
             }
           }
         }
-        `}</style>
+        `}
+        </style>
 
         <Header
           title={collective.name}
@@ -156,4 +165,5 @@ query Collective($collectiveSlug: String!) {
 `;
 
 export const addData = graphql(getDataQuery);
-export default withData(addGetLoggedInUserFunction(addData(withIntl(HostExpensesPage))));
+
+export default withData(withIntl(withLoggedInUser(addData(HostExpensesPage))));

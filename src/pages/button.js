@@ -1,8 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class ButtonPage extends React.Component {
+
   static getInitialProps ({ query: { color, collectiveSlug, verb } }) {
     return { color, collectiveSlug, verb }
+  }
+
+  static propTypes = {
+    color: PropTypes.string,
+    collectiveSlug: PropTypes.string,
+    verb: PropTypes.string,
   }
 
   render() {
@@ -15,7 +23,7 @@ class ButtonPage extends React.Component {
               margin: 0;
             }
 
-            .btn { 
+            .btn {
             width: 300px;
             height: 50px;
             overflow: hidden;
@@ -61,7 +69,8 @@ class ButtonPage extends React.Component {
             .btn.hover {
               background-position: 0 -100px;
             }
-          `}</style>
+          `}
+        </style>
         <a type="button" className={`btn ${color} ${verb}`} target="_blank" href={`https://opencollective.com/${collectiveSlug}/${verb}`} />
       </div>
     );

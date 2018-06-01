@@ -1,34 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Head from 'next/head';
-import MembersWithData from '../components/MembersWithData';
-import withData from '../lib/withData';
-import withIntl from '../lib/withIntl';
+
 import { FormattedMessage } from 'react-intl';
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-class Banner extends React.Component {
+import MembersWithData from '../components/MembersWithData';
 
-  constructor(props) {
-    super(props);
-    this.sendMessageToParentWindow = this.sendMessageToParentWindow.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
+import withData from '../lib/withData';
+import withIntl from '../lib/withIntl';
+
+class BannerIframe extends React.Component {
 
   static getInitialProps ({ query: { collectiveSlug, id, style } }) {
     return { collectiveSlug, id, style }
   }
 
-  sendMessageToParentWindow() {
-    if (!window.parent) return;
-    if (!this.height) return;
-    const message = `oc-${JSON.stringify({id: this.props.id, height: this.height})}`;
-    window.parent.postMessage(message, "*");
-  }
-
-  onChange() {
-    this.height = this.node && this.node.offsetHeight;
-    this.sendMessageToParentWindow();
+  static propTypes = {
+    collectiveSlug: PropTypes.string, // for addCollectiveData
+    id: PropTypes.string,
+    style: PropTypes.object,
+    data: PropTypes.object.isRequired, // from withData
   }
 
   UNSAFE_componentWillReceiveProps() {
@@ -38,6 +31,18 @@ class Banner extends React.Component {
   componentDidUpdate() {
     this.onChange();
   }
+
+  onChange = () => {
+    this.height = this.node && this.node.offsetHeight;
+    this.sendMessageToParentWindow();
+  };
+
+  sendMessageToParentWindow = () => {
+    if (!window.parent) return;
+    if (!this.height) return;
+    const message = `oc-${JSON.stringify({id: this.props.id, height: this.height})}`;
+    window.parent.postMessage(message, "*");
+  };
 
   render() {
     const { collectiveSlug, data } = this.props;
@@ -65,7 +70,7 @@ class Banner extends React.Component {
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,900" />
-          <title>{`${this.props.collectiveSlug} collectives`}</title>
+          <title>{`${collectiveSlug} collectives`}</title>
         </Head>
 
         <style jsx global>{`
@@ -138,7 +143,7 @@ class Banner extends React.Component {
           text-align: center;
         }
 
-        .btn { 
+        .btn {
           width: 300px;
           height: 50px;
           overflow: hidden;
@@ -170,7 +175,8 @@ class Banner extends React.Component {
         .btn.hover {
           background-position: 0 -100px;
         }
-        `}</style>
+        `}
+        </style>
 
         { backers.organizations + backers.users === 0 &&
           <a type="button" className="btn blue contribute" target="_blank" href={`https://opencollective.com/${collectiveSlug}`} />
@@ -226,7 +232,6 @@ class Banner extends React.Component {
       </div>
     );
   }
-
 }
 
 const getMembersQuery = gql`
@@ -248,4 +253,5 @@ query Collective($collectiveSlug: String!) {
 `;
 
 export const addCollectiveData = graphql(getMembersQuery);
-export default withData(withIntl(addCollectiveData(Banner)));
+
+export default withData(withIntl(addCollectiveData(BannerIframe)));

@@ -1,25 +1,28 @@
-import withData from '../lib/withData';
-import withIntl from '../lib/withIntl';
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import CreateOrganization from '../components/CreateOrganization';
-import { addGetLoggedInUserFunction } from '../graphql/queries';
 import Loading from '../components/Loading';
 
+import withData from '../lib/withData';
+import withIntl from '../lib/withIntl';
+import withLoggedInUser from '../lib/withLoggedInUser';
+
 class CreateOrganizationPage extends React.Component {
+
+  static propTypes = {
+    getLoggedInUser: PropTypes.func.isRequired, // from withLoggedInUser
+  }
 
   constructor(props) {
     super(props);
     this.state = { loading: true };
   }
 
-  static getInitialProps ({ query: { hostCollectiveSlug } }) {
-    return { slug: hostCollectiveSlug }
-  }
-
   async componentDidMount() {
     const { getLoggedInUser } = this.props;
-    const LoggedInUser = getLoggedInUser && await getLoggedInUser();
-    this.setState({LoggedInUser, loading: false});
+    const LoggedInUser = await getLoggedInUser();
+    this.setState({ LoggedInUser, loading: false });
   }
 
   render() {
@@ -35,4 +38,4 @@ class CreateOrganizationPage extends React.Component {
   }
 }
 
-export default withData(withIntl(addGetLoggedInUserFunction(CreateOrganizationPage)));
+export default withData(withIntl(withLoggedInUser(CreateOrganizationPage)));

@@ -1,19 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Router from 'next/router';
 
 import Header from '../components/Header';
 import Body from '../components/Body';
 import Footer from '../components/Footer';
 import Link from '../components/Link';
-import withIntl from '../lib/withIntl';
-import withData from '../lib/withData'
+
 import colors from '../constants/colors';
-import { addGetLoggedInUserFunction } from '../graphql/queries';
+
+import withIntl from '../lib/withIntl';
+import withData from '../lib/withData';
+import withLoggedInUser from '../lib/withLoggedInUser';
 
 class SubscriptionsRedirectPage extends React.Component {
 
-  static getInitialProps({ query: { collectiveSlug }}) {
-    return { slug: collectiveSlug }
+  static propTypes = {
+    getLoggedInUser: PropTypes.func.isRequired, // from withLoggedInUser
   }
 
   constructor(props) {
@@ -23,7 +26,7 @@ class SubscriptionsRedirectPage extends React.Component {
 
   async componentDidMount() {
     const { getLoggedInUser } = this.props;
-    const LoggedInUser = getLoggedInUser && await getLoggedInUser();
+    const LoggedInUser = await getLoggedInUser();
     this.setState({ LoggedInUser });
 
     if (!LoggedInUser) {
@@ -113,4 +116,4 @@ class SubscriptionsRedirectPage extends React.Component {
   }
 }
 
-export default withData(addGetLoggedInUserFunction(withIntl(SubscriptionsRedirectPage)));
+export default withData(withIntl(withLoggedInUser(SubscriptionsRedirectPage)));

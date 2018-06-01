@@ -1,27 +1,38 @@
-import withData from '../lib/withData'
-import withIntl from '../lib/withIntl';
-import React from 'react'
-import { addEventCollectiveData, addGetLoggedInUserFunction } from '../graphql/queries';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import NotFound from '../components/NotFoundPage';
 import Loading from '../components/Loading';
 import ErrorPage from '../components/ErrorPage';
 import Event from '../components/Event';
 
+import { addEventCollectiveData } from '../graphql/queries';
+
+import withData from '../lib/withData';
+import withIntl from '../lib/withIntl';
+import withLoggedInUser from '../lib/withLoggedInUser';
+
 class EventPage extends React.Component {
+
+  static getInitialProps ({ query: { parentCollectiveSlug, eventSlug } }) {
+    return { parentCollectiveSlug, eventSlug }
+  }
+
+  static propTypes = {
+    parentCollectiveSlug: PropTypes.string, // not used atm
+    eventSlug: PropTypes.string, // for addEventCollectiveData
+    data: PropTypes.object.isRequired, // from withData
+    getLoggedInUser: PropTypes.func.isRequired, // from withLoggedInUser
+  }
 
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  static getInitialProps ({ query: { parentCollectiveSlug, eventSlug } }) {
-    return { parentCollectiveSlug, eventSlug }
-  }
-
   async componentDidMount() {
     const { getLoggedInUser } = this.props;
-    const LoggedInUser = getLoggedInUser && await getLoggedInUser();
+    const LoggedInUser = await getLoggedInUser();
     this.setState({ LoggedInUser });
   }
 
@@ -53,4 +64,4 @@ class EventPage extends React.Component {
   }
 }
 
-export default withData(addGetLoggedInUserFunction(addEventCollectiveData(withIntl(EventPage))));
+export default withData(withIntl(withLoggedInUser(addEventCollectiveData(EventPage))));

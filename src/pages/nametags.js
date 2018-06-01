@@ -1,24 +1,37 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FormattedDate } from 'react-intl';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+
+import colors from '../constants/colors';
+
+import { firstSentence } from '../lib/utils';
+
 import withData from '../lib/withData';
 import withIntl from '../lib/withIntl';
-import { firstSentence } from '../lib/utils';
-import colors from '../constants/colors';
-import { FormattedDate } from 'react-intl';
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 
-class Nametags extends React.Component {
+class NametagsPage extends React.Component {
 
   static getInitialProps ({ query: { collectiveSlug, eventSlug, template, format, nametagWidth, nametagHeight } }) {
     return { collectiveSlug, eventSlug, slug: eventSlug, template, format, nametagWidth, nametagHeight }
   }
 
+  static propTypes = {
+    collectiveSlug: PropTypes.string,
+    eventSlug: PropTypes.string,
+    slug: PropTypes.string, // for addAttendeesData
+    template: PropTypes.string,
+    format: PropTypes.string, // Should that be pageFormat?
+    nametagWidth: PropTypes.number,
+    nametagHeight: PropTypes.number,
+    pageFormat: PropTypes.string, // Should that be format?
+    data: PropTypes.object.isRequired, // from withData
+  }
+
   constructor(props) {
     super(props);
     const { pageFormat, nametagWidth, nametagHeight } = this.props;
-
-    this.renderPage = this.renderPage.bind(this);
-    this.renderNametag = this.renderNametag.bind(this);
 
     this.dimensions = {
       'A4': {
@@ -57,20 +70,7 @@ class Nametags extends React.Component {
     this.page.paddingTop = Math.floor((this.page.height - this.rows * this.dimensions.nametag.height) / 2);
   }
 
-  renderPage(pageNumber, orders) {
-    while (orders.length < this.nametagsPerPage) {
-      orders.push({});
-    }
-    return (
-      <div className="page" key={this.pageNumber}>
-        <div className="nametags">
-          {orders.map(this.renderNametag)}
-        </div>
-      </div>
-    )
-  }
-
-  renderNametag(order, index) {
+  renderNametag = (order, index) => {
     const userCollective = order.fromCollective || {};
     return (
       <div className="nametag" key={index}>
@@ -84,7 +84,20 @@ class Nametags extends React.Component {
         </div>
       </div>
     )
-  }
+  };
+
+  renderPage = (pageNumber, orders) => {
+    while (orders.length < this.nametagsPerPage) {
+      orders.push({});
+    }
+    return (
+      <div className="page" key={this.pageNumber}>
+        <div className="nametags">
+          {orders.map(this.renderNametag)}
+        </div>
+      </div>
+    )
+  };
 
   render() {
     if (this.props.data.loading) return <div>Loading</div>
@@ -205,7 +218,8 @@ class Nametags extends React.Component {
           .sustainoss .eventInfo {
             display: block;
           }
-        `}</style>
+        `}
+        </style>
 
         <div className="pages">
           {orders.map((order, index) => {
@@ -254,4 +268,4 @@ query Collective($slug: String!) {
 
 export const addAttendeesData = graphql(getAttendeesQuery);
 
-export default withData(withIntl(addAttendeesData(Nametags)));
+export default withData(withIntl(addAttendeesData(NametagsPage)));

@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { initClient } from './initClient'
 import Head from 'next/head'
 
-export default ComposedComponent => {
+export default Page => {
 
   return class WithData extends React.Component {
 
-    static displayName = `WithData(${ComposedComponent.displayName})`
+    static displayName = `WithData(${Page.displayName})`
 
     static propTypes = {
       serverState: PropTypes.object.isRequired,
@@ -26,8 +26,8 @@ export default ComposedComponent => {
 
       // Evaluate the composed component's getInitialProps()
       let composedInitialProps = {}
-      if (ComposedComponent.getInitialProps) {
-        composedInitialProps = await ComposedComponent.getInitialProps(ctx)
+      if (Page.getInitialProps) {
+        composedInitialProps = await Page.getInitialProps(ctx)
       }
       // Run all graphql queries in the component tree
       // and extract the resulting data
@@ -39,7 +39,7 @@ export default ComposedComponent => {
         // Run all graphql queries
         const app = (
           <ApolloProvider client={apollo}>
-            <ComposedComponent client={apollo} url={url} {...composedInitialProps} />
+            <Page client={apollo} url={url} {...composedInitialProps} />
           </ApolloProvider>
         )
         if (composedInitialProps.ssr === undefined || composedInitialProps.ssr === true) {
@@ -78,7 +78,7 @@ export default ComposedComponent => {
     render () {
       return (
         <ApolloProvider client={this.apollo}>
-          <ComposedComponent {...this.props} client={this.apollo} />
+          <Page {...this.props} client={this.apollo} />
         </ApolloProvider>
       )
     }

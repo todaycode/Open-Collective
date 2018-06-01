@@ -1,23 +1,34 @@
 import React from 'react';
-import Header from '../components/Header';
-import Body from '../components/Body';
-import Footer from '../components/Footer';
-import { addGetLoggedInUserFunction } from '../graphql/queries';
-import withData from '../lib/withData';
-import withIntl from '../lib/withIntl';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl'
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag'
+
+import Header from '../components/Header';
+import Body from '../components/Body';
+import Footer from '../components/Footer';
+
 import { capitalize } from '../lib/utils';
+
+import withData from '../lib/withData';
+import withIntl from '../lib/withIntl';
+import withLoggedInUser from '../lib/withLoggedInUser';
 
 /**
  * This page is used to approve/reject in one click an expense or a collective
  */
 class ActionPage extends React.Component {
 
-  static getInitialProps (props) {
-    const { query: { table, id, action } } = props;
+  static getInitialProps ({ query: { action, table, id } }) {
     return { action, table, id, ssr: false };
+  }
+
+  static propTypes = {
+    action: PropTypes.string,
+    table: PropTypes.string,
+    id: PropTypes.string,
+    ssr: PropTypes.bool,
+    getLoggedInUser: PropTypes.func.isRequired, // from withLoggedInUser
   }
 
   constructor(props) {
@@ -36,7 +47,7 @@ class ActionPage extends React.Component {
       console.log(">>> error", JSON.stringify(error));
       this.setState({ loading: false, error: error.graphQLErrors[0] });
     }
-    const LoggedInUser = getLoggedInUser && await getLoggedInUser(this.props.collectiveSlug);
+    const LoggedInUser = await getLoggedInUser();
     this.setState({ LoggedInUser });
   }
 
@@ -96,4 +107,4 @@ const addMutationForAction = (action) => graphql(getQueryForAction(action), {
 const actions = ["approveCollective", "approveExpense", "rejectExpense"];
 const addMutations = compose.apply(this, actions.map(action => addMutationForAction(action)));
 
-export default withData(compose(addGetLoggedInUserFunction, addMutations)(withIntl(ActionPage)));
+export default withData(withIntl(withLoggedInUser(addMutations(ActionPage))));

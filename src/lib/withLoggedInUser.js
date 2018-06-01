@@ -17,16 +17,18 @@ const maybeRefreshAccessToken = async (currentToken) => {
   }
 };
 
-export default WrappedComponent => {
+export default Page => {
 
   return class withLoggedInUser extends React.Component {
+
+    static displayName = `withLoggedInUser(${Page.displayName})`
 
     static propTypes = {
       client: PropTypes.object
     }
 
-    static getInitialProps (props) {
-      return WrappedComponent.getInitialProps(props);
+    static async getInitialProps (context) {
+      return typeof Page.getInitialProps === 'function' ? await Page.getInitialProps(context) : {};
     }
 
     getLoggedInUserFromServer = () =>
@@ -71,7 +73,7 @@ export default WrappedComponent => {
 
     render() {
       return (
-        <WrappedComponent
+        <Page
           getLoggedInUser={this.getLoggedInUser}
           {...this.props}
           />

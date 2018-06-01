@@ -1,11 +1,15 @@
-import React from 'react'
-import withIntl from '../lib/withIntl';
-import { formatCurrency, imagePreview } from '../lib/utils';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedDate } from 'react-intl';
 import moment from 'moment';
-import { defaultBackgroundImage } from '../constants/collectives';
 import { get } from 'lodash';
 import Table from 'rc-table';
+
+import { defaultBackgroundImage } from '../constants/collectives';
+
+import { formatCurrency, imagePreview } from '../lib/utils';
+
+import withIntl from '../lib/withIntl';
 
 const baseUrl = 'https://opencollective.com';
 
@@ -15,11 +19,14 @@ class InvoicePage extends React.Component {
     return { invoice, pageFormat }
   }
 
+  static propTypes = {
+    invoice: PropTypes.object,
+    pageFormat: PropTypes.string,
+  }
+
   constructor(props) {
     super(props);
     const { pageFormat, invoice } = props;
-    this.renderPage = this.renderPage.bind(this);
-    this.renderTransaction = this.renderTransaction.bind(this);
     this.dimensions = {
       'A4': {
         unit: 'mm',
@@ -72,10 +79,9 @@ class InvoicePage extends React.Component {
 
     this.hostBillingAddress = { __html : `${invoice.host.location.name || ''}\n${invoice.host.location.address || ''}`.replace(/\n/g,'<br />') };
     this.fromCollectiveBillingAddress = { __html : `${invoice.fromCollective.location.name || ''}\n${invoice.fromCollective.location.address || ''}`.replace(/\n/g,'<br />') };
-
   }
 
-  renderPage() {
+  renderPage = () => {
     const { invoice } = this.props;
 
     const coverStyle = { ...get(invoice.host, 'settings.style.hero.cover')};
@@ -106,7 +112,8 @@ class InvoicePage extends React.Component {
             max-height: 100px;
             max-width: 200px;
           }
-        `}</style>
+        `}
+        </style>
         <div className="InvoicePage">
           <div className="header">
             <a href={`https://opencollective.com/${invoice.host.slug}`}>
@@ -151,9 +158,9 @@ class InvoicePage extends React.Component {
         </div>
       </div>
     )
-  }
+  };
 
-  renderTransaction(transaction, index) {
+  renderTransaction = (transaction, index) => {
     if (!transaction || !transaction.createdAt) {
       console.error(">>> renderTransaction error: invalid transaction object", transaction);
       return;
@@ -165,7 +172,7 @@ class InvoicePage extends React.Component {
         <div className="amount">{ formatCurrency(transaction.amount, transaction.currency) }</div>
       </div>
     )
-  }
+  };
 
   render() {
     const { invoice } = this.props;
@@ -352,7 +359,8 @@ class InvoicePage extends React.Component {
           tr.footer .description {
             text-align: right;
           }
-        `}</style>
+        `}
+        </style>
 
         <div className="pages">
           {transactions.map((transaction, index) => {

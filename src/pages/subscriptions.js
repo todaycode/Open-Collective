@@ -1,18 +1,26 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import Header from '../components/Header';
 import Body from '../components/Body';
 import Footer from '../components/Footer';
 import SubscriptionsWithData from '../components/SubscriptionsWithData';
-import withIntl from '../lib/withIntl';
-import withData from '../lib/withData'
+
 import colors from '../constants/colors';
-import { addGetLoggedInUserFunction } from '../graphql/queries';
+
+import withIntl from '../lib/withIntl';
+import withData from '../lib/withData';
+import withLoggedInUser from '../lib/withLoggedInUser';
 
 class SubscriptionsPage extends React.Component {
 
   static getInitialProps({ query: { collectiveSlug }}) {
     return { slug: collectiveSlug }
+  }
+
+  static propTypes = {
+    slug: PropTypes.string,
+    getLoggedInUser: PropTypes.func.isRequired, // from withLoggedInUser
   }
 
   constructor(props) {
@@ -22,7 +30,7 @@ class SubscriptionsPage extends React.Component {
 
   async componentDidMount() {
     const { getLoggedInUser } = this.props;
-    const LoggedInUser = getLoggedInUser && await getLoggedInUser();
+    const LoggedInUser = await getLoggedInUser();
     this.setState({ LoggedInUser });
   }
 
@@ -82,7 +90,7 @@ class SubscriptionsPage extends React.Component {
 
               <div className="Subscriptions-listing">
                 <SubscriptionsWithData
-                  slug={this.props.slug}
+                  slug={slug}
                   LoggedInUser={this.state.LoggedInUser}
                   />
               </div>
@@ -97,4 +105,4 @@ class SubscriptionsPage extends React.Component {
   }
 }
 
-export default withData(addGetLoggedInUserFunction(withIntl(SubscriptionsPage)));
+export default withData(withLoggedInUser(withIntl(SubscriptionsPage)));

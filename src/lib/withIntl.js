@@ -14,10 +14,13 @@ if (typeof window !== 'undefined' && window.ReactIntlLocaleData) {
   })
 }
 
-export default (Page) => {
+export default Page => {
+
   const IntlPage = injectIntl(Page)
 
-  return class PageWithIntl extends React.Component {
+  return class WithIntl extends React.Component {
+
+    static displayName = `WithIntl(${Page.displayName})`
 
     static propTypes = {
       locale: PropTypes.string,

@@ -1,28 +1,39 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { defineMessages } from 'react-intl';
+
 import Header from '../components/Header';
 import Body from '../components/Body';
 import Footer from '../components/Footer';
 import CollectiveCover from '../components/CollectiveCover';
-import { addCollectiveCoverData, addGetLoggedInUserFunction } from '../graphql/queries';
 import Loading from '../components/Loading';
 import NotFound from '../components/NotFoundPage';
 import ErrorPage from '../components/ErrorPage';
+import UpdateWithData from '../components/UpdateWithData';
+
+import { addCollectiveCoverData } from '../graphql/queries';
+
 import withData from '../lib/withData';
 import withIntl from '../lib/withIntl';
-import UpdateWithData from '../components/UpdateWithData';
-import { defineMessages } from 'react-intl';
+import withLoggedInUser from '../lib/withLoggedInUser';
 
 class UpdatePage extends React.Component {
 
-  static getInitialProps (props) {
-    const { query: { collectiveSlug, updateSlug }, data } = props;
-    return { collectiveSlug, updateSlug, data }
+  static getInitialProps ({ query: { collectiveSlug, updateSlug } }) {
+    return { slug: collectiveSlug, updateSlug }
+  }
+
+  static propTypes = {
+    slug: PropTypes.string, // for addCollectiveCoverData
+    updateSlug: PropTypes.string,
+    data: PropTypes.object.isRequired, // from withData
+    intl: PropTypes.object.isRequired, // from withIntl
+    getLoggedInUser: PropTypes.func.isRequired, // from withLoggedInUser
   }
 
   constructor(props) {
     super(props);
     this.state = {};
-
     this.messages = defineMessages({
       'collective.contribute': { id: 'collective.contribute', defaultMessage: 'contribute' }
     });
@@ -30,7 +41,7 @@ class UpdatePage extends React.Component {
 
   async componentDidMount() {
     const { getLoggedInUser } = this.props;
-    const LoggedInUser = getLoggedInUser && await getLoggedInUser(this.props.collectiveSlug);
+    const LoggedInUser = await getLoggedInUser();
     this.setState({LoggedInUser});
   }
 
@@ -89,4 +100,4 @@ class UpdatePage extends React.Component {
 
 }
 
-export default withData(addGetLoggedInUserFunction(addCollectiveCoverData(withIntl(UpdatePage))));
+export default withData(withIntl(withLoggedInUser(addCollectiveCoverData(UpdatePage))));
