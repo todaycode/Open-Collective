@@ -31,8 +31,16 @@ class InputTypeDropzone extends React.Component {
   handleChange(files) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
+=======
+    if (!files) {
+      this.setState({ value: null, url: null, loading: false });
+      return this.props.onChange(null);
+    }
+
+>>>>>>> 0e05c53... feat(image): allow for removing image (avatar, logo)
     this.setState({ loading: true });
 >>>>>>> 3bb6ec4... improve upload/error state for dropzone to upload image
     // for e2e testing purposes
@@ -165,6 +173,9 @@ class InputTypeDropzone extends React.Component {
           .dropzone:hover .placeholder, .dropzone.empty .placeholder {
             display: flex;
           }
+          .removeImage {
+            font-size: 11px;
+          }
         `}</style>
         <Dropzone
           multiple={false}
@@ -175,6 +186,9 @@ class InputTypeDropzone extends React.Component {
           >
           { this.renderContainer }
         </Dropzone>
+        { this.state.value &&
+          <a className="removeImage" onClick={() => this.handleChange(null)}>❌ remove image</a>
+        }
       </div>
     );
   }
