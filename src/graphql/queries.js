@@ -86,6 +86,7 @@ export const getLoggedInUserQuery = gql`
           type
           name
           currency
+          image
           stats {
             id
             balance
