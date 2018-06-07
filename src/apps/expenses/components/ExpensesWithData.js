@@ -53,7 +53,11 @@ class ExpensesWithData extends React.Component {
           editable={!compact}
 =======
           editable={view !== 'compact'}
+<<<<<<< HEAD
 >>>>>>> 8c34a03... wip
+=======
+          view={view}
+>>>>>>> 25761479... feat(expenses): added expense id in the title to make it easier to reference it in manual payments, host can now reject approved expense
           fetchMore={this.props.fetchMore}
           filters={filters}
           LoggedInUser={LoggedInUser}
