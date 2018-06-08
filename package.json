@@ -320,6 +320,7 @@
     "qrcode.react": "0.8.0",
     "raw-loader": "0.5.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "rc-table": "6.2.0",
 >>>>>>> 8cf6809... chore(packages): apply all minor/safe updates to package.json
 =======
@@ -329,6 +330,9 @@
     "react": "16.3.2",
 >>>>>>> 2d9a9da... chore(packages): update to next.js 6, babel 7 and related dependencies
 =======
+=======
+    "rc-table": "6.2.2",
+>>>>>>> 21c9d8d0... fix(package): update rc-table to version 6.2.2
     "react": "16.4.0",
 >>>>>>> 84bbbc1... fix(package): update react to version 16.4.0
     "react-add-to-calendar": "0.1.5",
