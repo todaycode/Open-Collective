@@ -15,7 +15,7 @@
     "accepts": "1.3.5",
     "bluebird": "3.5.1",
     "cached-request": "1.1.4",
-    "classnames": "2.2.5",
+    "classnames": "2.2.6",
     "convert-svg-to-png": "^0.4.0",
     "dotenv": "6.0.0",
     "enzyme": "3.3.0",
@@ -32,7 +32,7 @@
     "graphql": "0.12.3",
     "graphql-request": "1.6.0",
     "graphql-tag": "2.6.1",
-    "grid-styled": "^4.1.0",
+    "grid-styled": "^4.1.1",
     "html-pdf": "2.2.0",
     "image-size": "0.6.2",
     "image-to-ascii": "3.0.11",
@@ -130,6 +130,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "newrelic": "4.1.0",
     "next": "6.0.2",
 >>>>>>> 8cf6809... chore(packages): apply all minor/safe updates to package.json
@@ -144,6 +145,9 @@
 =======
     "newrelic": "4.1.4",
 >>>>>>> 4224992c... fix(package): update newrelic to version 4.1.4
+=======
+    "newrelic": "4.1.5",
+>>>>>>> 8cdd845b... fix(package): update newrelic to version 4.1.5
     "next": "6.0.3",
 <<<<<<< HEAD
 >>>>>>> e4629d2... chore(package): update dependencies

@@ -28,8 +28,12 @@ import { Button, Row, Col, Form } from 'react-bootstrap';
 >>>>>>> 0d14167... eslint feedback in components
 =======
 import { Button, Row, Col, Form, FormGroup } from 'react-bootstrap';
+<<<<<<< HEAD
 >>>>>>> 36167e8b... Add PayPal as new payment method option to the OrderForm (#494)
 import { defineMessages, FormattedMessage, FormattedDate, FormattedTime } from 'react-intl';
+=======
+import { defineMessages, FormattedMessage } from 'react-intl';
+>>>>>>> 98357603... eslint
 import { capitalize, formatCurrency, isValidEmail, getEnvVar } from '../lib/utils';
 import { getStripeToken } from '../lib/stripe';
 import { pick, get } from 'lodash';
@@ -446,7 +450,7 @@ class OrderForm extends React.Component {
   }
 
   prepareOrderRequest = () => {
-    const { paymentMethod, order, fromCollective, user } = this.state;
+    const { paymentMethod, order, fromCollective, user, contributionDetails } = this.state;
     const quantity = order.tier.quantity || 1;
     const orderRequest = {
       user,
