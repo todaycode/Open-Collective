@@ -57,8 +57,28 @@ describe("badge.routes.test.js", () => {
 
   describe("custom tiers", () => {
     test("loads the badge (svg)", async () => {
+<<<<<<< HEAD
+<<<<<<< HEAD
       const resText = await fetchText('/apex/tiers/sponsors/badge.svg');
       expect(resText).toMatch(/Sponsors<\/text>/);
+    }, timeout);
+
+    test("loads the banner (svg)", async () => {
+      const res = await fetchResponse(`/apex/tiers/backers.svg`);
+      expect(res.status).toEqual(200);
+    }, timeout);
+
+    test("loads the banner (png)", async () => {
+      const res = await fetchResponse(`/apex/tiers/backers.png`);
+      expect(res.status).toEqual(200);
+=======
+      const res = await r2(`${WEBSITE_URL}/apex/tiers/sponsors/badge.svg${cacheBurst}`).text;
+      expect(res).toMatch(/Sponsors<\/text>/);
+>>>>>>> 22d64ff2... refactor(svg-to-png): replace svg-to-png with convert-svg-to-png, refactor, add test
+=======
+      const resText = await fetchText('/apex/tiers/sponsors/badge.svg');
+      expect(resText).toMatch(/Sponsors<\/text>/);
+>>>>>>> 128fe166... refactor(fetch): replace r2 with fetch, and add fetch helpers in test
     }, timeout);
 
     test("loads the banner (svg)", async () => {

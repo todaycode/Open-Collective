@@ -21,6 +21,7 @@ import ActionButton from './Button';
 import SectionTitle from './SectionTitle';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 614e52e... updating style for /donate and createOrder
 import { Button, Row, Col, Form, InputGroup, FormControl } from 'react-bootstrap';
 =======
@@ -30,6 +31,9 @@ import { Button, Row, Col, Form } from 'react-bootstrap';
 import { Button, Row, Col, Form, FormGroup } from 'react-bootstrap';
 <<<<<<< HEAD
 >>>>>>> 36167e8b... Add PayPal as new payment method option to the OrderForm (#494)
+=======
+import { Button, Row, Col, Form, FormGroup } from 'react-bootstrap';
+>>>>>>> 54368760... Add PayPal as new payment method option to the OrderForm (#494)
 import { defineMessages, FormattedMessage, FormattedDate, FormattedTime } from 'react-intl';
 =======
 import { defineMessages, FormattedMessage } from 'react-intl';
@@ -408,7 +412,11 @@ class OrderForm extends React.Component {
       this.props.collective.currency;
     /* Parameters for the paypal button */
     const renderOptions = {
+<<<<<<< HEAD
       env: getEnvVar('PAYPAL_ENVIRONMENT'),
+=======
+      env: 'sandbox',
+>>>>>>> 54368760... Add PayPal as new payment method option to the OrderForm (#494)
       payment: async (data, actions) => {
         const paymentURL = '/api/services/paypal/create-payment';
         const { id } = await actions.request.post(paymentURL, {
@@ -432,6 +440,7 @@ class OrderForm extends React.Component {
         return this.submitOrder(orderRequest);
       }
     };
+<<<<<<< HEAD
 
     try {
       paypal.Button.render(renderOptions, '#paypal-checkout');
@@ -451,6 +460,27 @@ class OrderForm extends React.Component {
 
   prepareOrderRequest = () => {
     const { paymentMethod, order, fromCollective, user, contributionDetails } = this.state;
+=======
+
+    try {
+      paypal.Button.render(renderOptions, '#paypal-checkout');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      button.removeAttribute('disabled');
+    }
+  }
+
+  getTotalAmount = () => {
+    const { order } = this.state;
+    const quantity = (order.tier.quantity || 1);
+    const total = (quantity * order.tier.amount) || order.totalAmount;
+    return total;
+  }
+
+  prepareOrderRequest = () => {
+    const { paymentMethod, order, fromCollective, user } = this.state;
+>>>>>>> 54368760... Add PayPal as new payment method option to the OrderForm (#494)
     const quantity = order.tier.quantity || 1;
     const orderRequest = {
       user,
@@ -459,10 +489,13 @@ class OrderForm extends React.Component {
       publicMessage: order.publicMessage,
       quantity,
 <<<<<<< HEAD
+<<<<<<< HEAD
       interval: order.interval || tier.interval,
       totalAmount: (quantity * tier.amount) || order.totalAmount,
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 54368760... Add PayPal as new payment method option to the OrderForm (#494)
       interval: order.interval || order.tier.interval,
       totalAmount: this.getTotalAmount(),
       matchingFund: order.matchingFund,
