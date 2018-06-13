@@ -898,6 +898,7 @@ const getCollectiveCoverQuery = gql`
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 const getTransactionQuery = gql`
   query Transaction($id: Int!) {
     Transaction(id: $id) {
@@ -940,12 +941,22 @@ const getTransactionQuery = gql`
 export const getPrepaidCardBalanceQuery = gql`
   query checkPrepaidPaymentMethod($token: String!) {
     prepaidPaymentMethod(token: $token) {
+=======
+export const getOcCardBalanceQuery = gql`
+  query checkOcPaymentMethod($token: String!) {
+    ocPaymentMethod(token: $token) {
+>>>>>>> ae25b5ad... chore(OrderForm): Rename prepaid payment method to giftcard (#516)
       id,
       name,
       currency,
       balance,
       uuid
+<<<<<<< HEAD
 >>>>>>> 3350797... working gift card flow
+=======
+      service
+      type
+>>>>>>> ae25b5ad... chore(OrderForm): Rename prepaid payment method to giftcard (#516)
     }
   }
 `;
