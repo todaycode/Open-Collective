@@ -356,9 +356,13 @@
 >>>>>>> 21c9d8d0... fix(package): update rc-table to version 6.2.2
 =======
     "rc-table": "6.2.2",
+<<<<<<< HEAD
 >>>>>>> 439e1d45... fix(package): update rc-table to version 6.2.2
     "react": "16.4.0",
 >>>>>>> 84bbbc1... fix(package): update react to version 16.4.0
+=======
+    "react": "16.4.1",
+>>>>>>> 006ed7f5... fix(package): update react to version 16.4.1
     "react-add-to-calendar": "0.1.5",
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -404,6 +408,7 @@
 =======
     "react-datetime": "2.14.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "react-dom": "16.3.2",
 <<<<<<< HEAD
     "react-dropzone": "4.2.9",
@@ -416,6 +421,9 @@
     "react-dropzone": "4.2.10",
 >>>>>>> 2b49479... fix(package): update react-dropzone to version 4.2.10
 =======
+=======
+    "react-dom": "16.4.1",
+>>>>>>> 6e76314e... fix(package): update react-dom to version 16.4.1
     "react-dropzone": "4.2.11",
 >>>>>>> 383b9ca... fix(package): update react-dropzone to version 4.2.11
     "react-geosuggest": "2.7.0",
