@@ -29,20 +29,12 @@ class InputTypeDropzone extends React.Component {
   }
 
   handleChange(files) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-=======
     if (!files) {
       this.setState({ value: null, url: null, loading: false });
       return this.props.onChange(null);
     }
 
->>>>>>> 0e05c53... feat(image): allow for removing image (avatar, logo)
     this.setState({ loading: true });
->>>>>>> 3bb6ec4... improve upload/error state for dropzone to upload image
     // for e2e testing purposes
     if (window.location.hostname === 'localhost') {
       const fileUrl = "https://d.pr/free/i/OlQVIb+";
@@ -52,9 +44,7 @@ class InputTypeDropzone extends React.Component {
       }, 2500);
     }
 
->>>>>>> 8ec6162... limit number of payment methods to fetch per collective + other fixes
     const file = files[0];
-<<<<<<< HEAD
     upload(file)
       .then(fileUrl => {
         this.setState({ value: fileUrl, url: fileUrl, loading: false });
@@ -64,34 +54,6 @@ class InputTypeDropzone extends React.Component {
         console.error(">>> error uploading image", file, err);
         this.setState({ error: "error uploading image, please try again", loading: false });
       });
-=======
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      this.setState({ value: e.target.result })
-    }
-    reader.readAsDataURL(file);
-    const formData = new FormData();
-    formData.append('file', file);
-    // for e2e testing purposes
-    if (window.location.hostname === 'localhost') {
-      return this.props.onChange(`http://${window.location.host}/static/images/receipt.svg`);
-    }
-    fetch('/api/images', {
-      method: 'post',
-      headers: this.addAuthTokenToHeader(),
-      body: formData,
-    })
-    .then(this.checkStatus)
-    .then(json => {
-      console.log(">>> upload response", json);
-      this.setState({ url: json.url });
-      return this.props.onChange(json.url);
-    })
-    .catch(err => {
-      console.error(">>> error uploading image", file, err);
-      this.setState({ error: "error uploading image, please try again" });
-    });
->>>>>>> 296c2a8... fixing e2e tests
   }
 
   renderContainer({ isDragActive, isDragReject }) {

@@ -181,21 +181,10 @@ class InputField extends React.Component {
       }
 
       case 'date':
-<<<<<<< HEAD
-      case 'datetime':
-<<<<<<< HEAD
-=======
       case 'datetime': {
->>>>>>> 0d14167... eslint feedback in components
         const timeFormat = field.type === 'date' ? false : true;
-<<<<<<< HEAD
-=======
-      console.log(">>> datetime", field);
->>>>>>> 34d2dd2... wip
-=======
         const { closeOnSelect } = this.props;
 
->>>>>>> 1e646a6... CSV with all transactions of a collective between a date range (#215)
         this.input = (
           <FormGroup>
             {horizontal &&

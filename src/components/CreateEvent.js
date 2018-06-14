@@ -59,7 +59,7 @@ class CreateEvent extends React.Component {
     }
   }
 
-  handleTemplateChange(event) {
+  async handleTemplateChange(event) {
     delete event.id;
     delete event.slug;
     this.setState({ event, tiers: event.tiers });
@@ -98,43 +98,6 @@ class CreateEvent extends React.Component {
           }
         `}</style>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <Header
-          title={title}
-<<<<<<< HEAD
-          scripts={['google']}
-=======
-          LoggedInUser={this.props.LoggedInUser}
->>>>>>> 61eeeae... edit type of tier (ticket, backer, sponsor)
-          />
-
-        <Body>
-
-          <h1>{title}</h1>
-
-          {!canCreateEvent &&
-            <div className="login">
-              <p>You need to be logged in as a member of this collective to be able to create an event.</p>
-              <p><Button bsStyle="primary" href={`/${collective.slug}#support`}>Become a member</Button> <Button bsStyle="default" href={`/login?next=${collective.slug}/events/new`}>Login</Button></p>
-            </div>
-          }
-          {canCreateEvent &&
-            <div>
-              <div className="EventTemplatePicker">
-                <div className="field">
-                  <EventTemplatePicker label="Template" collectiveSlug={collective.slug} onChange={this.handleTemplateChange} />
-                </div>
-=======
-          <Header
-            title={title}
-            description={collective.description}
-            twitterHandle={collective.twitterHandle}
-            image={collective.image || collective.backgroundImage}
-            className={this.state.status}
-            LoggedInUser={this.props.LoggedInUser}
-            />
-=======
         <Header
           title={title}
           description={collective.description}
@@ -143,7 +106,6 @@ class CreateEvent extends React.Component {
           className={this.state.status}
           LoggedInUser={this.props.LoggedInUser}
           />
->>>>>>> d9e7825... eslint (version 1.2.0) --fix
 
         <Body>
 
@@ -159,22 +121,8 @@ class CreateEvent extends React.Component {
 
             {!canCreateEvent &&
               <div className="login">
-<<<<<<< HEAD
-                <p>You need to be logged in as a member of this collective to be able to create an event.</p>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <p><Button bsStyle="primary" href={`/${collective.slug}#support`}>Become a member</Button> <Button bsStyle="default" href={`/login?next=${collective.slug}/events/new`}>Login</Button></p>
->>>>>>> 20155ce... work in progress
-=======
-                <p><Button bsStyle="primary" href={`/${collective.slug}#support`}>Become a member</Button> <Button bsStyle="default" href={`/signin?next=${collective.slug}/events/new`}>Login</Button></p>
->>>>>>> 2b606ab... using /signin - white title for cover - ...
-=======
-                <p><Button bsStyle="primary" href={`/${collective.slug}#support`}>Become a member</Button> <Button bsStyle="default" href={`/signin?next=/${collective.slug}/events/new`}>Login</Button></p>
->>>>>>> df13894... fix /signin
-=======
                 <p><FormattedMessage id="events.create.login" defaultMessage="You need to be logged in as a core contributor of this collective to be able to create an event." /></p>
                 <p><Button bsStyle="primary" href={`/signin?next=/${collective.slug}/events/new`}><FormattedMessage id="login.button" defaultMessage="login" /></Button></p>
->>>>>>> 0a49a85... fix become a member on create event
               </div>
             }
             {canCreateEvent &&

@@ -1,6 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import withData from '../lib/withData';
 import withIntl from '../lib/withIntl';
 import { get } from 'lodash';
@@ -9,45 +7,16 @@ import gql from 'graphql-tag'
 
 import ExpensesWithData from '../apps/expenses/components/ExpensesWithData';
 import ExpensesStatsWithData from '../apps/expenses/components/ExpensesStatsWithData';
-=======
-import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
-import { get } from 'lodash';
->>>>>>> adbb6f8... chore(eslint): Linting for CollectivePickerWithData & host.expenses
 
 import { addGetLoggedInUserFunction } from '../graphql/queries';
-=======
->>>>>>> aecf7b2... Revert UI changes on host.expenses page
 import Header from '../components/Header';
 import Body from '../components/Body';
 import Footer from '../components/Footer';
 import CollectiveCover from '../components/CollectiveCover';
-import { addGetLoggedInUserFunction } from '../graphql/queries';
 import Loading from '../components/Loading';
 import ErrorPage from '../components/ErrorPage';
-<<<<<<< HEAD
 import CollectivePicker from '../components/CollectivePickerWithData';
 
-=======
-import withData from '../lib/withData';
-import withIntl from '../lib/withIntl';
-import ExpensesWithData from '../components/ExpensesWithData';
-<<<<<<< HEAD
-import CollectivePicker, { AddFundsFormWithData } from '../components/CollectivePickerWithData';
-<<<<<<< HEAD
-import ExpensesStatsWithData from '../components/ExpensesStatsWithData';
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
->>>>>>> 5d9caaa... chore(host.expenses): Move add funds form outside collective picker
-=======
->>>>>>> adbb6f8... chore(eslint): Linting for CollectivePickerWithData & host.expenses
-=======
-import { get } from 'lodash';
-import CollectivePicker from '../components/CollectivePickerWithData';
-import ExpensesStatsWithData from '../components/ExpensesStatsWithData';
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
->>>>>>> aecf7b2... Revert UI changes on host.expenses page
 
 class HostExpensesPage extends React.Component {
 

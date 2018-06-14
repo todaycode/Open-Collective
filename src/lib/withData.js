@@ -39,11 +39,7 @@ export default ComposedComponent => {
         // Run all graphql queries
         const app = (
           <ApolloProvider client={apollo}>
-<<<<<<< HEAD
-            <ComposedComponent url={url} client={apollo} {...composedInitialProps} />
-=======
             <ComposedComponent client={apollo} url={url} {...composedInitialProps} />
->>>>>>> 5084c48... add export csv for list of attendees (for admins)
           </ApolloProvider>
         )
         if (composedInitialProps.ssr === undefined || composedInitialProps.ssr === true) {
@@ -82,11 +78,7 @@ export default ComposedComponent => {
     render () {
       return (
         <ApolloProvider client={this.apollo}>
-<<<<<<< HEAD
           <ComposedComponent {...this.props} client={this.apollo} />
-=======
-          <ComposedComponent client={this.apollo} {...this.props} />
->>>>>>> 5084c48... add export csv for list of attendees (for admins)
         </ApolloProvider>
       )
     }

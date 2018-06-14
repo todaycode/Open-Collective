@@ -3,19 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import withIntl from '../lib/withIntl';
 import { defineMessages, FormattedMessage } from 'react-intl';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { union, get } from 'lodash';
-=======
-import { Link } from '../server/pages';
-import { union, get, uniqBy } from 'lodash';
->>>>>>> 2137b6e... don't repeat avatars in collective cover if multiple roles
-import { prettyUrl, formatCurrency, imagePreview } from '../lib/utils';
-import { Router } from '../server/pages';
-=======
 import { get } from 'lodash';
 import { prettyUrl, imagePreview } from '../lib/utils';
->>>>>>> 0d14167... eslint feedback in components
 import Currency from './Currency';
 import Avatar from './Avatar';
 import Logo from './Logo';
@@ -31,16 +20,8 @@ class CollectiveCover extends React.Component {
   static propTypes = {
     collective: PropTypes.object.isRequired,
     href: PropTypes.string,
-<<<<<<< HEAD
-    title: PropTypes.oneOf([PropTypes.string, PropTypes.node]),
-=======
-    cta: PropTypes.node,
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-<<<<<<< HEAD
->>>>>>> cffb7af... added new types of tier with presets. Fixes opencollective/opencollective#853
-=======
     description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
->>>>>>> 972959d... Fix for membership tier for scuttlebutt
     style: PropTypes.object,
     cta: PropTypes.object // { href, label }
   }

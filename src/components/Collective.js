@@ -64,84 +64,6 @@ class Collective extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const { intl, LoggedInUser, query: { referral } } = this.props;
-=======
-    const { intl, LoggedInUser, query } = this.props;
-
-<<<<<<< HEAD
-    console.log("this.props.data", this.props.collective);
->>>>>>> f44f88f... working version e2e
-=======
->>>>>>> 8053456... cleanups
-    const donateParams = { collectiveSlug: this.collective.slug, verb: 'donate' };
-    if (referral) {
-      donateParams.referral = referral;
-    }
-<<<<<<< HEAD
-=======
-    const { intl, LoggedInUser, query } = this.props;
-
->>>>>>> 9b02eb7... create organization on /organizations/new
-    const backersHash = this.collective.stats.backers.organizations > 0 ? '#organizations' : '#backers';
-<<<<<<< HEAD
-    const actions = [
-      {
-        className: 'whiteblue',
-        component: <HashLink to={backersHash}>
-              <FormattedMessage
-                id="collective.stats.backers.users"
-                defaultMessage="{n} {n, plural, one {backer} other {backers}}"
-                values={{ n: this.collective.stats.backers.users }}
-                />
-              { this.collective.stats.backers.organizations > 0 &&
-                <div>
-                  <FormattedMessage
-                    id="collective.stats.backers.organizations"
-                    defaultMessage="{n} {n, plural, one {organization} other {organizations}}"
-                    values={{ n: this.collective.stats.backers.organizations}}
-                    />
-                </div>
-              }
-          </HashLink>
-      },
-      {
-        className: 'whiteblue',
-        component: <HashLink to={`#budget`}>
-            <FormattedMessage
-              id="collective.budget"
-              defaultMessage="budget"
-              />
-          </HashLink>
-      },
-      {
-        className: 'blue',
-<<<<<<< HEAD
-        component: <Link route={'donate'} params={donateParams}>
-=======
-        component: <Link route={'donate'} params={{ collectiveSlug: this.collective.slug, verb: 'donate', referral: query.referral }}>
->>>>>>> 9b02eb7... create organization on /organizations/new
-            <a><b>{intl.formatMessage(this.messages['collective.donate']).toUpperCase()}</b></a>
-          </Link>
-      }
-    ];
-
-    if (LoggedInUser && LoggedInUser.canEditCollective(this.collective)) {
-      actions.push({
-        className: 'whiteblue small',
-        component: <a href={`/${this.collective.slug}/edit`}>EDIT COLLECTIVE</a>
-      });
-    }
-
-=======
->>>>>>> a98cd7d... wip
-=======
->>>>>>> 0d14167... eslint feedback in components
-    const backgroundImage = this.collective.backgroundImage || get(this.collective,'parentCollective.backgroundImage') || defaultBackgroundImage;
-    const canEditCollective = LoggedInUser && LoggedInUser.canEditCollective(this.collective);
-=======
     const { intl, LoggedInUser, query, collective } = this.props;
 
     const donateParams = { collectiveSlug: collective.slug, verb: 'donate' };
@@ -150,7 +72,6 @@ class Collective extends React.Component {
     }
     const backgroundImage = collective.backgroundImage || get(collective,'parentCollective.backgroundImage') || defaultBackgroundImage;
     const canEditCollective = LoggedInUser && LoggedInUser.canEditCollective(collective);
->>>>>>> 1735e2a... fix(collective): stop relying on this.collective only set in constructor
     const notification = {};
     if (get(query, 'status') === 'collectiveCreated') {
       notification.title = intl.formatMessage(this.messages['collective.created']);

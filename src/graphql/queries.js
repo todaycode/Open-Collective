@@ -3,11 +3,6 @@ import gql from 'graphql-tag'
 
 import withLoggedInUser from '../lib/withLoggedInUser';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
 export const transactionFields = `
   id
   uuid
@@ -57,11 +52,6 @@ query Transactions($CollectiveId: Int!, $type: String, $limit: Int, $offset: Int
 }
 `;
 
-<<<<<<< HEAD
-
->>>>>>> c88eb8e... Add transaction refund button visible for site admins only (#278)
-=======
->>>>>>> 6c51800... more eslint feedback in src
 export const getLoggedInUserQuery = gql`
   query LoggedInUser {
     LoggedInUser {
@@ -117,55 +107,6 @@ export const getLoggedInUserQuery = gql`
   }
 `;
 
-<<<<<<< HEAD
-export const getUserQuery = gql`
-  query User($username: String!) {
-    User(username: $username) {
-      id
-      username
-      firstName
-      lastName
-      twitterHandle
-      description
-      organization
-      website
-      email
-      image
-      collectives {
-        id
-        slug
-        name
-        role
-        memberSince
-        totalDonations
-        tier {
-          id
-          name
-          amount
-          currency
-          interval
-        }
-      }
-    }
-  }
-`;
-
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 1980447... show logged in user, fix create event
-=======
-export const getCollectiveQuery = gql`
-  query Collective($collectiveSlug: String!) {
-    Collective(collectiveSlug: $collectiveSlug) {
-      id,
-      slug,
-      name,
-      description,
-      backgroundImage,
-      logo,
-=======
-=======
->>>>>>> 6878cde... added export csv/json in editCollective
 const getTiersQuery = gql`
   query Collective($slug: String!) {
     Collective(slug: $slug) {
@@ -176,7 +117,6 @@ const getTiersQuery = gql`
       backgroundImage
       twitterHandle
       description
->>>>>>> 20155ce... work in progress
       currency
       settings
       tiers {
@@ -192,25 +132,6 @@ const getTiersQuery = gql`
   }
 `;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 6032982... fetching currency from the collective
-=======
-const getTiersQuery = gql`
-  query Collective($collectiveSlug: String!) {
-    Collective(collectiveSlug: $collectiveSlug) {
-      id,
-      slug,
-      name,
-      logo,
-      backgroundImage,
-      twitterHandle,
-      description,
-      currency,
-      settings,
-=======
-=======
 const getCollectiveToEditQuery = gql`
   query Collective($slug: String!) {
     Collective(slug: $slug) {
@@ -327,7 +248,6 @@ const getCollectiveToEditQuery = gql`
     }
   }
 `;
->>>>>>> 28a8682... Edit connected accounts and payment methods
 
 const getCollectiveQuery = gql`
   query Collective($slug: String!) {
@@ -379,7 +299,6 @@ const getCollectiveQuery = gql`
         totalAmountRaised
         totalAmountReceived
       }
->>>>>>> 20155ce... work in progress
       tiers {
         id
         slug
@@ -480,61 +399,6 @@ const getCollectiveQuery = gql`
   }
 `;
 
-<<<<<<< HEAD
->>>>>>> 3e63f41... wip
-const getEventQuery = gql`
-  query Event($collectiveSlug: String!, $eventSlug: String!) {
-    Event(collectiveSlug: $collectiveSlug, eventSlug: $eventSlug) {
-=======
-const getEventQuery = gql`query Event($collectiveSlug: String!, $eventSlug: String!) {
-  Event(collectiveSlug: $collectiveSlug, eventSlug: $eventSlug) {
-    id,
-    slug,
-    name,
-    description,
-    startsAt,
-    endsAt,
-    timezone,
-    location,
-    address,
-    lat,
-    long,
-    tiers {
-      id,
-      name,
-      description,
-      amount,
-      currency,
-      maxQuantity
-    },
-    collective {
->>>>>>> bfc3279... added support for timezone
-      id,
-      slug,
-      createdByUser {
-        id
-      },
-      name,
-      description,
-      startsAt,
-      endsAt,
-<<<<<<< HEAD
-<<<<<<< HEAD
-      location,
-=======
-      timezone,
-<<<<<<< HEAD
-      locationName,
->>>>>>> e54bb4f... create/edit event
-=======
-      timezone,
-      locationName,
->>>>>>> 7dbcbbe... make Sustain great again
-      address,
-      lat,
-      long,
-=======
-=======
 const getEventCollectiveQuery = gql`
   query Collective($eventSlug: String!) {
     Collective(slug: $eventSlug) {
@@ -554,18 +418,12 @@ const getEventCollectiveQuery = gql`
       timezone
       currency
       settings
->>>>>>> 20155ce... work in progress
       location {
         name
         address
         lat
         long
-<<<<<<< HEAD
-      },
->>>>>>> 1d3dfd6... InputTypeLocation
-=======
       }
->>>>>>> 20155ce... work in progress
       tiers {
         id
         slug
@@ -575,7 +433,6 @@ const getEventCollectiveQuery = gql`
         amount
         currency
         maxQuantity
-<<<<<<< HEAD
       }
       parentCollective {
         id
@@ -609,31 +466,6 @@ const getEventCollectiveQuery = gql`
           image
           slug
           twitterHandle
-=======
-      },
-      collective {
-        id,
-        slug,
-        name,
-        mission,
-        currency,
-        backgroundImage,
-        logo,
-        stripePublishableKey
-      },
-      responses {
-        id,
-        createdAt,
-        quantity,
-        status,
-        description,
-        user {
-          name,
-          avatar,
-          username,
-          twitterHandle,
-<<<<<<< HEAD
->>>>>>> e6e13c8... added link to download invoice for a donation if logged in as member/host
           description
         }
       }
@@ -654,133 +486,6 @@ const getEventCollectiveQuery = gql`
             email
           }
         }
-=======
-          description,
-          email
-        },
->>>>>>> 3e93a48... don't run a new query to exportMembers
-        tier {
-          id
-          name
-        }
-      }
-    }
-  }`;
-
-export const addEventData = graphql(getEventQuery);
-
-<<<<<<< HEAD
-const getEventsQuery = gql`
-<<<<<<< HEAD
-  query allEvents($collectiveSlug: String) {
-    allEvents(collectiveSlug: $collectiveSlug) {
-      id,
-      slug,
-      name,
-      description,
-      startsAt,
-      endsAt,
-      timezone,
-<<<<<<< HEAD
-=======
-  query allEvents($parentCollectiveSlug: String) {
-    allEvents(slug: $parentCollectiveSlug) {
-      id
-      slug
-      name
-      description
-      longDescription
-      startsAt
-      endsAt
-      timezone
->>>>>>> 20155ce... work in progress
-      location {
-        name
-        address
-        lat
-        long
-      }
-      tiers {
-        id
-        type
-        name
-        description
-        amount
-<<<<<<< HEAD
-      },
-=======
-      locationName,
-      address,
->>>>>>> 7dbcbbe... make Sustain great again
-      collective {
-        id,
-        slug,
-        name,
-        mission,
-        backgroundImage,
-        logo
-=======
-      }
-      parentCollective {
-        id
-        slug
-        name
-        mission
-        backgroundImage
-        image
->>>>>>> 20155ce... work in progress
-      }
-    }
-  }
-`;
-
-<<<<<<< HEAD
-export const addEventsData = graphql(getEventsQuery);
-
-=======
->>>>>>> 948d8e6... added events on collective page, consolidated avatars, fix bug when no credit card on file
-const getAttendeesQuery = gql`
-<<<<<<< HEAD
-  query Collective($slug: String!) {
-    Collective(slug: $slug) {
-      slug
-      name
-      startsAt
-      location {
-        name
-      }
-      orders {
-        id
-        createdAt
-        quantity
-        processedAt
-        description
-=======
-  query Event($collectiveSlug: String!, $eventSlug: String!) {
-    Event(collectiveSlug: $collectiveSlug, eventSlug: $eventSlug) {
-      slug,
-      name,
-      startsAt,
-      location {
-        name,
-        address
-      },
-      responses {
-        id,
-        createdAt,
-        quantity,
-        status,
-        description,
->>>>>>> 3f114f9... fix nametags
-        user {
-          id
-          firstName
-          lastName
-          image
-          username
-          twitterHandle
-          description
-        }
         tier {
           id
           name
@@ -790,59 +495,8 @@ const getAttendeesQuery = gql`
   }
 `;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-export const addAttendeesData = graphql(getAttendeesQuery);
-=======
-=======
-=======
-const getCollectiveTierQuery = gql`
-  query CollectiveTier($slug: String! $TierId: Int!) {
-    Collective(slug: $slug) {
-      id
-      slug
-      name
-      type
-      image
-      description
-      twitterHandle
-      currency
-      backgroundImage
-      settings
-      image
-      host {
-        id
-        name
-        slug
-      }
-    }
-    Tier(id: $TierId) {
-      id
-      type
-      name
-      description
-      amount
-      currency
-      interval
-      presets
-    }
-  }
-`;
-
-<<<<<<< HEAD
->>>>>>> 3e63f41... wip
-const getCollectiveTransactionsQuery = gql`
-  query CollectiveTransactions($slug: String!, $type: String, $limit: Int, $offset: Int) {
-=======
-=======
->>>>>>> 948d8e6... added events on collective page, consolidated avatars, fix bug when no credit card on file
-=======
->>>>>>> 5b2e73d... fix /events
 const getCollectiveCoverQuery = gql`
   query CollectiveCover($slug: String!) {
->>>>>>> bf84558... added Expense components
     Collective(slug: $slug) {
       id
       type
@@ -899,107 +553,20 @@ const getCollectiveCoverQuery = gql`
   }
 `;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-const getTransactionQuery = gql`
-  query Transaction($id: Int!) {
-    Transaction(id: $id) {
-      id
-      uuid
-      description
-      publicMessage
-      privateMessage
-      createdAt
-      type
-      amount
-      currency
-      netAmountInCollectiveCurrency
-      hostFeeInHostCurrency
-      platformFeeInHostCurrency
-      paymentProcessorFeeInHostCurrency
-      paymentMethod {
-        name
-      }
-      user {
-        id
-        name
-        username
-        image
-      }
-      host {
-        id
-        name
-      }
-      ... on Expense {
-        category
-        attachment
-      }
-      ... on Donation {
-        subscription {
-          interval
-        }
-      }
-=======
-export const getPrepaidCardBalanceQuery = gql`
-  query checkPrepaidPaymentMethod($token: String!) {
-    prepaidPaymentMethod(token: $token) {
-=======
 export const getOcCardBalanceQuery = gql`
   query checkOcPaymentMethod($token: String!) {
     ocPaymentMethod(token: $token) {
->>>>>>> ae25b5ad... chore(OrderForm): Rename prepaid payment method to giftcard (#516)
       id,
       name,
       currency,
       balance,
       uuid
-<<<<<<< HEAD
->>>>>>> 3350797... working gift card flow
-=======
       service
       type
->>>>>>> ae25b5ad... chore(OrderForm): Rename prepaid payment method to giftcard (#516)
     }
   }
 `;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-const TRANSACTIONS_PER_PAGE = 10;
-export const addCollectiveTransactionsData = graphql(getCollectiveTransactionsQuery, {
-  options(props) {
-    return {
-      variables: {
-        slug: props.slug,
-        offset: 0,
-        limit: TRANSACTIONS_PER_PAGE * 2
-      }
-    }
-  },
-  props: ({ data }) => ({
-    data,
-    fetchMore: () => {
-      return data.fetchMore({
-        variables: {
-          offset: data.allTransactions.length,
-          limit: TRANSACTIONS_PER_PAGE
-        },
-        updateQuery: (previousResult, { fetchMoreResult }) => {
-          if (!fetchMoreResult) {
-            return previousResult
-          }
-          return Object.assign({}, previousResult, {
-            // Append the new posts results to the old one
-            allTransactions: [...previousResult.allTransactions, ...fetchMoreResult.allTransactions]
-          })
-        }
-      })
-    }
-  })  
-});
->>>>>>> 488edbe... new route /:collectiveSlug/transactions
-=======
 export const getSubscriptionsQuery = gql`
   query Collective($slug: String!) {
     Collective(slug: $slug) {
@@ -1098,9 +665,6 @@ export const getSubscriptionsQuery = gql`
   }
 `;
 
-<<<<<<< HEAD
->>>>>>> f44f88f... working version e2e
-=======
 export const searchCollectivesQuery = gql`
   query search($term: String!, $limit: Int, $offset: Int) {
     search(term: $term, limit: $limit, offset: $offset) {
@@ -1138,18 +702,7 @@ export const searchCollectivesQuery = gql`
   }
 `;
 
->>>>>>> aaa828d... feat(graphql/queries): add search query for collectives
 export const addCollectiveData = graphql(getCollectiveQuery);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 3350797... working gift card flow
-export const addCollectiveData = graphql(getCollectiveQuery);
-<<<<<<< HEAD
-export const addCollectiveCoverData = graphql(getCollectiveCoverQuery);
->>>>>>> bf84558... added Expense components
-=======
 export const addCollectiveCoverData = graphql(getCollectiveCoverQuery, {
   options(props) {
     return {
@@ -1159,27 +712,8 @@ export const addCollectiveCoverData = graphql(getCollectiveCoverQuery, {
     }
   }
 });
->>>>>>> e882965... Wip
 export const addCollectiveToEditData = graphql(getCollectiveToEditQuery);
 export const addEventCollectiveData = graphql(getEventCollectiveQuery);
-<<<<<<< HEAD
-<<<<<<< HEAD
-export const addCollectiveTierData = graphql(getCollectiveTierQuery);
-=======
-
-// Need to bypass the cache otherwise it won't update the list of participants with the email addresses when we refetch the query as an admin
-export const addEventData = graphql(getEventQuery, { options: { fetchPolicy: 'network-only' }});
-
->>>>>>> 137a983... fetch email addresses to export members
-=======
-export const addEventData = graphql(getEventQuery);
->>>>>>> 6519b74... bypass the cache only if admin
-export const addEventsData = graphql(getEventsQuery);
-=======
->>>>>>> 948d8e6... added events on collective page, consolidated avatars, fix bug when no credit card on file
-export const addAttendeesData = graphql(getAttendeesQuery);
-=======
->>>>>>> 5b2e73d... fix /events
 export const addTiersData = graphql(getTiersQuery);
 export const addSubscriptionsData = graphql(getSubscriptionsQuery);
 export const addSearchQueryData = graphql(searchCollectivesQuery);
@@ -1188,78 +722,5 @@ export const addGetLoggedInUserFunction = component => {
   if (process.env.NODE_ENV == 'development') {
     console.warn('addGetLoggedInUserFunction is deprecated, use withLoggedInUser instead');
   }
-<<<<<<< HEAD
-};
-
-export const addGetLoggedInUserFunction = (component) => {
-  const accessToken = typeof window !== 'undefined' && window.localStorage.getItem('accessToken');
-  if (!accessToken) return component;
-  return graphql(getLoggedInUserQuery, {
-    props: ({ data }) => ({
-      data,
-      getLoggedInUser: async () => {
-        const token = window.localStorage.getItem('accessToken');
-        if (!token) {
-          storage.set("LoggedInUser", null);
-          return null;
-        }
-<<<<<<< HEAD
-<<<<<<< HEAD
-        return new Promise(async (resolve) => {
-            let res;
-            if (data.LoggedInUser) {
-              const user = new LoggedInUser(data.LoggedInUser);
-<<<<<<< HEAD
-=======
-              const endTime = new Date;
-              const elapsedTime = Math.round((endTime.getTime() - startTime.getTime()) / 1000);
-              console.info(`>>> LoggedInUser fetched in ${elapsedTime} seconds`);
->>>>>>> 671d8ae... require to be logged in to submit an expense
-              return resolve(user);
-            }
-            try {
-              res = await data.refetch();
-              if (!res.data || !res.data.LoggedInUser) {
-                return resolve(null);
-              }
-              const user = new LoggedInUser(res.data.LoggedInUser);
-              const endTime = new Date;
-              const elapsedTime = Math.round((endTime.getTime() - startTime.getTime()) / 1000);
-              console.info(`>>> LoggedInUser fetched in ${elapsedTime} seconds`);
-              return resolve(user);
-            } catch (e) {
-              console.error(">>> getLoggedInUser error:", e);
-              return resolve(null);
-            }
-        });
-=======
-=======
-
-        // Just issue the request, don't wait for this call
-        maybeRefreshAccessToken(token);
-
->>>>>>> 3aef8fe... Refresh authentication token it't 1 month or less to expire (#358)
-        const cache = storage.get("LoggedInUser");
-        if (cache) {
-          refreshLoggedInUser(data); // we don't wait.
-          return new LoggedInUser(cache);
-        }
-        return await refreshLoggedInUser(data);
->>>>>>> 0c1d867... updated design and fixed e2e tests
-      }
-<<<<<<< HEAD
-    }
-  })
-});
->>>>>>> 6032982... fetching currency from the collective
-=======
-    })
-  })(component);
-=======
   return withLoggedInUser(component);
->>>>>>> a58e533... refactor: addGetLoggedInUserFunction -> withLoggedInUser
 }
-<<<<<<< HEAD
->>>>>>> b8ba07b... ssr
-=======
->>>>>>> c88eb8e... Add transaction refund button visible for site admins only (#278)

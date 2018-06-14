@@ -13,21 +13,9 @@ import { Router } from '../server/pages';
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import Loading from '../components/Loading';
-<<<<<<< HEAD
-import NotFound from '../components/NotFound';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { pick } from 'lodash';
-=======
-import storage from '../lib/storage';
->>>>>>> 30f07e8... using local storage to store referral and matchingFund
-=======
-=======
 import NotFound from '../components/NotFoundPage';
->>>>>>> 05cc50a... not found page
 import storage from '../lib/storage';
 import { get, pick } from 'lodash';
->>>>>>> d37ba03... added MatchingFund.expiryDate and ability to force a fund with Collective.settings.matchingFund
 
 class CreateOrderPage extends React.Component {
 
@@ -103,33 +91,11 @@ class CreateOrderPage extends React.Component {
 
   async createOrder(order) {
     const { intl, data } = this.props;
-<<<<<<< HEAD
-    order.collective = { id: data.Collective.id };
-<<<<<<< HEAD
-<<<<<<< HEAD
-    order.paymentMethod = pick(order.paymentMethod, ['uuid', 'service', 'type', 'token', 'customerId', 'data', 'name', 'currency', 'save']);
-=======
-    if (referral) {
-      order.referral = { id: referral }
-=======
-=======
->>>>>>> 15ff145... fix when matching fund id is invalid
 
     if (this.referral && this.referral > 0) {
       order.referral = { id: this.referral }
->>>>>>> 30f07e8... using local storage to store referral and matchingFund
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 8221aaf... fixes opencollective/opencollective#759
-=======
-    if (this.state.matchingFund) {
-      order.matchingFund = this.state.matchingFund;
-    }
-=======
->>>>>>> 15ff145... fix when matching fund id is invalid
     order.paymentMethod = pick(order.paymentMethod, ['uuid', 'service', 'type', 'token', 'customerId', 'data', 'name', 'currency', 'save']);
->>>>>>> 770b55d... fix
     if (this.state.LoggedInUser) {
       delete order.user;
     }
@@ -210,21 +176,9 @@ class CreateOrderPage extends React.Component {
 
           <CollectiveCover
             collective={collective}
-<<<<<<< HEAD
             href={`/${collective.slug}`}
             LoggedInUser={LoggedInUser}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-            href={href}
-            title={intl.formatMessage(this.messages[`${tier.type.toLowerCase()}.title`], {name: tier.name.replace(/[s]$/,'')})}
-            className="small"
->>>>>>> 49664da... fix for tier name not showing up
-=======
->>>>>>> 614e52e... updating style for /donate and createOrder
-=======
             className={coverClassName}
->>>>>>> b9209c0... fix for event page, temporarily removing Interested Feature
             />
 
           <div className="content">

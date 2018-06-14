@@ -1,17 +1,13 @@
 // Load environment variables
 import dotenv from 'dotenv';
 dotenv.config();
-<<<<<<< HEAD
 
 // Only load newrelic when we explicitly want it
 if (process.env.NEW_RELIC_ENABLED) {
   require('newrelic');
 }
 
-=======
-import 'newrelic';
 import path from 'path';
->>>>>>> 2e748908... fix(server): next.js directory should not be dependent from env
 import http from 'http';
 import express from 'express';
 import next from 'next';

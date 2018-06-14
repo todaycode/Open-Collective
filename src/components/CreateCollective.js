@@ -78,22 +78,10 @@ class CreateCollective extends React.Component {
     const { LoggedInUser, host, intl } = this.props;
     const canApply = get(host, 'settings.apply');
 
-<<<<<<< HEAD
     if (!host) {
       return (<Loading />);
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const title = `Apply to create a new collective on ${host.name}`;
-=======
-    const title = `Apply to create a new collective hosted by ${host.name}`;
->>>>>>> 8b33c78... add big buttons to pick category
-=======
-    const title = intl.formatMessage(this.messages["host.apply.title"], { hostname: host.name });
->>>>>>> eb6bdad... Small improvements for /meetups/apply
-=======
     const title = get(host, 'settings.apply.title') || intl.formatMessage(this.messages["host.apply.title"], { hostname: host.name });
->>>>>>> a7d3e09... Fix create meetup + other small fixes
 
     return (
       <div className="CreateCollective">

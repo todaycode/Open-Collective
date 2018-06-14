@@ -2,13 +2,8 @@ import withData from '../lib/withData';
 import withIntl from '../lib/withIntl';
 import React from 'react';
 import CreateCollective from '../components/CreateCollective';
-<<<<<<< HEAD
-import { addGetLoggedInUserFunction, addCollectiveData } from '../graphql/queries';
-import NotFound from '../components/NotFoundPage';
-=======
 import { addGetLoggedInUserFunction, addCollectiveCoverData } from '../graphql/queries';
-import NotFound from '../components/NotFound';
->>>>>>> 7b85e91... Moving /apply and /create to new frontend
+import NotFound from '../components/NotFoundPage';
 import Loading from '../components/Loading';
 
 class CreateCollectivePage extends React.Component {

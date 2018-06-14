@@ -4,44 +4,13 @@
 import React from 'react';
 import { withApollo } from 'react-apollo';
 import PropTypes from 'prop-types';
-<<<<<<< HEAD
-import TierComponent from '../components/Tier';
-import InputField from '../components/InputField';
-<<<<<<< HEAD
-import RequestBitcoin from '../components/RequestBitcoin';
-=======
-import MatchingFundWithData from '../components/MatchingFundWithData';
->>>>>>> 8221aaf... fixes opencollective/opencollective#759
-import ActionButton from '../components/Button';
-=======
 import TierComponent from './Tier';
 import InputField from './InputField';
 import MatchingFundWithData from './MatchingFundWithData';
 import ActionButton from './Button';
 import SectionTitle from './SectionTitle';
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 614e52e... updating style for /donate and createOrder
-import { Button, Row, Col, Form, InputGroup, FormControl } from 'react-bootstrap';
-=======
-import { Button, Row, Col, Form } from 'react-bootstrap';
->>>>>>> 0d14167... eslint feedback in components
-=======
 import { Button, Row, Col, Form, FormGroup } from 'react-bootstrap';
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 36167e8b... Add PayPal as new payment method option to the OrderForm (#494)
-=======
-import { Button, Row, Col, Form, FormGroup } from 'react-bootstrap';
->>>>>>> 54368760... Add PayPal as new payment method option to the OrderForm (#494)
 import { defineMessages, FormattedMessage, FormattedDate, FormattedTime } from 'react-intl';
-=======
-import { defineMessages, FormattedMessage } from 'react-intl';
->>>>>>> 98357603... eslint
-=======
-import { defineMessages, FormattedMessage, FormattedDate, FormattedTime } from 'react-intl';
->>>>>>> 6af9ab06... fix conflict
 import { capitalize, formatCurrency, isValidEmail, getEnvVar } from '../lib/utils';
 import { getStripeToken } from '../lib/stripe';
 import { pick, get } from 'lodash';
@@ -419,11 +388,7 @@ class OrderForm extends React.Component {
       this.props.collective.currency;
     /* Parameters for the paypal button */
     const renderOptions = {
-<<<<<<< HEAD
       env: getEnvVar('PAYPAL_ENVIRONMENT'),
-=======
-      env: 'sandbox',
->>>>>>> 54368760... Add PayPal as new payment method option to the OrderForm (#494)
       payment: async (data, actions) => {
         const paymentURL = '/api/services/paypal/create-payment';
         const { id } = await actions.request.post(paymentURL, {
@@ -447,28 +412,6 @@ class OrderForm extends React.Component {
         return this.submitOrder(orderRequest);
       }
     };
-<<<<<<< HEAD
-
-    try {
-      paypal.Button.render(renderOptions, '#paypal-checkout');
-    } catch (error) {
-      console.error(error);
-    } finally {
-      button.removeAttribute('disabled');
-    }
-  }
-
-  getTotalAmount = () => {
-    const { order } = this.state;
-    const quantity = (order.tier.quantity || 1);
-    const total = (quantity * order.tier.amount) || order.totalAmount;
-    return total;
-  }
-
-  prepareOrderRequest = () => {
-<<<<<<< HEAD
-    const { paymentMethod, order, fromCollective, user, contributionDetails } = this.state;
-=======
 
     try {
       paypal.Button.render(renderOptions, '#paypal-checkout');
@@ -488,10 +431,6 @@ class OrderForm extends React.Component {
 
   prepareOrderRequest = () => {
     const { paymentMethod, order, fromCollective, user } = this.state;
->>>>>>> 54368760... Add PayPal as new payment method option to the OrderForm (#494)
-=======
-    const { paymentMethod, order, fromCollective, user } = this.state;
->>>>>>> 6af9ab06... fix conflict
     const quantity = order.tier.quantity || 1;
     const orderRequest = {
       user,
@@ -499,23 +438,10 @@ class OrderForm extends React.Component {
       fromCollective,
       publicMessage: order.publicMessage,
       quantity,
-<<<<<<< HEAD
-<<<<<<< HEAD
-      interval: order.interval || tier.interval,
-      totalAmount: (quantity * tier.amount) || order.totalAmount,
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 54368760... Add PayPal as new payment method option to the OrderForm (#494)
       interval: order.interval || order.tier.interval,
       totalAmount: this.getTotalAmount(),
       matchingFund: order.matchingFund,
->>>>>>> 36167e8b... Add PayPal as new payment method option to the OrderForm (#494)
       paymentMethod
-=======
-      matchingFund: order.matchingFund,
-      paymentMethod: sanitizedCard
->>>>>>> 8221aaf... fixes opencollective/opencollective#759
     };
     if (order.tier && order.tier.id) {
       orderRequest.tier = { id: order.tier.id, amount: order.tier.amount };
@@ -873,80 +799,6 @@ class OrderForm extends React.Component {
         </style>
         <Form horizontal>
 
-<<<<<<< HEAD
-          { !requireLogin &&
-            <section className="order">
-              { order.tier.type !== 'TICKET' && <SectionTitle section="contributionDetails" /> }
-              { order.tier.type === 'TICKET' &&
-                <div>
-                  <SectionTitle section="ticketDetails" />
-                  <Row>
-                    <Col sm={12}>
-                      <div className="form-group">
-                        <label className="col-sm-2 control-label">
-                          <FormattedMessage id="tier.order.ticket.info" defaultMessage="Event info" />
-                        </label>
-                        <Col sm={10}>
-                          <FormattedDate value={collective.startsAt} weekday="short" day="numeric" month="long" />, &nbsp;
-                          <FormattedTime value={collective.startsAt} timeZone={collective.timezone} />&nbsp; - &nbsp;
-                          { get(collective, 'location.name') }
-                        </Col>
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              }
-              <Row>
-                <Col sm={12}>
-                  <div className="form-group">
-                    <label className="col-sm-2 control-label">
-                      { order.tier.type !== 'TICKET' && <FormattedMessage id="tier.order.contribution" defaultMessage="Contribution" /> }
-                      { order.tier.type === 'TICKET' && <FormattedMessage id="tier.order.ticket" defaultMessage="Ticket" /> }
-                    </label>
-                    <Col sm={10}>
-                      <TierComponent
-                        tier={order.tier}
-                        values={{
-                          quantity: order.tier.quantity || order.quantity, // TODO: confusing, need to fix
-                          interval: order.interval || order.tier.interval,
-                          amount: order.totalAmount,
-                        }}
-                        onChange={(tier) => this.handleChange('order', 'tier', tier)}
-                        />
-                    </Col>
-                  </div>
-                </Col>
-              </Row>
-              { this.props.matchingFund &&
-                <Row>
-                  <Col sm={12}>
-                    <MatchingFundWithData
-                      collective={collective}
-                      order={order}
-                      uuid={this.props.matchingFund}
-                      onChange={(matchingFund) => this.handleChange('order', 'matchingFund', matchingFund)}
-                      />
-                  </Col>
-                </Row>
-              }
-              <Row>
-                <Col sm={12}>
-                  <InputField
-                    label="Message (public)"
-                    type="textarea"
-                    name="publicMessage"
-                    className="horizontal"
-                    placeholder={intl.formatMessage(this.messages['order.publicMessage.placeholder'])}
-                    defaultValue={order.publicMessage}
-                    maxLength={255}
-                    onChange={(value) => this.handleChange("order", "publicMessage", value)}
-                    />
-                </Col>
-              </Row>
-            </section>
-          }
-=======
->>>>>>> 9279ea6... define a custom expense policy
           <section className="userDetailsForm">
             <SectionTitle
               section="userDetails"
@@ -955,8 +807,8 @@ class OrderForm extends React.Component {
                   { !LoggedInUser && <FormattedMessage id="tier.order.userdetails.description" defaultMessage="If you wish to remain anonymous, only provide an email address without any other personal details." /> }
                   { LoggedInUser && <FormattedMessage id="tier.order.userdetails.description.loggedin" defaultMessage="If you wish to remain anonymous, logout and use another email address without providing any other personal details." /> }
                 </div>
-            }
-                                    />
+                }
+              />
 
             { !LoggedInUser &&
               <Row key={`email.input`}>

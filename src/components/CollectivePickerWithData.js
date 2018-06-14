@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import Error from './Error';
 import withIntl from '../lib/withIntl';
 import { graphql, compose } from 'react-apollo';
@@ -11,33 +9,6 @@ import Currency from './Currency';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import ConnectPaypal from './ConnectPaypal';
 import AddFundsForm from './AddFundsForm';
-import { pick } from 'lodash';
-=======
-import gql from 'graphql-tag';
-import classNames from 'classnames';
-import Scrollchor from 'react-scrollchor';
-
-import { pick, omit } from 'lodash';
-import { graphql, compose } from 'react-apollo';
-import { FormattedMessage, defineMessages } from 'react-intl';
-import {
-  Button,
-  ButtonGroup,
-  Badge,
-} from 'react-bootstrap';
->>>>>>> c1fa9fd... [wip] feat(CollectivePickerWithData): Add funds to organizations
-
-=======
-import Error from '../components/Error';
->>>>>>> aecf7b2... Revert UI changes on host.expenses page
-import withIntl from '../lib/withIntl';
-import { graphql, compose } from 'react-apollo';
-import gql from 'graphql-tag'
-import { DropdownButton, MenuItem, Badge } from 'react-bootstrap';
-import Currency from '../components/Currency';
-import { FormattedMessage, defineMessages } from 'react-intl';
-import ConnectPaypal from '../components/ConnectPaypal';
-import AddFundsForm from '../components/AddFundsForm';
 import { pick } from 'lodash';
 
 class CollectivePickerWithData extends React.Component {

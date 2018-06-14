@@ -1,72 +1,15 @@
 import React from 'react';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import TopBarProfileMenu from './TopBarProfileMenu';
-<<<<<<< HEAD
-import { Link } from '../server/pages';
->>>>>>> df13894... fix /signin
-=======
->>>>>>> fa600af... fix for 404 when click on create event, better signin/signoff flow
-=======
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import SearchIcon from './SearchIcon';
 import TopBarProfileMenu from './TopBarProfileMenu';
-<<<<<<< HEAD
-import { FormattedMessage } from 'react-intl';
->>>>>>> 72e482d... Better status in top bar for logging in / logging out
-=======
 import { defineMessages, FormattedMessage } from 'react-intl';
 import withIntl from '../lib/withIntl';
->>>>>>> 3517ef1... Link OC Logo to homepage, fix edit tickets and Latest Expense title
 
 const logo = '/static/images/opencollective-icon.svg';
 
 class TopBar extends React.Component {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  constructor(props) {
-    super(props);
-    this.state = {
-      showProfileMenu: false
-    };
-  }
-
-  componentDidMount() {
-    this.onClickOutsideRef = this.onClickOutside.bind(this);
-    document.addEventListener('click', this.onClickOutsideRef);
-    if (typeof window !== 'undefined') {
-      this.redirect = window.location.href.replace(/^https?:\/\/[^\/]+/,'');
-    }
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('click', this.onClickOutsideRef);
-  }
-
-  onClickOutside() {
-    this.setState({showProfileMenu: false});
-  }
-
-  toggleProfileMenu(e) {
-    if (e.target.className.indexOf('LoginTopBarProfileButton') !== -1) {
-      this.setState({showProfileMenu: !this.state.showProfileMenu});
-      e.nativeEvent.stopImmediatePropagation();
-    }
-  }
-
-  onClickLogout(e) {
-    this.props.logout();
-    this.toggleProfileMenu(e);
-  }
-
-=======
->>>>>>> fa600af... fix for 404 when click on create event, better signin/signoff flow
-=======
   static propTypes = {
     LoggedInUser: PropTypes.object,
     showSearch: PropTypes.bool,
@@ -76,9 +19,6 @@ class TopBar extends React.Component {
     showSearch: true,
   }
 
-<<<<<<< HEAD
->>>>>>> 72e482d... Better status in top bar for logging in / logging out
-=======
   constructor(props) {
     super(props);
     this.messages = defineMessages({
@@ -86,7 +26,6 @@ class TopBar extends React.Component {
     });
   }
 
->>>>>>> 3517ef1... Link OC Logo to homepage, fix edit tickets and Latest Expense title
   onClickSubscriptions(e) {
     this.props.pushState(null, '/subscriptions')
     this.toggleProfileMenu(e);
@@ -124,22 +63,9 @@ class TopBar extends React.Component {
     )
   }
 
->>>>>>> df13894... fix /signin
   render() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const {className} = this.props;
-=======
-    const { className, LoggedInUser } = this.props;
-=======
-    const { className, LoggedInUser, intl } = this.props;
->>>>>>> 3517ef1... Link OC Logo to homepage, fix edit tickets and Latest Expense title
-=======
     const { className, LoggedInUser, intl, showSearch } = this.props;
->>>>>>> 74c02fa... feat(TopBar): add responsive search input
 
->>>>>>> fa600af... fix for 404 when click on create event, better signin/signoff flow
     return (
       <div className={classNames(className, 'TopBar')}>
         <style jsx>{`
@@ -271,20 +197,7 @@ class TopBar extends React.Component {
             <li><a className="menuItem" href="https://medium.com/open-collective"><FormattedMessage id="menu.blog" defaultMessage="Blog" /></a></li>
           </ul>
           <div className="separator"></div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-          <a href="/login?next=/">Login</a>
-=======
-          { !LoggedInUser && <a href="/signin?next=/">Login</a> }
-=======
-          { !LoggedInUser && <Link route="signin" params={ { next: this.redirect } }><a>Login</a></Link> }
->>>>>>> df13894... fix /signin
-          { LoggedInUser && <TopBarProfileMenu LoggedInUser={LoggedInUser} /> }
->>>>>>> 2b606ab... using /signin - white title for cover - ...
-=======
           <TopBarProfileMenu LoggedInUser={LoggedInUser} />
->>>>>>> fa600af... fix for 404 when click on create event, better signin/signoff flow
         </div>
       </div>
     )

@@ -116,32 +116,16 @@ class TransactionDetails extends React.Component {
         <div className="col">
           <label><FormattedMessage id="transaction.amount" defaultMessage="amount" /></label>
           <div className="amountDetails">
-<<<<<<< HEAD
-            <span>{amountDetailsStr}</span>
-            <span className="netAmountInCollectiveCurrency">&nbsp;=&nbsp;
-=======
             { amountDetailsStr &&
               <span>
                 <span>{amountDetailsStr}</span>
                 <span className="netAmountInCollectiveCurrency">&nbsp;=&nbsp;</span>
               </span>
             }
-<<<<<<< HEAD
-            <span className="netAmountInGroupCurrency">
->>>>>>> e6e13c8... added link to download invoice for a donation if logged in as member/host
-              <FormattedNumber
-<<<<<<< HEAD
-                value={transaction.netAmountInCollectiveCurrency / 100}
-                currency={transaction.currency}
-=======
-                value={transaction.netAmountInGroupCurrency / 100}
-=======
             <span className="netAmountInCollectiveCurrency">
               <FormattedNumber
                 value={transaction.netAmountInCollectiveCurrency / 100}
->>>>>>> bf84558... added Expense components
                 currency={collective.currency}
->>>>>>> 081bb03... how the right currency in the transaction details
                 {...this.currencyStyle}
                 />
             </span>

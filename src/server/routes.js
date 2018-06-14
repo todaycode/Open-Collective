@@ -3,79 +3,15 @@ import { template } from 'lodash';
 import fs from 'fs';
 import pdf from 'html-pdf';
 import moment from 'moment';
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-routes.add('event', '/:collectiveSlug/events/:eventSlug');
-routes.add('events', '/:collectiveSlug/events');
-routes.add('events', '/');
-=======
-const pages = nextRoutes();
-
-pages.add('createEvent', '/:collectiveSlug/events/(new|create)');
-pages.add('events-iframe', '/:collectiveSlug/events/iframe');
-pages.add('event', '/:collectiveSlug/events/:eventSlug');
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-pages.add('editEvent', '/:collectiveSlug/events/:eventSlug/edit');
-pages.add('events', '/:collectiveSlug/events');
-pages.add('transactions', '/:collectiveSlug/transactions');
-<<<<<<< HEAD
-pages.add('events', '/');
->>>>>>> e54bb4f... create/edit event
-=======
-=======
->>>>>>> e6e13c8... added link to download invoice for a donation if logged in as member/host
-pages.add('nametags', '/:collectiveSlug/events/:eventSlug/nametags');
-<<<<<<< HEAD
->>>>>>> af9cec0... /:collectiveSlug/events/:eventSlug/nametags.pdf
-pages.add('button', '/:collectiveSlug/donate/button');
-=======
-pages.add('button', '/:collectiveSlug/:verb(contribute|donate)/button');
->>>>>>> 4013f11... new contribute button
-=======
-import pages from './pages';
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 3e63f41... wip
-=======
-import { translateApiUrl } from '../lib/utils';
-=======
-import { translateApiUrl, getCloudinaryUrl } from '../lib/utils';
->>>>>>> 638a1ac... proxy images for CDN caching (via cloudflare)
-=======
-import { translateApiUrl } from '../lib/utils';
-import { getCloudinaryUrl } from './lib/utils';
->>>>>>> 808fbe3... proxy images through /proxy
-import request from 'request';
-<<<<<<< HEAD
->>>>>>> 20155ce... work in progress
-=======
-=======
 import request from 'request';
 import express from 'express';
 
 import pages from './pages';
->>>>>>> 3c32d1f... refactor: update logging
 import controllers from './controllers';
-<<<<<<< HEAD
->>>>>>> 915fa20... serving /:collectiveSlug/(sponsors|backers)/badge.svg from the new frontend server
-=======
 import * as mw from './middlewares';
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 33a7b4d... added google analytics
-=======
-import express from 'express';
->>>>>>> 30a185b... added old assets for backward compatibility in /public
-=======
 import { logger } from './logger';
 import { getCloudinaryUrl } from './lib/utils';
 import { translateApiUrl } from '../lib/utils';
->>>>>>> 3c32d1f... refactor: update logging
 
 module.exports = (server, app) => {
 
@@ -199,17 +135,8 @@ module.exports = (server, app) => {
   })
 
   server.get('/:collectiveSlug/:verb(contribute|donate)/button.js', (req, res) => {
-<<<<<<< HEAD
     const content = fs.readFileSync(path.join(__dirname,'../templates/button.js'), 'utf8');
-<<<<<<< HEAD
-=======
-    const content = fs.readFileSync(path.join(__dirname,'../templates/widget.js'), 'utf8');
->>>>>>> 4013f11... new contribute button
-    _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
-    const compiled = _.template(content);
-=======
     const compiled = template(content, { interpolate: /{{([\s\S]+?)}}/g });
->>>>>>> 6430557... build: optimize lodash bundling
     res.setHeader('content-type', 'application/javascript');
     res.send(compiled({
       collectiveSlug: req.params.collectiveSlug,
@@ -234,4 +161,3 @@ module.exports = (server, app) => {
   return pages.getRequestHandler(server.next);
 
 }
->>>>>>> 2a3fde1... new /:collectiveSlug/donate/button.js route

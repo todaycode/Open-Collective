@@ -174,13 +174,8 @@ class TicketsConfirmed extends React.Component {
                 </div>
               </div>
               <div className="location">
-<<<<<<< HEAD
                 <div className="locationName">{event.location.name}</div>
                 <div className="locationAddress">{event.location.address}</div>
-=======
-                <div className="locationName">{event.locationName}</div>
-                <div className="locationAddress">{event.address}</div>
->>>>>>> 7dbcbbe... make Sustain great again
               </div>
             </div>
           </div>

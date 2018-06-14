@@ -268,12 +268,8 @@ class GoalsCover extends React.Component {
         <div className="">
           { get(collective, 'stats.backers.all') > 0 &&
             <div className="budgetText">
-<<<<<<< HEAD
               <FormattedMessage id="cover.budget.text" defaultMessage="Thanks to your financial contributions, we are operating on an estimated annual budget of" />
               <span className="annualBudget">{formatCurrency(get(collective, 'stats.yearlyBudget'), collective.currency, { precision: 0 })}</span>
-=======
-              <FormattedMessage id="cover.budget.text" defaultMessage="Thanks to your financial contributions, we’re operating on an estimated annual budget of  {yearlyBudget}." values={{ yearlyBudget: formatCurrency(get(collective, 'stats.yearlyBudget'), collective.currency, { precision: 0 })}} />
->>>>>>> 8c34a03... wip
             </div>
           }
           <div className="barContainer" style={get(this.state, 'styles.barContainer')} ref={node => this.nodes.barContainer = node}>
